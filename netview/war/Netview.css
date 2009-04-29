@@ -1,0 +1,144 @@
+/** Add css rules here for your application. */
+
+.blackbg {
+	background-color: #000000;
+}
+
+/** Example rules used by the template application (remove for your app) */
+h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: #777777;
+  margin: 40px 0px 70px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1em;
+  font-weight: bold;
+  color: #66FF66;
+  border-bottom: 4px solid #66ff66;
+}
+
+.sendButton {
+  display: block;
+  font-size: 16pt;
+}
+
+/** Most GWT widgets already have a style name defined */
+.gwt-DialogBox {
+  width: 400px;
+}
+
+.gwt-StackPanel {
+  border-bottom: 1px solid #66FF66;
+}
+
+.gwt-StackPanel .gwt-StackPanelItem {
+  cursor: pointer;
+  cursor: hand;
+  font-weight: bold;
+  font-size: .8em;
+  padding: 6px;
+  border: 2px solid #66FF66;
+  border-bottom: 0px;
+  background: #222;
+}
+
+.gwt-StackPanel .gwt-StackPanelContent {
+  border: 1px solid #66FF66;
+  border-bottom: 0px;
+  background: #666;
+  padding: 2px 2px 10px 5px;
+}
+
+.gwt-DecoratedStackPanel {
+  border-bottom: 1px solid #66FF66;
+}
+
+.gwt-DecoratedStackPanel .gwt-StackPanelContent {
+  border: 1px solid #66FF66;
+  border-bottom: 0px;
+  background: #666;
+  padding: 2px 2px 10px 5px;
+}
+
+.gwt-DecoratedStackPanel .gwt-StackPanelItem {
+  cursor: pointer;
+  cursor: hand;
+  font-weight: bold;
+  font-size: 1.3em;
+  padding: 4px;
+  border: 1px solid #66FF66;
+  border-bottom: 0px;
+  background: #222;
+}
+
+.gwt-DecoratedStackPanel .stackItemTopLeft,
+.gwt-DecoratedStackPanel .stackItemTopRight,
+.gwt-DecoratedStackPanel .stackItemTopLeftInner,
+.gwt-DecoratedStackPanel .stackItemTopRightInner {
+  display: none;
+}
+
+.dialogVPanel {
+  margin: 5px;
+}
+
+.serverResponseLabelError {
+  color: red;
+}
+
+/** Set ids using widget.getElement().setId("idOfElement") */
+#closeButton {
+  margin: 15px 6px 6px;
+}
+
+.gwt-StackPanel {
+	background-color: #000000;
+}
+
+/** gadgets css **/
+	/* global HTML tags */
+			body{ margin:0px; padding:0px; background-color:#a8b8c3; }
+			div,td{ font-size:10pt; font-family: verdana; }
+			h2{ margin:10px;font-family:arial;}
+			    	
+			/* GadgetMenu */
+    		.GadgetsMenu .gwt-Hyperlink { margin-left:10px; }
+			.GadgetsMenu{ margin:10px; }
+		
+			/* GadgetColumn */
+			.GadgetColumn{ margin-top:10px; margin-left:10px; }
+			
+			/* DockableWidget */
+			.gwtapps-DockableWidget { margin-bottom:4px; }
+			.gwtapps-Placeholder{border: 1px dashed #c00;}
+		
+			/* TabBar */
+/*			.gwt-TabBar{ background-image:url(tab-rest.gif);background-repeat: repeat-x; background-position:bottom;padding-top:3px; width:100%}
+			.gwt-TabBar .gwt-TabBarFirst{ width:10px; }
+			.gwt-TabBar .gwt-TabBarItem { cursor:hand;cursor:pointer;background-image:url(tab.gif); background-repeat:no-repeat; width:126px; background-position:bottom; height:27px; font-size:8pt;}
+			.gwt-TabBar .gwt-TabBarItem div{ padding:5px; }
+			.gwt-TabBar .gwt-TabBarItem-selected {  background-image:url(tab-selected.gif);   }
+			.gwt-TabPanelBottom	{ height: 100%; background-color:#fff; }	
+*/			
+			/* GadgetContainerView */
+			.gwtapps-GadgetContainerTitle{ cursor: move; color: #262c30;  }
+			.gwtapps-GadgetContainerTitleBar{ background-image:url(titleback.gif);background-position:bottom;background-repeat:repeat-x; }
+			.gwtapps-GadgetContainerTitleBar td { padding:2px; }
+			.gwtapps-GadgetContainerEditPanel{background-color:#e5e5e5;}
+			.gwtapps-GadgetContainerBody{ background-color:#FFF; }		
+			.gwtapps-GadgetContainer .gwtapps-RoundedPanel-inside{ padding: 2px 6px 6px 6px;  }
+			.gwtapps-GadgetContainerPanel .gwtapps-RoundedPanel-inside{ padding:0px; }
+		
+			/* Calendar */
+			.Calendar-CurrentMonth{ border:1px solid #ccc;}
+			.Calendar-OtherMonth{ color: #ccc; }
+			.Calendar-Today{background: #abc;}
+			
+			/* Gadgets */
+			.ToDoList-Done{ text-decoration: line-through; }				
+			.gwtapps-GoogleMap{ height:200px; }
+			.News-Item{ margin-bottom:3px; display:list-item; margin-left:20px; }
+			.DiceWars{ height:250px; }
