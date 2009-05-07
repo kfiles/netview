@@ -28,13 +28,14 @@ public class DockableWidget extends SimplePanel implements MouseListener{
 	private static HashSet dockableContainers = new HashSet();
 	private HashSet dockableListeners = new HashSet();
 	
-	public DockableWidget( Widget w ){
-		setWidget( w );
-		setStyleName( "gwtapps-DockableWidget");
-		
-		if( w instanceof SourcesMouseEvents )
-			((SourcesMouseEvents)w).addMouseListener( this );
-	}
+	public DockableWidget(Widget w) {
+    setWidget(w);
+    setStyleName("gwtapps-DockableWidget");
+    if (DesktopView.editable == true) {
+      if (w instanceof SourcesMouseEvents)
+        ((SourcesMouseEvents) w).addMouseListener(this);
+    }
+  }
 	
 	public static void addContainer( Widget widget ){
 		dockableContainers.add( widget );

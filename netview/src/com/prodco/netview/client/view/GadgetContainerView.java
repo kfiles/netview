@@ -62,7 +62,8 @@ public class GadgetContainerView extends SimplePanel implements SourcesMouseEven
 	
 	public GadgetContainerView( Gadget c ){
 		child = c;
-		buildTitleBar();		
+		if (DesktopView.editable)
+		  buildTitleBar();		
 		buildMainLayout();
 		mainLayout.setWidth("100%");
 		RoundedPanel round = new RoundedPanel("#eaecec",mainLayout,RoundedPanel.ROUND_TOP);

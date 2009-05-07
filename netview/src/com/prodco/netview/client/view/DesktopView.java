@@ -19,11 +19,13 @@ import com.prodco.netview.client.model.GadgetClass;
 
 public class DesktopView extends Composite implements DockableListener {
 	
-	private TabPanel gadgetTabs = new TabPanel();
-	private final DesktopViewListener listener;
+  private HorizontalPanel gadgetPanel = new HorizontalPanel();
+  private final DesktopViewListener listener;
+  public static boolean editable;
 	
-	public DesktopView( DesktopViewListener ls){
+	public DesktopView( DesktopViewListener ls, boolean editable ){
 		this.listener = ls;
+		this.editable = editable;
 		
 		//initialize the main panel
 		VerticalPanel mainPanel = new VerticalPanel();
@@ -40,34 +42,26 @@ public class DesktopView extends Composite implements DockableListener {
 
 		//add gadgets
 		List classes = GadgetClass.getClasses();
-		gadgetsMenu.add( new Label("Add Gadget: "));
-		for( int i=0; i< classes.size();++i)
-		{
-			final GadgetClass gadgetClass = (GadgetClass)classes.get(i);
-			Hyperlink gadgetLink = new Hyperlink( gadgetClass.getName(),"" );
-			gadgetLink.addClickListener( new ClickListener()
-			{
-				public void onClick( Widget sender )
-				{
-					insertGadget( gadgetClass.newGadget() );
-				}
-			});
+		if (editable) {
+      gadgetsMenu.add(new Label("Add Gadget: "));
+      for (int i = 0; i < classes.size(); ++i) {
+        final GadgetClass gadgetClass = (GadgetClass) classes.get(i);
+        Hyperlink gadgetLink = new Hyperlink(gadgetClass.getName(), "");
+        gadgetLink.addClickListener(new ClickListener() {
+          public void onClick(Widget sender) {
+            insertGadget(gadgetClass.newGadget());
+          }
+        });
 
-			gadgetsMenu.add( gadgetLink );
-		}		
+        gadgetsMenu.add(gadgetLink);
+      }
+    }
 		//create the tab panel
-		mainPanel.add( gadgetTabs );
-		mainPanel.setCellHeight(gadgetTabs, "100%");
-		gadgetTabs.setWidth("100%");
-		gadgetTabs.setHeight("100%");
-
-
-		//create the tabs and pages
-		gadgetTabs.add( createPage(), "<div>Tab 1</div>", true);
-		gadgetTabs.add( createPage(), "<div>Tab 2</div>", true);
-
-		//select the first tab 
-		gadgetTabs.selectTab(0);
+		mainPanel.setCellHeight(gadgetPanel, "100%");
+    gadgetPanel = createPage();
+		gadgetPanel.setWidth("1000px");
+		gadgetPanel.setHeight("100%");
+    mainPanel.add( gadgetPanel);
 
 	}
 	public HorizontalPanel createPage(){
@@ -94,8 +88,9 @@ public class DesktopView extends Composite implements DockableListener {
 	}
 
 	public HorizontalPanel getCurrentPage(){
-		return (HorizontalPanel)gadgetTabs.getDeckPanel().getWidget(gadgetTabs.getDeckPanel().getVisibleWidget());
+		return gadgetPanel;
 	}
+	
 	public void insertGadget( Gadget gadget ){
 		FlowPanel column = (FlowPanel)getCurrentPage().getWidget(0);
 		insertGadget( column, gadget );	
@@ -114,7 +109,7 @@ public class DesktopView extends Composite implements DockableListener {
 		Element element = document.getDocumentElement();
 		NodeList pages = element.getElementsByTagName("Page");
 		for( int i = 0; i < pages.getLength(); i++ ){
-			HorizontalPanel page = (HorizontalPanel)gadgetTabs.getDeckPanel().getWidget(i);
+			HorizontalPanel page = getCurrentPage();
 			Element pageElement = (Element)pages.item(i);
 			NodeList columns = pageElement.getElementsByTagName("Column");
 			for( int j = 0; j < columns.getLength(); j++ ){
@@ -142,11 +137,9 @@ public class DesktopView extends Composite implements DockableListener {
 		Document document = XMLParser.createDocument();
 		Element element = document.createElement("Desktop");
 		document.appendChild( element );
-		int pageCount = gadgetTabs.getDeckPanel().getWidgetCount();
-		for( int i=0; i < pageCount; ++i ){
 			Element pageElement = element.getOwnerDocument().createElement("Page");
 			element.appendChild(pageElement);
-			HorizontalPanel page = (HorizontalPanel)gadgetTabs.getDeckPanel().getWidget(i);
+			HorizontalPanel page = getCurrentPage();
 			int columnCount = page.getWidgetCount();
 			for( int j=0; j < columnCount; j++ ){
 				FlowPanel column = (FlowPanel)page.getWidget(j);
@@ -161,7 +154,6 @@ public class DesktopView extends Composite implements DockableListener {
 					gadgetContainer.getGadget().toXML( gadgetElement );
 				}
 			}
-		}
 		return document.toString();
 	}
 	public void onDocked(Widget widget) {
