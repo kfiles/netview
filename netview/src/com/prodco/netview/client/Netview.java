@@ -1,7 +1,15 @@
+/***********************************************************
+ * Copyright 2009
+ * Kirby Files, ksfiles@gmail.com
+ * Suresh Tripath, workingsuresh@gmail.com
+ * All Rights Reserved
+ */
+
 package com.prodco.netview.client;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -17,7 +25,7 @@ import com.prodco.netview.client.view.DesktopViewListener;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Netview implements EntryPoint {
+public class Netview implements EntryPoint, DesktopViewListener {
   /**
    * The message displayed to the user when the server cannot be reached or
    * returns an error.
@@ -26,15 +34,16 @@ public class Netview implements EntryPoint {
       + "attempting to contact the server. Please check your network "
       + "connection and try again.";
 
-  /**
-   * Create a remote service proxy to talk to the server-side Greeting service.
-   */
-  private final GreetingServiceAsync greetingService = GWT
-      .create(GreetingService.class);
 
-//  private StackPanel slider = new StackPanel();
+  // private StackPanel slider = new StackPanel();
   private VerticalPanel panel = new VerticalPanel();
-  
+
+  private Storage storage;
+
+  DesktopView view1;
+
+  DesktopView view2;
+
   /**
    * This is the entry point method.
    */
@@ -51,32 +60,33 @@ public class Netview implements EntryPoint {
 
     // Add the nameField and sendButton to the RootPanel
     // Use RootPanel.get() to get the entire body element
-    
-//    slider.add(addRadialGraph(), "Network");
-//    panel.add(addRadialGraph());
-//    slider.add(graph, "Analysis");
-    //add gadgets
-    GadgetClass.addClass( new AmLineGraphGadget.Class() );
-    GadgetClass.addClass( new RadialGraphGadget.Class() );
-    GadgetClass.addClass( new TreeMapGadget.Class() );
-    
-    //create view
-    panel.add( new DesktopView(new DesktopViewListener() {
 
-      public void onInterfaceChange() {
-        // TODO Auto-generated method stub
-        
-      }}, true));
+    // slider.add(addRadialGraph(), "Network");
+    // panel.add(addRadialGraph());
+    // slider.add(graph, "Analysis");
+    // add gadgets
+    GadgetClass.addClass(new AmLineGraphGadget.Class());
+    GadgetClass.addClass(new RadialGraphGadget.Class());
+    GadgetClass.addClass(new TreeMapGadget.Class());
 
-    panel.add( new DesktopView(new DesktopViewListener() {
+    // create view
 
-      public void onInterfaceChange() {
-        // TODO Auto-generated method stub
-        
-      }}, true));
+    view1 = new DesktopView(this, false);
+    view2 = new DesktopView(this, false);
+    panel.add(view1);
+    panel.add(view2);
+    storage = new CookieStorage();
+    String layout = storage.getValue("layout1");
+    if (layout != null)
+      view1.setLayoutFromString(layout);
+    Window.alert( layout );
+
+    layout = storage.getValue("layout2");
+    if (layout != null)
+      view2.setLayoutFromString(layout);
 
     RootPanel.get("chartslot").add(panel);
-//    addGraph("Top IP addresses");
+    // addGraph("Top IP addresses");
   }
 
   native void addGraph(String title) /*-{
@@ -87,20 +97,34 @@ public class Netview implements EntryPoint {
 
   Widget addRadialGraph() {
     HTML radial = new HTML(
-        "<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'version=7,0,0,0' " +
-        " width='600' height='600' id='circleIP' align='middle'>" +
-   "<param name='allowScriptAccess' value='sameDomain' />"+
-   "<param name='movie' value='flare/circlIP.swf' />" +
-   "<param name='quality' value='high' />" +
-   "<param name='bgcolor' value='#000000' />" +
-   "<embed src='flare/circlIP.swf' quality='high' bgcolor='#000000' width='600' height='600' name='circlIP' align='middle' allowScriptAccess='sameDomain' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' />" +
-   "</object>");
+        "<object classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab'version=7,0,0,0' "
+            + " width='600' height='600' id='circleIP' align='middle'>"
+            + "<param name='allowScriptAccess' value='sameDomain' />"
+            + "<param name='movie' value='flare/circlIP.swf' />"
+            + "<param name='quality' value='high' />"
+            + "<param name='bgcolor' value='#000000' />"
+            + "<embed src='flare/circlIP.swf' quality='high' bgcolor='#000000' width='600' height='600' name='circlIP' align='middle' allowScriptAccess='sameDomain' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' />"
+            + "</object>");
     return radial;
-//    $wnd.AC_FL_RunContent(
-//        "id", "circlIP",
-//        "name", "circlIP",
-//        "type", "application/x-shockwave-flash",
-//        "pluginspage", "http://www.adobe.com/go/getflashplayer"
-//    );
+    // $wnd.AC_FL_RunContent(
+    // "id", "circlIP",
+    // "name", "circlIP",
+    // "type", "application/x-shockwave-flash",
+    // "pluginspage", "http://www.adobe.com/go/getflashplayer"
+    // );
+  }
+
+  public void onInterfaceChange() {
+    // save layout to storage
+    String layout = view1.getLayoutAsString();
+    storage.setValue("layout1", layout);
+    layout = view2.getLayoutAsString();
+    storage.setValue("layout2", layout);
+    try {
+      storage.save();
+    }
+    catch (StorageException e) {
+      Window.alert("unable to save the desktops state");
+    }
   }
 }

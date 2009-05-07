@@ -12,22 +12,11 @@
   
   <!-- Servlets -->
   <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>com.prodco.netview.server.GreetingServiceImpl</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>GraphDataServlet</servlet-name>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <description>This is the description of my J2EE component</description>
     <servlet-class>com.prodco.netview.server.GraphDataServlet</servlet-class>
   </servlet>
 
-  
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/netview/greet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
+    <servlet-mapping>
     <servlet-name>GraphDataServlet</servlet-name>
     <url-pattern>/data/graph</url-pattern>
   </servlet-mapping>
