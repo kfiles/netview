@@ -100,7 +100,7 @@ h2 {
 
 /** gadgets css **/
 	/* global HTML tags */
-			body{ margin:0px; padding:0px; background-color:#a8b8c3; }
+			body{ margin:0px; padding:0px; background-color:#666666;/*#a8b8c3;*/ }
 			div,td{ font-size:10pt; font-family: verdana; }
 			h2{ margin:10px;font-family:arial;}
 			    	
@@ -124,11 +124,13 @@ h2 {
 			.gwt-TabPanelBottom	{ height: 100%; background-color:#fff; }	
 */			
 			/* GadgetContainerView */
-			.gwtapps-GadgetContainerTitle{ cursor: move; color: #262c30;  }
-			.gwtapps-GadgetContainerTitleBar{ background-image:url(titleback.gif);background-position:bottom;background-repeat:repeat-x; }
-			.gwtapps-GadgetContainerTitleBar td { padding:2px; }
+			/* .gwtapps-GadgetContainerTitle{ cursor: move; color: #262c30;  } */
+			.gwtapps-GadgetContainerTitle{ cursor: move; color: #66FF66;  }
+			/*.gwtapps-GadgetContainerTitleBar{ background-image:url(titleback.gif);background-position:bottom;background-repeat:repeat-x; }*/
+			.gwtapps-GadgetContainerTitleBar{ background-color:#666666; }
+			.gwtapps-GadgetContainerTitleBar td { padding-left:6px; padding-right:2px; padding-top:2px; padding-bottom:2px; }
 			.gwtapps-GadgetContainerEditPanel{background-color:#e5e5e5;}
-			.gwtapps-GadgetContainerBody{ background-color:#FFF; }		
+			.gwtapps-GadgetContainerBody{ background-color:#000; }		
 			.gwtapps-GadgetContainer .gwtapps-RoundedPanel-inside{ padding: 2px 6px 6px 6px;  }
 			.gwtapps-GadgetContainerPanel .gwtapps-RoundedPanel-inside{ padding:0px; }
 		
@@ -631,20 +633,22 @@ html>body .gwt-DecoratedPopupPanel .popupBottomRight {
 .gwt-PushButton-down-disabled {
   margin: 0;
   text-decoration: none;
-  background: url("images/hborder.png") repeat-x 0px -27px;
+/*  background: url("images/hborder.png") repeat-x 0px -27px;*/
 }
 .gwt-PushButton-up,
 .gwt-PushButton-up-hovering,
 .gwt-PushButton-up-disabled {
-  padding: 3px 5px 3px 5px;
+/*  padding: 3px 5px 3px 5px; */
+  padding: 1px;
 }
 .gwt-PushButton-up {
-  border: 1px outset #000;
+/*  border: 1px outset #000; */
   cursor: pointer;
   cursor: hand;
 }
 .gwt-PushButton-up-hovering {
-  border: 1px outset #24d3ff;
+/*  border: 1px outset #24d3ff; */
+  background-color: #dddddd;
   cursor: pointer;
   cursor: hand;
 }

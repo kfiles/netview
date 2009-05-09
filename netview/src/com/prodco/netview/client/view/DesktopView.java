@@ -9,6 +9,10 @@ package com.prodco.netview.client.view;
 
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -41,6 +45,7 @@ public class DesktopView extends Composite implements DockableListener
     // initialize the main panel
     VerticalPanel mainPanel = new VerticalPanel();
     initWidget( mainPanel );
+//    Window.alert( "widget inited" );
     mainPanel.setWidth( "100%" );
     mainPanel.setHeight( "100%" );
 
@@ -53,6 +58,7 @@ public class DesktopView extends Composite implements DockableListener
 
     // add gadgets
     List classes = GadgetClass.getClasses();
+//    Window.alert( "Adding " + classes.size() + " links" );
     if ( editable )
       {
       gadgetsMenu.add( new Label( "Add Gadget: " ) );
@@ -60,34 +66,44 @@ public class DesktopView extends Composite implements DockableListener
         {
         final GadgetClass gadgetClass = (GadgetClass) classes.get( i );
         Hyperlink gadgetLink = new Hyperlink( gadgetClass.getName(), "" );
-        gadgetLink.addClickListener( new ClickListener() {
-          public void onClick ( Widget sender )
+        gadgetLink.addClickHandler( new ClickHandler() {
+          public void onClick ( ClickEvent event )
             {
             insertGadget( gadgetClass.newGadget() );
             }
         } );
-
         gadgetsMenu.add( gadgetLink );
         }
       }
+//    Window.alert(  "Creating dock panel");
+
     // create the tab panel
-    mainPanel.setCellHeight( gadgetPanel, "100%" );
     gadgetPanel = createPage();
+//    Window.alert(  "dock panel created");
     gadgetPanel.setWidth( "1000px" );
     gadgetPanel.setHeight( "100%" );
+//    Window.alert(  "adding dock panel");
+
     mainPanel.add( gadgetPanel );
+    mainPanel.setCellHeight( gadgetPanel, "100%" );
+//    Window.alert( "Done creating DesktopView" );
 
     }
 
   public HorizontalPanel createPage ()
     {
+//    Window.alert(  "in createPage");
     HorizontalPanel page = new HorizontalPanel();
     page.setStyleName( "GadgetPage" );
+//    Window.alert(  "set page width");
     page.setWidth( "100%" );
     page.setHeight( "100%" );
     page.setVerticalAlignment( HasVerticalAlignment.ALIGN_TOP );
+//    Window.alert(  "creating column0");
     createColumn( page, 0 );
+//    Window.alert(  "creating column1");
     createColumn( page, 1 );
+//    Window.alert(  "creating column2");
     createColumn( page, 2 );
     return page;
     }

@@ -26,33 +26,33 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.prodco.netview.client.model.Gadget;
+import com.prodco.netview.client.model.GadgetListener;
 import com.prodco.netview.client.model.UserPref;
+import com.google.gwt.user.client.ui.ImageBundle.Resource;
 
 public class GadgetContainerView extends SimplePanel
   implements
     SourcesMouseEvents
   {
 
+  private static final String COLOR_BORDER = "#999999";
+
+  private static final String COLOR_TITLE_BG = "#666666";
+  
+  private static final String COLOR_BODY = "#000000";
+
   public static interface TitleBarImageBundle extends ImageBundle
     {
-    /**
-     * @gwt.resource close.gif
-     */
+    @Resource ("com/prodco/netview/client/view/icons/stop-16.png")
     public AbstractImagePrototype closeIcon ();
 
-    /**
-     * @gwt.resource minimize1.gif
-     */
+    @Resource ("minimize1.gif")
     public AbstractImagePrototype minimize1Icon ();
 
-    /**
-     * @gwt.resource minimize2.gif
-     */
+    @Resource ("minimize2.gif")
     public AbstractImagePrototype minimize2Icon ();
 
-    /**
-     * @gwt.resource refresh.gif
-     */
+    @Resource ("com/prodco/netview/client/view/icons/reload-16.png")
     public AbstractImagePrototype refreshIcon ();
     }
 
@@ -64,11 +64,11 @@ public class GadgetContainerView extends SimplePanel
   private VerticalPanel mainLayout = new VerticalPanel();
   private Label title = new Label();
   private Hyperlink edit = new Hyperlink( "edit", "" );
-  private ToggleButton minimizeButton = new ToggleButton( titleBarImages
-    .minimize1Icon().createImage(), titleBarImages.minimize2Icon()
-    .createImage() );
-  private PushButton refreshButton = new PushButton( titleBarImages
-    .refreshIcon().createImage() );
+//  private ToggleButton minimizeButton = new ToggleButton( titleBarImages
+//    .minimize1Icon().createImage(), titleBarImages.minimize2Icon()
+//    .createImage() );
+//  private PushButton refreshButton = new PushButton( titleBarImages
+//    .refreshIcon().createImage() );
   private PushButton closeButton = new PushButton( titleBarImages.closeIcon()
     .createImage() );
   private FlexTable editPanel = new FlexTable();
@@ -83,7 +83,7 @@ public class GadgetContainerView extends SimplePanel
       buildTitleBar();
     buildMainLayout();
     mainLayout.setWidth( "100%" );
-    RoundedPanel round = new RoundedPanel( "#eaecec", mainLayout,
+    RoundedPanel round = new RoundedPanel( COLOR_BORDER, mainLayout,
       RoundedPanel.ROUND_TOP );
     round.setWidth( "100%" );
     setWidget( round );
@@ -100,7 +100,11 @@ public class GadgetContainerView extends SimplePanel
 
   protected void buildMainLayout ()
     {
-    RoundedPanel roundTitle = new RoundedPanel( "#bdd3f3", titleBar,
+    String roundedColor = COLOR_TITLE_BG;
+    if (false == DesktopView.editable)
+      roundedColor = COLOR_BODY; 
+    if (true == DesktopView.editable) {
+    RoundedPanel roundTitle = new RoundedPanel( roundedColor, titleBar,
       RoundedPanel.ROUND_TOP );
     roundTitle.setWidth( "100%" );
     mainLayout.add( roundTitle );
@@ -110,6 +114,7 @@ public class GadgetContainerView extends SimplePanel
       editPanel.setWidth( "100%" );
       buildEditPanel();
       }
+    }
     childContainer.setWidget( child );
     mainLayout.add( childContainer );
     }
@@ -117,9 +122,9 @@ public class GadgetContainerView extends SimplePanel
   protected void buildTitleBar ()
     {
     int column = 0;
-    titleBar.add( minimizeButton );
+//    titleBar.add( minimizeButton );
     titleBar.add( title );
-    titleBar.add( refreshButton );
+//    titleBar.add( refreshButton );
     if ( child.getGadgetClass().getUserPrefsCount() > 0 )
       titleBar.add( edit );
     titleBar.add( closeButton );
@@ -138,32 +143,33 @@ public class GadgetContainerView extends SimplePanel
         toggleEdit();
         }
     } );
-    refreshButton.addClickListener( new ClickListener() {
-      public void onClick ( Widget sender )
-        {
-        child.refresh();
-        }
-    } );
+//    refreshButton.addClickListener( new ClickListener() {
+//      public void onClick ( Widget sender )
+//        {
+//        child.refresh();
+//        }
+//    } );
     closeButton.addClickListener( new ClickListener() {
       public void onClick ( Widget sender )
         {
         if ( Window.confirm( "Remove "
           + child.getGadgetClass().getName() + " from your page?" ) )
           {
+          DesktopViewListener l = child.getGadgetListener(); 
           getParent().removeFromParent();
-          child.getGadgetListener().onInterfaceChange();
+          l.onInterfaceChange();
           }
         }
     } );
-    minimizeButton.addClickListener( new ClickListener() {
-      public void onClick ( Widget sender )
-        {
-        if ( minimizeButton.isDown() )
-          child.setVisible( false );
-        else child.setVisible( true );
-        open = !open;
-        }
-    } );
+//    minimizeButton.addClickListener( new ClickListener() {
+//      public void onClick ( Widget sender )
+//        {
+//        if ( minimizeButton.isDown() )
+//          child.setVisible( false );
+//        else child.setVisible( true );
+//        open = !open;
+//        }
+//    } );
     }
 
   protected void buildEditPanel ()
