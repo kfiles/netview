@@ -23,6 +23,7 @@ import com.prodco.netview.client.gadgets.AmLineGraphGadget;
 import com.prodco.netview.client.gadgets.GraphGadget;
 import com.prodco.netview.client.gadgets.RadialGraphGadget;
 import com.prodco.netview.client.gadgets.TreeMapGadget;
+import com.prodco.netview.client.gadgets.TreeMapGadget2;
 import com.prodco.netview.client.model.GadgetClass;
 import com.prodco.netview.client.view.DesktopView;
 import com.prodco.netview.client.view.DesktopViewListener;
@@ -85,7 +86,8 @@ public class Netview
     // add gadgets
     GadgetClass.addClass( new RadialGraphGadget.Class() );
     GadgetClass.addClass( new AmLineGraphGadget.Class() );
-    GadgetClass.addClass( new TreeMapGadget.Class() );
+//    GadgetClass.addClass( new TreeMapGadget.Class() );
+    GadgetClass.addClass( new TreeMapGadget2.Class() );
     RootPanel.get( "chartslot" ).add( panel );
 
     History.addValueChangeHandler( this );

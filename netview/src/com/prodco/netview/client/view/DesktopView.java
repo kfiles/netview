@@ -129,7 +129,6 @@ public class DesktopView extends Composite implements DockableListener
     {
     FlowPanel column = (FlowPanel) getCurrentPage().getWidget( 0 );
     insertGadget( column, gadget );
-    gadget.setGadgetListener( listener );
     listener.onInterfaceChange();
     }
 
@@ -138,6 +137,7 @@ public class DesktopView extends Composite implements DockableListener
     GadgetContainerView gadgetContainer = new GadgetContainerView( gadget );
     DockableWidget dw = new DockableWidget( gadgetContainer );
     column.add( dw );
+    gadget.setGadgetListener( listener );
     dw.addDockableListener( this );
     }
 

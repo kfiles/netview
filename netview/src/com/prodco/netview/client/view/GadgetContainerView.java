@@ -157,7 +157,8 @@ public class GadgetContainerView extends SimplePanel
           {
           DesktopViewListener l = child.getGadgetListener(); 
           getParent().removeFromParent();
-          l.onInterfaceChange();
+          if (null != l)
+            l.onInterfaceChange();
           }
         }
     } );
