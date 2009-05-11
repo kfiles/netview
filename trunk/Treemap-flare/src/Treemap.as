@@ -1,29 +1,4 @@
 package {
-/*  	import br.com.stimuli.string.printf;
-	
-	import flare.display.DirtySprite;
-	import flare.display.TextSprite;
-	import flare.query.methods.eq;
-	import flare.query.methods.neq;
-	import flare.util.Colors;
-	import flare.vis.Visualization;
-	import flare.vis.controls.ClickControl;
-	import flare.vis.controls.HoverControl;
-	import flare.vis.data.Data;
-	import flare.vis.data.DataSprite;
-	import flare.vis.data.EdgeSprite;
-	import flare.vis.data.NodeSprite;
-	import flare.vis.data.Tree;
-	import flare.vis.events.SelectionEvent;
-	import flare.vis.operator.encoder.PropertyEncoder;
-	import flare.vis.operator.label.RadialLabeler;
-	import flare.vis.operator.layout.CircleLayout;
-	
-	import flash.geom.Rectangle;
-	import flash.text.TextFormat;
- */ 
-	import flare.vis.legend.Legend;
-
 
 	import flash.display.Sprite;
 	import flare.display.TextSprite;
@@ -43,8 +18,6 @@ package {
 	import flare.vis.operator.encoder.PropertyEncoder;
 	import flare.vis.operator.label.Labeler;
 	import flare.vis.operator.layout.TreeMapLayout;
-/* 	import flare.widgets.ProgressBar;
- */	
 	import flash.display.StageQuality;
 	import flash.filters.DropShadowFilter;
 	import flash.geom.Rectangle;
@@ -62,28 +35,10 @@ package {
 	public class Treemap extends Sprite
 	{
 		
-		private static var _tipText:String = "<b>{0}</b><br/>{1:,0} bytes";
-		protected var _appBounds:Rectangle;
-
-		/** We will be rotating text, so we embed the font. */
-		[Embed(source="verdana.TTF", fontName="Verdana")]
-		private static var _font:Class;
-		
-		private var _url:String = 
-			"http://flare.prefuse.org/data/flare.json.txt";
-			
-		private var _vis:Visualization;
-		private var _detail:TextSprite;
-		private var _legend:Legend;
-		private var _bar:ProgressBar;
-		private var _bounds:Rectangle = new Rectangle(0, 0, 800, 600);
-		
-		private var _fmt:TextFormat = new TextFormat("Verdana", 7, "0xffffff");
-		private var _focus:NodeSprite;
-		
 		private var _data:Array = [
   {"name":"172.15.16.2", app:"HTTP", "size":108758},
   {"name":"172.15.16.2", app:"SNMP", "size":108757},
+  {"name":"172.15.16.2", app:"ORACLE", "size":10},
   {"name":"172.15.17.2", app:"ORACLE", "size":5460},
   {"name":"172.15.19.2", app:"LDP", "size":7644},
   {"name":"172.15.21.2", app:"XIMB", "size":26670},
@@ -126,74 +81,25 @@ package {
   {"name":"172.27.0.62", app:"SNMP", "size":32397},
   {"name":"172.27.0.97", app:"ORACLE", "size":3527}
   ];
-  //These are the received packets. Having both messes with
-  //the tree structure
-/*   {srcip:"10.1.33.110", destip:"63.115.138.131", bytes:2320},
-  {srcip:"10.1.33.92", destip:"10.100.2.70", bytes:1300},
-  {srcip:"10.1.33.95", destip:"10.100.2.42", bytes:10304},
-  {srcip:"10.1.33.95", destip:"10.100.2.76", bytes:1092},
-  {srcip:"10.1.33.98", destip:"10.100.2.76", bytes:698},
-  {srcip:"10.18.0.1", destip:"216.141.33.104", bytes:1848},
-  {srcip:"172.18.128.1", destip:"216.141.33.104", bytes:2466},
-  {srcip:"172.18.128.15", destip:"172.16.128.10", bytes:13388},
-  {srcip:"172.18.128.15", destip:"172.21.0.10", bytes:9101},
-  {srcip:"172.18.128.15", destip:"172.21.0.12", bytes:4310},
-  {srcip:"172.18.128.15", destip:"172.21.0.18", bytes:1904},
-  {srcip:"172.18.128.15", destip:"192.168.200.4", bytes:1808},
-  {srcip:"172.18.128.2", destip:"216.141.33.109", bytes:22131},
-  {srcip:"172.18.128.2", destip:"216.141.33.26", bytes:2872},
-  {srcip:"172.18.128.20", destip:"216.141.33.102", bytes:2037},
-  {srcip:"172.18.128.248", destip:"172.27.0.131", bytes:28905},
-  {srcip:"172.18.128.248", destip:"172.27.0.140", bytes:1494},
-  {srcip:"172.18.128.3", destip:"216.141.33.104", bytes:18270},
-  {srcip:"172.18.128.34", destip:"172.27.0.62", bytes:30989},
-  {srcip:"172.18.128.4", destip:"216.141.33.104", bytes:18968},
-  {srcip:"172.18.128.5", destip:"172.27.0.140", bytes:31391},
-  {srcip:"172.18.128.6", destip:"172.27.0.140", bytes:26317},
-  {srcip:"172.18.128.7", destip:"172.27.0.140", bytes:29771},
-  {srcip:"172.18.128.8", destip:"172.27.0.140", bytes:26739},
-  {srcip:"172.18.128.83", destip:"172.27.0.140", bytes:1022},
-  {srcip:"172.18.128.84", destip:"172.15.16.2", bytes:67984},
-  {srcip:"172.18.128.84", destip:"172.15.17.2", bytes:5460},
-  {srcip:"172.18.128.84", destip:"172.15.19.2", bytes:7644},
-  {srcip:"172.18.128.84", destip:"172.15.21.2", bytes:17832},
-  {srcip:"172.18.128.84", destip:"172.15.22.2", bytes:8064},
-  {srcip:"172.18.128.84", destip:"172.15.23.2", bytes:7728},
-  {srcip:"172.18.128.84", destip:"172.15.25.2", bytes:7056},
-  {srcip:"172.18.128.84", destip:"172.15.27.3", bytes:7644},
-  {srcip:"172.18.128.84", destip:"172.16.128.81", bytes:10380},
-  {srcip:"172.18.128.84", destip:"172.17.128.25", bytes:17118},
-  {srcip:"172.18.128.84", destip:"172.19.128.34", bytes:6513},
-  {srcip:"172.18.128.84", destip:"172.21.0.200", bytes:7762},
-  {srcip:"172.18.128.84", destip:"172.21.0.26", bytes:4042},
-  {srcip:"172.18.128.84", destip:"172.22.128.11", bytes:4091},
-  {srcip:"172.18.128.84", destip:"172.22.128.13", bytes:6513},
-  {srcip:"172.18.128.84", destip:"172.23.128.14", bytes:14465},
-  {srcip:"172.18.128.84", destip:"172.25.128.23", bytes:7654},
-  {srcip:"172.18.128.84", destip:"172.27.0.140", bytes:1937},
-  {srcip:"172.18.128.9", destip:"172.27.0.97", bytes:28506},
-  {srcip:"172.18.129.11", destip:"172.27.0.186", bytes:424},
-  {srcip:"172.18.129.13", destip:"172.21.0.12", bytes:384},
-  {srcip:"172.18.129.200", destip:"172.27.0.86", bytes:7774},
-  {srcip:"172.18.129.201", destip:"172.27.0.86", bytes:7787},
-  {srcip:"172.18.129.202", destip:"172.27.0.86", bytes:13364},
-  {srcip:"172.18.129.203", destip:"172.27.0.86", bytes:9698},
-  {srcip:"172.18.129.204", destip:"172.27.0.86", bytes:7200},
-  {srcip:"172.18.129.205", destip:"172.27.0.86", bytes:10920},
-  {srcip:"172.18.129.22", destip:"172.27.0.186", bytes:1368},
-  {srcip:"172.18.129.24", destip:"172.21.0.186", bytes:6936},
-  {srcip:"172.18.129.24", destip:"172.27.0.186", bytes:9724},
-  {srcip:"172.18.129.42", destip:"172.21.0.12", bytes:384},
-  {srcip:"172.18.129.46", destip:"172.27.0.140", bytes:1118},
-  {srcip:"172.18.129.48", destip:"172.27.0.186", bytes:1824},
-  {srcip:"172.18.129.49", destip:"172.27.0.186", bytes:456},
-  {srcip:"172.18.129.55", destip:"172.27.0.186", bytes:2736},
-  {srcip:"172.18.129.60", destip:"172.27.0.140", bytes:2122},
-  {srcip:"172.18.129.69", destip:"172.27.0.186", bytes:5968},
-  {srcip:"172.18.129.72", destip:"172.27.0.140", bytes:1229},
-  {srcip:"172.18.129.79", destip:"172.27.0.186", bytes:3236},
-  {srcip:"172.31.5.17", destip:"172.27.0.140", bytes:22402}
- */		public function Treemap() {
+  
+  		private static var _tipText:String = "<b>{0}</b><br/>{1:,0} bytes";
+		protected var _appBounds:Rectangle;
+
+		/** We will be rotating text, so we embed the font. */
+		[Embed(source="verdana.TTF", fontName="Verdana")]
+		private static var _font:Class;
+		
+		private var _url:String = 
+			"http://flare.prefuse.org/data/flare.json.txt";
+			
+		private var _vis:Visualization;
+		private var _detail:TextSprite;
+		private var _bar:ProgressBar;
+		
+		private var _fmt:TextFormat = new TextFormat("Verdana", 7, "0xffffff");
+		private var _focus:NodeSprite;
+		
+ 		public function Treemap() {
  			addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 /* 			init();
  */		}
@@ -202,12 +108,18 @@ package {
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 			initStage();
-			onResize();
 			init();
+			onResize();
 			stage.addEventListener(Event.RESIZE, onResize);
 		}
 
-		protected function initStage():void
+		protected function onResize(evt:Event=null):void
+		{
+ 			_appBounds = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
+  			resize(_appBounds.clone());
+ 		}
+
+		private function initStage():void
 		{
 			if (!stage) {
 				throw new Error(
@@ -219,23 +131,24 @@ package {
 
 		protected function init():void
 		{
+ 			addChild(_bar = new ProgressBar());
+ 			_bar.bar.filters = [new DropShadowFilter(1)];
+
 			// load data file
-/* 			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
+			  var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
-				var obj:Array = JSON.decode(ldr.data as String) as Array;
-				var data:Data = buildData(obj);
- */	            visualize(_data);
-/*			});
- */  		}
+   				trace("visulizing data");
+	            visualize(_data);
+ 	            _bar = null;
+			});
+/* 	            visualize(_data);
+	            _bar=null;
+ */ 		}
   		
- 		private function onResize(evt:Event=null):void
-		{
-			_appBounds = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
- 			resize(_appBounds.clone());
- 		}
 				
 		public function resize(b:Rectangle):void
 		{
+			trace(b.width+" :  "+b.height+" :  "+b.x+" : "+b.y);
 			if (_bar) {
 				_bar.x = b.width/2 - _bar.width/2;
 				_bar.y = b.height/2 - _bar.height/2;
@@ -342,10 +255,7 @@ package {
 					var cls:String = evt.node.data.name;
 					trace("callAgain() for srcIp "+cls);
 					callAgain(cls);
-/*  					var url:String = _src + cls.split(".").join("/") + ".as";
-					trace(cls+" : " +url);
-					navigateToURL(new URLRequest(url), "_code");
- */ 				}
+				}
 			));
 			
 			// perform layout
@@ -361,47 +271,23 @@ package {
   			_vis.data=null;
   			_vis=null;
   			
- 			addChild(_bar = new ProgressBar());
+  			addChild(_bar = new ProgressBar());
  			_bar.bar.filters = [new DropShadowFilter(1)];
-			
+ 			
 			// load data file
-
-/*   			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
+  			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
- */  				trace("visulizing data");
+  				trace("visulizing data");
+ 	            visualize(_data, srcIp);
+	            _bar = null;
+			});
+
+/*  				trace("visulizing data");
  	            visualize(_data,srcIp);
  	            _bar = null;
-/* 			});
- */ 
+ */
   		}
 		
-
-		
-		/** Show all reverse dependencies */
-		
-		
-		private function addDetail():void
-		{	
-			var fmt:TextFormat = new TextFormat("Verdana",14, 0xffffff);
-			
-			_legend = Legend.fromValues(null, [
-				{color: 0xffff0000, size: 0.75, label: "Inbound"},
-				{color: 0xff00ff00, size: 0.75, label: "Outbound"}
-			]);
-			_legend.labelTextFormat = fmt;
-			_legend.labelTextMode = TextSprite.EMBED;
-			_legend.update();
-			addChild(_legend);
-
-			_detail = new TextSprite("", fmt, TextSprite.EMBED);
-			_detail.textField.multiline = true;
-			_detail.htmlText = "No selection";
-			addChild(_detail);
-		}
-		
-
-
-		// --------------------------------------------------------------------
 		
 		/**
 		 * Creates the visualized data.
@@ -496,11 +382,7 @@ package {
  						ipmap[p].data.size += s;
 					}
 
-/* 					if (!ipmap[row.size]) {
-						t = data.addNode({name:row.app, size:1, index:nn++});
-				 	    tree.addChild(ipmap[p], t);
-					}
- */			}
+			}
 
   			for each (node in tree.nodes)
  			{
@@ -508,21 +390,7 @@ package {
  				trace("node-"+j+"="+node.data.name+":"+node.data.size);
  			}
 
- 
-
-			//Now create edges from src->dest
-/* 			for each (row in ips) {
-					p = row.srcip;
-					var t:NodeSprite = ipmap[row.app];
- 					if (!t) {
-						t = data.addNode({name:row.app, size:1, index:nn++});
-				 	}
-				 	    tree.addChild(ipmap[p], t);
- 				 	//tree.addChild(ipmap[p], t);
-				 	data.addEdgeFor(ipmap[p], t, true, row);
-			}
- */
-			// sort the list of children alphabetically by name
+ 			// sort the list of children alphabetically by name
  			for each (u in tree.nodes) {
 				u.sortEdgesBy(NodeSprite.CHILD_LINKS, "target.data.name");
 			}
