@@ -1,6 +1,5 @@
 package {
 
-	import flash.display.Sprite;
 	import flare.display.TextSprite;
 	import flare.query.methods.eq;
 	import flare.query.methods.fn;
@@ -18,17 +17,17 @@ package {
 	import flare.vis.operator.encoder.PropertyEncoder;
 	import flare.vis.operator.label.Labeler;
 	import flare.vis.operator.layout.TreeMapLayout;
+	
+	import flash.display.Sprite;
+	import flash.display.StageAlign;
 	import flash.display.StageQuality;
+	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.filters.DropShadowFilter;
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	import flash.net.navigateToURL;
 	import flash.text.TextFormat;
-
-	import flash.events.Event;
-	import flash.display.StageAlign;
-	import flash.display.StageScaleMode;
 
 
 /* 	[SWF(width="600", height="400", backgroundColor="#000000", frameRate="30")]
@@ -99,6 +98,8 @@ package {
 		
 		private var _fmt:TextFormat = new TextFormat("Verdana", 7, "0xffffff");
 		private var _focus:NodeSprite;
+				
+		private var _level=0;
 		
  		public function Treemap() {
  			addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
@@ -116,6 +117,7 @@ package {
 
 		protected function onResize(evt:Event=null):void
 		{
+			trace(stage.stageWidth+": "+stage.stageHeight);
  			_appBounds = new Rectangle(0, 0, stage.stageWidth, stage.stageHeight);
   			resize(_appBounds.clone());
  		}
@@ -136,21 +138,21 @@ package {
  			_bar.bar.filters = [new DropShadowFilter(1)];
 
 			// load data file
-			  var ldr:URLLoader = new URLLoader(new URLRequest(_url));
+ 			  var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
    				trace("visulizing data");
 	            visualize(_data);
  	            _bar = null;
 			});
-/* 	            visualize(_data);
+/*   	            visualize(_data);
 	            _bar=null;
- */ 		}
+ */  		}
   		
 				
 		public function resize(b:Rectangle):void
 		{
-			trace(b.width+" :  "+b.height+" :  "+b.x+" : "+b.y);
-			if (_bar) {
+/* 			trace(b.width+" :  "+b.height+" :  "+b.x+" : "+b.y);
+ */			if (_bar) {
 				_bar.x = b.width/2 - _bar.width/2;
 				_bar.y = b.height/2 - _bar.height/2;
 			}
@@ -203,17 +205,16 @@ package {
 			_vis.operators.add(new TreeMapLayout("data.size"));
 
 			// label top-level packages in new layer
-			_vis.operators.add(new Labeler(
-				// strip off the "flare." prefix
+ 			_vis.operators.add(new Labeler(
 			    fn("substring","data.name",0),
 				Data.NODES, new TextFormat("Arial", 14, 0, true),
 				eq("depth",1), Labeler.LAYER));
-
+ 
 			// add drop shadow to generated labels
-			_vis.operators.add(new PropertyEncoder({
+ 			_vis.operators.add(new PropertyEncoder({
 				"props.label.filters": [new DropShadowFilter(3,45,0x888888)]
 			}, Data.NODES, eq("depth",1)));
-
+ 
 			// run the operators
 			_vis.update();
 			
@@ -239,19 +240,19 @@ package {
 			));
 			
 			// provide tooltip on mouse hover
-			_vis.controls.add(new TooltipControl(NodeSprite, null,
+ 			_vis.controls.add(new TooltipControl(NodeSprite, null,
 				function(evt:TooltipEvent):void {
 					TextSprite(evt.tooltip).htmlText = Strings.format(_tipText,
 						evt.node.data.name, evt.node.data.size);
 				}
 			));
-			
+ 			
 			// click to hyperlink to source code
 			_vis.controls.add(new ClickControl(NodeSprite, 1,
 				function(evt:SelectionEvent):void {
 					
 					// Build data gain
-					
+
 					// Visualize treemap again for given subnet.
 					var cls:String = evt.node.data.name;
 					trace("callAgain() for srcIp "+cls);
@@ -272,21 +273,30 @@ package {
   			_vis.data=null;
   			_vis=null;
   			
+  			_level++;
+  			
+  			if (_level >1)
+  			   _level=0;
+  			
   			addChild(_bar = new ProgressBar());
  			_bar.bar.filters = [new DropShadowFilter(1)];
  			
 			// load data file
-  			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
+   			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
   				trace("visulizing data");
- 	            visualize(_data, srcIp);
+/*   				_vis.controls.clear();
+ */  				if (_level==0)
+ 	            	visualize(_data);
+ 	            else 
+ 	            	visualize(_data, srcIp);
 	            _bar = null;
 			});
-
-/*  				trace("visulizing data");
+ 
+/*   				trace("visulizing data");
  	            visualize(_data,srcIp);
  	            _bar = null;
- */
+ */ 
   		}
 		
 		
