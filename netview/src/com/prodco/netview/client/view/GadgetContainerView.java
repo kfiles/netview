@@ -82,10 +82,10 @@ public class GadgetContainerView extends SimplePanel
     if ( DesktopView.editable )
       buildTitleBar();
     buildMainLayout();
-    mainLayout.setWidth( "100%" );
+    mainLayout.setWidth( "50%" );
     RoundedPanel round = new RoundedPanel( COLOR_BORDER, mainLayout,
       RoundedPanel.ROUND_TOP );
-    round.setWidth( "100%" );
+    round.setWidth( "50%" );
     setWidget( round );
     child.refresh();
 
@@ -111,7 +111,7 @@ public class GadgetContainerView extends SimplePanel
     if ( child.getGadgetClass().getUserPrefsCount() > 0 )
       {
       mainLayout.add( editPanel );
-      editPanel.setWidth( "100%" );
+      editPanel.setWidth( "50%" );
       buildEditPanel();
       }
     }
