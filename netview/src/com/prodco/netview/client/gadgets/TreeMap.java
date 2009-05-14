@@ -34,7 +34,7 @@ public class TreeMap extends Widget
     }
 
   native void addGraph ( String divName ) /*-{
-    var so = new $wnd.SWFObject("treemap/Treemap.swf", "amline", "400", "400", "8", "#000000");
+    var so = new $wnd.SWFObject("treemap/Treemap.swf", "amline", "650", "480", "8", "#000000");
     so.addVariable("preloader_color", "#000000"); 
 //    $wnd.alert(divName);
     so.write(divName);

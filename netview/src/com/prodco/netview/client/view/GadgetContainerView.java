@@ -35,8 +35,10 @@ public class GadgetContainerView extends SimplePanel
     SourcesMouseEvents
   {
 
-  private static final String COLOR_BORDER = "#999999";
+//  private static final String COLOR_BORDER = "#999999";
 
+  private static final String COLOR_BORDER = "#000000";
+  
   private static final String COLOR_TITLE_BG = "#666666";
   
   private static final String COLOR_BODY = "#000000";
