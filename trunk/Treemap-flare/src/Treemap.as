@@ -31,7 +31,7 @@ package {
 
 
 /* 	[SWF(width="600", height="400", backgroundColor="#000000", frameRate="30")]
- */	[SWF(backgroundColor="#ffffff", frameRate="30")]
+ */	[SWF(backgroundColor="#000000", frameRate="30")]
 	public class Treemap extends Sprite
 	{
 		
@@ -95,7 +95,9 @@ package {
 		private var _vis:Visualization;
 		private var _detail:TextSprite;
 		private var _bar:ProgressBar;
-		
+
+		private static var _fillColor:uint = 0xff447744;
+		private static var _lineColor:uint = 0x111111FF;		
 		private var _fmt:TextFormat = new TextFormat("Verdana", 7, "0xffffff");
 		private var _focus:NodeSprite;
 				
@@ -184,14 +186,14 @@ package {
 			_vis.data.nodes.visit(function(n:NodeSprite):void {
 				n.buttonMode = true;
 				n.shape = Shapes.BLOCK;
-				n.fillColor = 0xff4444ff;
-				n.lineColor = 0xffcccccc;
+				n.fillColor = _fillColor;
+				n.lineColor = _lineColor;
 				n.lineWidth = n.depth==1 ? 2 : n.childDegree ? 1 : 0;
-				n.fillAlpha = n.depth / 25;
+				n.fillAlpha = 1;/*n.depth / 25;*/
 			});
 			// no fill or mouse interaction for nodes with children
 			_vis.data.nodes.setProperties({
-				fillColor: 0,
+				fillColor: 0x00ff0000,
 				mouseEnabled: false
 			}, null, "childDegree");
 			
@@ -227,15 +229,15 @@ package {
 				HoverControl.MOVE_AND_RETURN,
 				// highlight
 				function(evt:SelectionEvent):void {
-					evt.node.lineColor = 0xffFF0000;
-					evt.node.fillColor = 0xffFFAAAA;
+					evt.node.lineColor = 0xff77dd77;
+					evt.node.fillColor = 0xff92BA92;
 				},
 				// unhighlight
 				function(evt:SelectionEvent):void {
 					var n:NodeSprite = evt.node;
-					n.lineColor = 0xffcccccc;
-					n.fillColor = 0xff4444FF;
-					n.fillAlpha = n.depth / 25;
+					n.lineColor = _lineColor;
+					n.fillColor = _fillColor;
+					n.fillAlpha = 1;/*n.depth / 25;*/
 				}
 			));
 			
