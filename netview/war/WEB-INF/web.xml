@@ -16,9 +16,19 @@
     <servlet-class>com.prodco.netview.server.GraphDataServlet</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>CsvUploadServlet</servlet-name>
+    <servlet-class>com.prodco.netview.server.CsvUploadServlet</servlet-class>
+  </servlet>
+
     <servlet-mapping>
     <servlet-name>GraphDataServlet</servlet-name>
     <url-pattern>/data/graph</url-pattern>
+  </servlet-mapping>
+
+    <servlet-mapping>
+    <servlet-name>CsvUploadServlet</servlet-name>
+    <url-pattern>/upload</url-pattern>
   </servlet-mapping>
 
 </web-app>
