@@ -10,7 +10,10 @@ package com.prodco.netview.server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
@@ -22,12 +25,17 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
 import com.prodco.netview.domain.FlowRecord;
+import com.prodco.netview.server.PersistenceManagerHelper;
 
 public class CsvUploadServlet extends HttpServlet
   {
 
   private static final long serialVersionUID = 1L;
 
+  private final Logger log = Logger.getLogger( this.getClass().getName() );
+  
+  SimpleDateFormat tcFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ssZ");
+  
   /**
    * Constructor of the object.
    */
@@ -93,37 +101,55 @@ public class CsvUploadServlet extends HttpServlet
    * @throws IOException
    *           if an error occurred
    */
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings ( "unchecked" )
   public void doPost ( HttpServletRequest request, HttpServletResponse response )
     throws ServletException, IOException
     {
     BufferedReader in = request.getReader();
     ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
-    strat.setType(FlowRecord.class);
-    String[] columns = new String[] {"timecode", "timestampStart", "vlanName", 
+    strat.setType( FlowRecord.class );
+    String[] columns = new String[]{"timecode", "timestampStart", "vlanName",
       "vlanTag", "appName", "srcIp", "destIp", "srcPort", "destPort",
-      "ipProto", "ipTos", "tcpFlags", "packetCount", "byteCount"}; 
-    strat.setColumnMapping(columns);
+      "ipProto", "ipTos", "tcpFlags", "packetCount", "byteCount"};
+    strat.setColumnMapping( columns );
 
     CsvToBean csv = new CsvToBean();
-    List<FlowRecord> list = csv.parse(strat, in);
+    PersistenceManager pm = PersistenceManagerHelper.getInstance()
+      .getPersistenceManager();
+    try
+      {
+      List<FlowRecord> list = csv.parse( strat, in );
 
-    response.setContentType( "text/html" );
-    PersistenceManager pm = PersistenceManagerHelper.getInstance().getPersistenceManager();
-    try {
-      for (FlowRecord rec : list) {
+      response.setContentType( "text/html" );
+      for ( FlowRecord rec : list )
+        {
         rec.setSiteId( 1l );
-        pm.makePersistent(rec);
+        rec.setVlanName( "LAN" );
+        try {
+          rec.setTimecode( (int)(tcFormat.parse( rec.getTimestampStart() + "-0000" ).getTime()/30000l) );
+        } catch (ParseException e) {
+         //leave old timecode
+        }
+        pm.makePersistent( rec );
+        }
+
       }
-    } finally {
-        pm.close();
-    }
-//    PrintWriter out = response.getWriter();
-//    out
-//      .println( "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">" );
-//    out.println( "<HTML>" );
-//    out.flush();
-//    out.close();
+    
+    catch ( RuntimeException e )
+      {
+      log.severe( "Error parsing CSV file: " + e.getClass().getName() + ": " + e.getMessage() );
+      }
+    finally
+      {
+      pm.close();
+      }
+    // PrintWriter out = response.getWriter();
+    // out
+    // .println( "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01
+    // Transitional//EN\">" );
+    // out.println( "<HTML>" );
+    // out.flush();
+    // out.close();
     }
 
   /**
