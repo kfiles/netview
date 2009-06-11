@@ -3,8 +3,15 @@
 int siteId = 1;
 int startTime = 1236211200;
 int endTime = 1236296700;
-XYDataSet data = new FlowDataDAO().getTopSrcPorts(siteId, startTime, endTime); 
-List<String> categories = data.getCategories(); %>
+XYDataSet data = new FlowDataDAO().getTopSrcPorts(siteId, startTime, endTime, 4);
+if (null == data)
+	out.println("No XYDataSet");
+else { 
+List<String> categories = data.getCategories(); 
+if (null == categories || categories.size() == 0)
+	out.println("No categories");
+else {
+	%>
 <categories fontSize='4'>
 <% for (String label : categories) {%>
 <category label='<%= label %>'/>
@@ -16,7 +23,9 @@ List<String> categories = data.getCategories(); %>
 <set value='<%= num %>' />
 </dataset>
 <% } //vals
-  } //series %>
+  } //series
+  } //else
+  } //else %>
 <styles><definition><style type='font' name='CaptionFont' size='15' color='66FF66' /><style type='font' name='SubCaptionFont' color='66EE66' bold='0' />
 </definition>
 <application><apply toObject='caption' styles='CaptionFont' /><apply toObject='SubCaption' styles='SubCaptionFont' /></application>

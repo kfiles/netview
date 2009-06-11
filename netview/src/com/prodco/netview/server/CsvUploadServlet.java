@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
+import com.google.apphosting.api.DeadlineExceededException;
 import com.prodco.netview.domain.FlowRecord;
 import com.prodco.netview.server.PersistenceManagerHelper;
 
@@ -70,6 +71,7 @@ public class CsvUploadServlet extends HttpServlet
   public void doGet ( HttpServletRequest request, HttpServletResponse response )
     throws ServletException, IOException
     {
+    System.err.println( "Got HEAD request" );
 
     response.setContentType( "text/html" );
     PrintWriter out = response.getWriter();
@@ -116,11 +118,14 @@ public class CsvUploadServlet extends HttpServlet
     CsvToBean csv = new CsvToBean();
     PersistenceManager pm = PersistenceManagerHelper.getInstance()
       .getPersistenceManager();
+    int count = 0;
     try
       {
       List<FlowRecord> list = csv.parse( strat, in );
+      int listSize = list.size();
+      log.info( "CSV Parsed with " + listSize + " records" );
 
-      response.setContentType( "text/html" );
+      response.setContentType( "text/plain" );
       for ( FlowRecord rec : list )
         {
         rec.setSiteId( 1l );
@@ -130,11 +135,18 @@ public class CsvUploadServlet extends HttpServlet
         } catch (ParseException e) {
          //leave old timecode
         }
+
         pm.makePersistent( rec );
+        count++;
         }
+      log.info( "Done storing " + listSize + " rows");
 
       }
-    
+    catch ( DeadlineExceededException e ) {
+      //Let the sender know how many records were processed
+      response.getWriter().println( count );
+      response.getWriter().flush();
+    }
     catch ( RuntimeException e )
       {
       log.severe( "Error parsing CSV file: " + e.getClass().getName() + ": " + e.getMessage() );
@@ -142,6 +154,7 @@ public class CsvUploadServlet extends HttpServlet
     finally
       {
       pm.close();
+      log.info( "Transaction ended");
       }
     // PrintWriter out = response.getWriter();
     // out

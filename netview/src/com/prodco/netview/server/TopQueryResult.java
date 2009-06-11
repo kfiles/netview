@@ -135,7 +135,8 @@ public class TopQueryResult<P> implements Comparable<TopQueryResult<P>>
       throw new ClassCastException ("Object of type " + obj.getClass().getName() + 
         " cannot be compared to this " + this.getClass().getName());
     final TopQueryResult<P> other = (TopQueryResult<P>) obj;
-    return totalBytes.compareTo( other.totalBytes );
+    //Sort by greatest to least bytes
+    return other.totalBytes.compareTo( totalBytes );
     }
 
   @Override
