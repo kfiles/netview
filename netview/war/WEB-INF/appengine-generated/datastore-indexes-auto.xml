@@ -1,0 +1,11 @@
+<!-- Indices written at Thu, 11 Jun 2009 02:06:58 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="FlowRecord" ancestor="false" source="auto">
+        <property name="siteId" direction="asc"/>
+        <property name="timecode" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
