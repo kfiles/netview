@@ -1,17 +1,20 @@
 package com.prodco.netview.server;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class XYSeries
   {
-  List<String> XVals;
-  List<Number> YVals;
+  List<String> XVals= new ArrayList<String>();
+  List<Number> YVals= new ArrayList<Number>();
   String label;
   
   public void addPoint(String x, Number y) {
-    XVals.add( x );
-    YVals.add( y );
-  }
+    if (x != null && y != null) {
+      XVals.add( x );
+      YVals.add( y );
+    }
+  } 
   
   public List<String> getXVals ()
     {

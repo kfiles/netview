@@ -89,7 +89,7 @@ public class Netview
 //    GadgetClass.addClass( new TreeMapGadget.Class() );
     GadgetClass.addClass( new TreeMapGadget2.Class() );
     RootPanel.get( "chartslot" ).add( panel );
-
+        
     History.addValueChangeHandler( this );
     String token = History.getToken();
     if ( null == token
