@@ -110,14 +110,14 @@ public class FlowDataDAO
       System.out.println("Getting TreemapDataSet from database for site="+siteId);
       PersistenceManager pm = PersistenceManagerHelper.getInstance()
         .getPersistenceManager();
-      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
-      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
+//      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
+//      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
       int packetCount=1;
-//      String q = "siteId == " + siteId; 
-////      + " && timecode > " + startTime + " && timecode < " + endTime;
-//      Query query = pm.newQuery( FlowRecord.class, q);
-//      query.setOrdering( "timecode asc" );
-//      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
+      String q = "siteId == " + siteId; 
+//      + " && timecode > " + startTime + " && timecode < " + endTime;
+      Query query = pm.newQuery( FlowRecord.class, q);
+      query.setOrdering( "timecode asc" );
+      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
       if (null == recs) {
         log.warning( "No records matched the query for siteId " + siteId);
         return null;
@@ -150,18 +150,18 @@ public class FlowDataDAO
     XYDataSet rv = new XYDataSet();
     try
       {
-      testSimpleJsonCode("172.15.16.2","HTTP",108758);
-      System.out.println("Getting TreemapDataSet from database for site="+siteId);
+//      testSimpleJsonCode("172.15.16.2","HTTP",108758);
+//      System.out.println("Getting TreemapDataSet from database for site="+siteId);
       PersistenceManager pm = PersistenceManagerHelper.getInstance()
         .getPersistenceManager();
-      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
-      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
+//      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
+//      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
       int packetCount=1;
-//      String q = "siteId == " + siteId; 
-////      + " && timecode > " + startTime + " && timecode < " + endTime;
-//      Query query = pm.newQuery( FlowRecord.class, q);
-//      query.setOrdering( "timecode asc" );
-//      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
+      String q = "siteId == " + siteId; 
+//      + " && timecode > " + startTime + " && timecode < " + endTime;
+      Query query = pm.newQuery( FlowRecord.class, q);
+      query.setOrdering( "timecode asc" );
+      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
       if (null == recs) {
         log.warning( "No records matched the query for siteId " + siteId);
         return null;

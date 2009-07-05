@@ -19,11 +19,19 @@
 			out.println("No categories");
 		else {
 
+    int i=0;
 	for (JSONObject obj : data) {
 	System.out.println(obj);
+	if (i==0) {
 %>
-<%=obj%>,
+<%=obj%>
 <%
+    } else {
+    %>
+    ,<%=obj%>
+<%
+	}
+	 i++;
 	} //for
 	}  //else
 	} //else
