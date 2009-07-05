@@ -1,5 +1,7 @@
 package {
 
+	import com.adobe.serialization.json.JSON;
+	
 	import flare.display.TextSprite;
 	import flare.query.methods.eq;
 	import flare.query.methods.fn;
@@ -30,58 +32,10 @@ package {
 	import flash.text.TextFormat;
 
 
-/* 	[SWF(width="600", height="400", backgroundColor="#000000", frameRate="30")]
- */	[SWF(backgroundColor="#000000", frameRate="30")]
+ 	[SWF(backgroundColor="#ffffff", frameRate="30")]
 	public class Treemap extends Sprite
 	{
 		
-		private var _data:Array = [
-  {"name":"172.15.16.2", app:"HTTP", "size":108758},
-  {"name":"172.15.16.2", app:"SNMP", "size":108757},
-  {"name":"172.15.16.2", app:"ORACLE", "size":10},
-  {"name":"172.15.17.2", app:"ORACLE", "size":5460},
-  {"name":"172.15.19.2", app:"LDP", "size":7644},
-  {"name":"172.15.21.2", app:"XIMB", "size":26670},
-  {"name":"172.15.22.2", app:"FTP", "size":8064},
-  {"name":"172.15.23.2", app:"SSH", "size":7728},
-  {"name":"172.15.25.2", app:"CVS", "size":7056},
-  {"name":"172.15.27.3", app:"HTTP", "size":7644},
-  {"name":"172.16.128.10", app:"HTTP", "size":20443},
-  {"name":"172.16.128.81", app:"MNA", "size":10956},
-  {"name":"172.17.128.25", app:"XIMB", "size":17121},
-  {"name":"172.19.128.34", app:"SOAP", "size":6598},
-  {"name":"172.21.0.10", app:"FTP", "size":10482},
-  {"name":"172.21.0.12", app:"HTTP", "size":8438},
-  {"name":"172.21.0.12", app:"SNMP", "size":360},
-  {"name":"172.21.0.12", app:"LDAP", "size":360},
-  {"name":"172.21.0.18", app:"FTP", "size":5610},
-  {"name":"172.21.0.186", app:"LDAP", "size":6852},
-  {"name":"172.21.0.200", app:"SSH", "size":8276},
-  {"name":"172.21.0.26", app:"CVS", "size":3500},
-  {"name":"172.22.128.11", app:"LDAP", "size":3638},
-  {"name":"172.22.128.13", app:"HTTP", "size":6313},
-  {"name":"172.23.128.14", app:"ORACLE", "size":12810},
-  {"name":"172.25.128.23", app:"MNA", "size":7788},
-  {"name":"172.27.0.131", app:"HTTP", "size":4693},
-  {"name":"172.27.0.131", app:"SNMP", "size":660},
-  {"name":"172.27.0.140", app:"HTTP", "size":1290},
-  {"name":"172.27.0.140", app:"SNMP", "size":28745},
-  {"name":"172.27.0.140", app:"LDAP", "size":23965},
-  {"name":"172.27.0.140", app:"CVS", "size":27255},
-  {"name":"172.27.0.140", app:"FTP", "size":24885},
-  {"name":"172.27.0.140", app:"XIMB", "size":876},
-  {"name":"172.27.0.140", app:"SOAP", "size":1776},
-  {"name":"172.27.0.140", app:"MNA", "size":1019},
-  {"name":"172.27.0.140", app:"IM", "size":1971},
-  {"name":"172.27.0.140", app:"DCAT", "size":1022},
-  {"name":"172.23.0.140", app:"EJB", "size":20898},
-  {"name":"172.27.0.186", app:"HTTP", "size":7932},
-  {"name":"172.27.0.186", app:"SNMP", "size":25904},
-  {"name":"172.27.0.186", app:"AUTHEN", "size":18212},
-  {"name":"172.27.0.62", app:"SNMP", "size":32397},
-  {"name":"172.27.0.97", app:"ORACLE", "size":3527}
-  ];
-  
   		private static var _tipText:String = "<b>{0}</b><br/>{1:,0} bytes";
 		protected var _appBounds:Rectangle;
 
@@ -89,9 +43,7 @@ package {
 		[Embed(source="verdana.TTF", fontName="Verdana")]
 		private static var _font:Class;
 		
-		private var _url:String = 
-			"http://flare.prefuse.org/data/flare.json.txt";
-			
+		private var _url:String = "http://localhost:8080/testdata/treemap.jsp";
 		private var _vis:Visualization;
 		private var _detail:TextSprite;
 		private var _bar:ProgressBar;
@@ -101,8 +53,8 @@ package {
 		private var _fmt:TextFormat = new TextFormat("Verdana", 7, "0xffffff");
 		private var _focus:NodeSprite;
 				
-		private var _level=0;
-		
+		private var _level:int=0;
+		private var obj:Array;
  		public function Treemap() {
  			addEventListener(Event.ADDED_TO_STAGE, onStageAdd);
 /* 			init();
@@ -136,6 +88,7 @@ package {
 
 		protected function init():void
 		{
+			trace("Starting treemap");
  			addChild(_bar = new ProgressBar());
  			_bar.bar.filters = [new DropShadowFilter(1)];
 
@@ -143,7 +96,17 @@ package {
  			  var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
    				trace("visulizing data");
-	            visualize(_data);
+   				trace("ldr.data="+ldr.data);
+   				trace("Decoding data now");
+   				obj = JSON.decode(ldr.data as String) as Array;
+   				
+   				trace ("Got response back from treemap.jsp");
+   				
+
+/* 				var _data:Data = buildData(obj);
+ */
+ 				trace("total records="+obj.length);
+ 	            visualize(obj);
  	            _bar = null;
 			});
 /*   	            visualize(_data);
@@ -287,12 +250,13 @@ package {
    			var ldr:URLLoader = new URLLoader(new URLRequest(_url));
 			_bar.loadURL(ldr, function():void {
   				trace("visulizing data");
-/*   				_vis.controls.clear();
- */  				if (_level==0)
- 	            	visualize(_data);
+   				
+   				trace("obj.size="+obj.length);
+    			if (_level==0)
+ 	            	visualize(obj);
  	            else 
- 	            	visualize(_data, srcIp);
-	            _bar = null;
+ 	            	visualize(obj, srcIp);
+ 	            _bar = null;
 			});
  
 /*   				trace("visulizing data");
@@ -391,7 +355,7 @@ package {
 					 	tree.addChild(tree.root, ipmap[p]);
 					} else {
  						var n:NodeSprite = ipmap[p];
-						trace("existing data="+n.data.app.toString()+ " : "+n.data.size);
+						trace("existing data="+n.data.name.toString()+ " : "+n.data.size);
  						ipmap[p].data.size += s;
 					}
 
