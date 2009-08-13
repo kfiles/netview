@@ -118,6 +118,7 @@ public class CsvUploadServlet extends HttpServlet
     CsvToBean csv = new CsvToBean();
     PersistenceManager pm = PersistenceManagerHelper.getInstance()
       .getPersistenceManager();
+    pm.currentTransaction().begin();
     int count = 0;
     try
       {
@@ -140,7 +141,7 @@ public class CsvUploadServlet extends HttpServlet
         count++;
         }
       log.info( "Done storing " + listSize + " rows");
-
+      pm.currentTransaction().commit();
       }
     catch ( DeadlineExceededException e ) {
       //Let the sender know how many records were processed
