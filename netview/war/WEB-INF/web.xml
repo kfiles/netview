@@ -11,6 +11,7 @@
   </welcome-file-list>
   
   <!-- Servlets -->
+
   <servlet>
     <servlet-name>GraphDataServlet</servlet-name>
     <servlet-class>com.prodco.netview.server.GraphDataServlet</servlet-class>

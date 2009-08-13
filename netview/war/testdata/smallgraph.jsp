@@ -21,8 +21,8 @@ else {
 <dataset seriesname='<%= series.getLabel() %>'>
 <%   for (Number num : series.getYVals()) { %>
 <set value='<%= num %>' />
-</dataset>
 <% } //vals
+%></dataset><% 
   } //series
   } //else
   } //else %>

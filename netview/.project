@@ -6,6 +6,11 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.wst.jsdt.core.javascriptValidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -26,8 +31,13 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
+			<triggers>full,incremental,</triggers>
 			<arguments>
+				<dictionary>
+					<key>LaunchConfigHandle</key>
+					<value>&lt;project&gt;/.externalToolBuilders/com.google.gwt.eclipse.core.gwtProjectValidator.launch</value>
+				</dictionary>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
@@ -35,5 +45,6 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>com.google.gwt.eclipse.core.gwtNature</nature>
 		<nature>com.google.gdt.eclipse.core.webAppNature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
 </projectDescription>

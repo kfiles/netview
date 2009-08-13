@@ -1,6 +1,7 @@
 
 package com.prodco.netview.server;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,6 +23,8 @@ import javax.jdo.Query;
 
 import com.prodco.netview.client.util.ExceptionUtil;
 import com.prodco.netview.domain.FlowRecord;
+import com.prodco.netview.server.query.TopQueryResult;
+import com.prodco.netview.server.query.TopQueryType;
 
 public class FlowDataDAO
   {
@@ -31,15 +34,16 @@ public class FlowDataDAO
   SimpleDateFormat labelFormat = new SimpleDateFormat( "HH:mm" );
 
   @SuppressWarnings ( "unchecked" )
-  public XYDataSet getTopSrcPorts ( int siteId, int startTime, int endTime,
+  public XYDataSet getTopResult( int siteId, int startTime, int endTime, TopQueryType type,
     int num )
     {
-    XYDataSet rv = new XYDataSet();
+    XYDataSet rv = null;
     try
       {
       System.out.println("Getting data from database");
       PersistenceManager pm = PersistenceManagerHelper.getInstance()
         .getPersistenceManager();
+      pm.currentTransaction().begin();
       String q = "siteId == " + siteId; 
 //      + " && timecode > " + startTime + " && timecode < " + endTime;
       Query query = pm.newQuery( FlowRecord.class, q);
@@ -55,37 +59,8 @@ public class FlowDataDAO
       } else {
         System.out.println("Got "+ rpb+" records back from database");
       }
-      Hashtable<Integer, TopQueryResult<Integer>> top = new Hashtable<Integer, TopQueryResult<Integer>>();
-      for ( FlowRecord rec : recs )
-        {
-        TopQueryResult<Integer> entry = top.get( rec.getSrcPort() );
-        if ( null == entry )
-          entry = new TopQueryResult<Integer>( rec.getSrcPort() );
-        entry.addBytes( rec.getByteCount() );
-        entry.addPackets( rec.getPacketCount() );
-        entry.addRecord( rec );
-        top.put( entry.getTopProp(), entry );
-        }
-      TreeSet<TopQueryResult<Integer>> sorted = new TreeSet<TopQueryResult<Integer>>();
-      Enumeration<TopQueryResult<Integer>> ii = top.elements();
-      while ( ii.hasMoreElements() )
-        {
-        sorted.add( ii.nextElement() );
-        }
-      Iterator<TopQueryResult<Integer>> jj = sorted.iterator();
-      TopQueryResult<Integer> entry;
-      for ( int i = 0; i < num
-        && jj.hasNext(); i++ )
-        {
-        entry = jj.next();
-        XYSeries series = new XYSeries();
-        for ( FlowRecord rec : entry.getRecords() )
-          {
-          series.addPoint( labelFormat.format( new Date( 30000l * rec
-            .getTimecode() ) ), rec.getByteCount() );
-          }
-        rv.addDataSet( series );
-        }
+      rv = type.getHandler().getDataSet( recs, num );
+      pm.currentTransaction().commit();
       }
     catch ( NullPointerException e) {
       log.severe( e.getClass().getSimpleName() + " in retrieving flows: " + 
