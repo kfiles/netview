@@ -23,7 +23,7 @@
         <property name="javax.jdo.option.ConnectionUserName"
             value="root"/>
         <property name="javax.jdo.option.ConnectionPassword"
-            value="netview"/>
+            value="bb0ws1f"/>
         <property name="javax.jdo.option.Optimistic"
             value="true"/>
         <property name="datanucleus.autoCreateSchema"
