@@ -1,6 +1,9 @@
 
 package com.prodco.netview.server;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -83,17 +86,67 @@ public class FlowDataDAO
     try
       {
       System.out.println("Getting TreemapDataSet from database for site="+siteId);
-      PersistenceManager pm = PersistenceManagerHelper.getInstance()
-        .getPersistenceManager();
-//      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
-//      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
-      int packetCount=1;
-      String q = "siteId == " + siteId; 
-//      + " && timecode > " + startTime + " && timecode < " + endTime;
-      Query query = pm.newQuery( FlowRecord.class, q);
-      query.setOrdering( "timecode asc" );
-      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
-      if (null == recs) {
+      Connection conn = null;
+      List<FlowRecord> recs =  new ArrayList<FlowRecord>();
+
+      try
+      {
+          String userName = "prodco";
+          String password = "prodco";
+          String url = "jdbc:mysql://localhost:3306/prodco";
+          Class.forName ("com.mysql.jdbc.Driver").newInstance ();
+          conn = (Connection) DriverManager.getConnection (url, userName, password);
+          System.out.println ("Database connection established");
+          
+          String sql = "Select flow_id,app_id,app_name,src_ip,src_port,dest_ip,dest_port,"+
+          "byte_count,packet_count,site_id from flow_sign where site_id="+siteId;
+          ResultSet rs = conn.createStatement().executeQuery( sql );
+          
+
+          while (rs.next()) {
+            FlowRecord flow = new FlowRecord();
+            flow.setAppName(rs.getString( "app_name" ));
+            flow.setSrcIp( rs.getString("src_ip"));
+            flow.setSrcPort(rs.getInt( "src_port" ));
+            flow.setDestIp( rs.getString( "dest_ip" ));
+            flow.setDestPort(rs.getInt( "dest_port"));
+            flow.setByteCount(rs.getLong( "byte_count"));
+            flow.setPacketCount(rs.getInt( "packet_count"));
+            flow.setAppId( (long)rs.getInt( "app_id"));
+            flow.setId( (long)rs.getInt( "flow_id" ) );
+            flow.setSiteId( (long)rs.getInt( "site_id" ) );
+            recs.add( flow );
+          }
+      }
+      catch (Exception e)
+      {
+          e.printStackTrace();
+          System.err.println ("Cannot connect to database server");
+      }
+      finally
+      {
+          if (conn != null)
+          {
+              try
+              {
+                  conn.close ();
+                  System.out.println ("Database connection terminated");
+              }
+              catch (Exception e) { /* ignore close errors */ }
+          }
+      }      
+      
+//      PersistenceManager pm = PersistenceManagerHelper.getInstance()
+//        .getPersistenceManager();
+////      String query = "select from " + FlowRecord.class.getName() + " where appName=='SNMP'";
+////      List<FlowRecord> recs = (List<FlowRecord>) pm.newQuery(query).execute();
+//      int packetCount=1;
+//      String q = "siteId == " + siteId; 
+////      + " && timecode > " + startTime + " && timecode < " + endTime;
+//      Query query = pm.newQuery( FlowRecord.class, q);
+//      query.setOrdering( "timecode asc" );
+//      List<FlowRecord> recs = (List<FlowRecord>) query.execute();
+      if (0 == recs.size()) {
         log.warning( "No records matched the query for siteId " + siteId);
         return null;
       }
