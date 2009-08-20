@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<menu name="Set Sites">
+
+<sites> 
+	<site name="San Jose"> 
+	</site> 
+	<site name="Denver"> 
+	</site> 
+	<site name="Los Angeles"> 
+	</site> 
+	<site name="San Diego"> 
+	</site> 
+	<site name="San Francisco"> 
+	</site> 
+	<site name="Albuquerque"> 
+	</site> 
+	<site name="Seattle"> 
+	</site> 
+</sites> 
+</menu> 
