@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<menu name="Set Sites">
+
+<sites> 
+	<site name="Chicago"> 
+	</site> 
+	<site name="London"> 
+	</site> 
+	<site name="New York"> 
+	</site> 
+	<site name="Paris"> 
+	</site> 
+	<site name="San Diego"> 
+	</site> 
+	<site name="Tokyo"> 
+	</site> 
+	<site name="Atlanta"> 
+	</site> 
+	<site name="San Francisco"> 
+	</site> 
+	<site name="Toronto"> 
+	</site> 
+	<site name="Miami"> 
+	</site> 
+	<site name="Seattle"> 
+	</site> 
+	<site name="Munich"> 
+	</site> 
+	<site name="Los Angeles"> 
+	</site> 
+	<site name="Washington DC"> 
+	</site> 
+	<site name="Singapore"> 
+	</site> 
+	<site name="Beijing"> 
+	</site> 
+	<site name="New Delhi"> 
+	</site> 
+</sites> 
+</menu> 
