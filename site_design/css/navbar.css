@@ -66,11 +66,11 @@ ul#navbar {
 	overflow: hidden;
 	background-image: url(../images/navbar_bg_trans.png);
 	margin-top: 5px;
-	*margin: auto;
-	*margin-top: 28px;
+	margin: auto;
+	margin-top: 28px;
 	width: 971px;
 	height: 280px;
-	*height: 276px;
+	height: 276px;
 	text-align: left;
 	border-bottom: 1px solid #333;
 	font-size: 12px;

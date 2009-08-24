@@ -102,8 +102,12 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   </li> 
                </ul> 
             </div> <!-- End of Sites Dynamic Menu -->
-      </td> <!-- Column 4 -->
-      <td><img src="../images/navbar_help.gif" width="30" align="right"></td>
+      </td>
+      <td>  <!-- Column 4: Help -->
+            <ul id="navbar" width="20">
+               <li class="navlist"><a href="help.html">?</a></li>
+            </ul> 
+     </td>
 
       </tr>
       </table> <!-- End of Table (4 columns) -->
@@ -125,10 +129,10 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
        <!-- Event List Container -->
        <div id="event_list_container">
           <!-- Event List Table (2 Columns) -->
-          <table width="414" border="1" cellpadding="0" cellspacing="0" class="event_table">
+          <table width="100%" border="1" cellpadding="0" cellspacing="0" class="event_table">
              <tr>
              <th width="100" height="30px" scope="col">Site</th>
-             <th height="30px" scope="col">Events / Alerts / Alarms</th>
+             <th scope="col">Events / Alerts / Alarms</th>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
              <td height="15px" align="center" nowrap="nowrap">NYC</td>
