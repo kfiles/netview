@@ -7,3 +7,5 @@ Title: NetView Javascript
 @import url(SpryAssets/SpryMenuBar.js);
 @import url(SpryAssets/SpryData.js);
 @import url(SpryAssets/SpryNestedXMLDataSet.js);
+@import url(SpryAssets/SpryEffects.js);
+

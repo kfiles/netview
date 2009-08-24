@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>NetView Prototype</title>
+<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
+<script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
+
+<!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
+<script type="text/javascript" src="../js/jquery.js"></script> 
+
+<script type="text/javascript"> 
+$(document).ready(function() {
+   $("ul#navbar li").hover(function() { //Hover over event on list item
+      $(this).find("span").show(); //Show the subnav
+      } ,
+   function() { //on hover out...
+      $(this).find("span").hide(); //Hide the subnav
+      });
+});
+</script> 
+
+<!-- Vars Used by Dynamic Menu -->
+<script type="text/javascript"> 
+<!-- 
+var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
+var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
+var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
+var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
+var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
+//--> 
+</script> 
+
+</head>
+<body>
+
+<!-- Page Container -->
+<div id="page_container">
+
+    <!-- Banner -->
+    <div id="banner"></div>
+
+    <!-- Navigation Bar Container -->
+    <div id="navbar_container">
+    <!-- Table (4 columns) -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+      <td> <!-- Column 1: Navigation -->
+            <ul id="navbar" width="490">
+               <li class="navlist"><a href="index.html">NetMonitor</a></li>
+               <li class="navlist"><a href="analysis.html">Analysis</a></li>
+               <li class="navlist"><a href="alarms.html">Alarms</a></li>
+               <li class="navlist"><a href="preferences.html">Preferences</a>
+                  <!--Preferences Sub-Navigation Bar Starts Here-->
+                  <span> 
+                     <a href="policy_editor.html">Policy</a>
+                     <a href="app_editor.html">Applications</a>
+                     <a href="profiles_editor.html">Profiles</a>
+                     <a href="users_editor.html">Users</a>
+                     <a href="alarms_editor.html">Alarms</a>
+                     <a href="sites_editor.html">Sites</a>
+                     <a href="agents_editor.html">Agents</a> 
+                  </span>
+                  <!--Preferences Sub-Navigation Bar Ends Here-->
+               </li>
+            </ul> 
+      </td>
+      <td> <!-- Column 2: Set Profile Pull-Down Button -->
+            <!-- Profiles Dynamic Menu -->
+            <div id="ProfilesMenubar" spry:region="dsMenu dsProfile dsSubProfile"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu"> 
+                  <!-- Menu -->
+                  <li><a>{dsMenu::@name}</a> 
+                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile"> 
+                        <!-- Profile -->
+                        <li><a href="{dsProfile::@url}">{dsProfile::@name}</a>
+                           <ul spry:if="{dsSubProfile::ds_RowCount}" spry:repeatchildren="dsSubProfile"> 
+                              <!-- SubProfile -->
+                              <li><a href="{dsSubProfile::@url}">{dsSubProfile::@name}</a></li> 
+                           </ul> 
+                        </li> 
+                     </ul> 
+                  </li> 
+               </ul> 
+            </div> <!-- End of Profiles Dynamic Menu -->
+      </td>
+      <td> <!-- Column 3: Set Site Pull-Down Button -->
+            <!-- Sites Dynamic Menu -->
+            <div id="SitesMenubar" spry:region="dsMenu2 dsSite"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu2"> 
+                  <!-- Menu -->
+                  <li><a>{dsMenu2::@name}</a> 
+                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite"> 
+                        <!-- Site -->
+                        <li><a>{dsSite::@name}</a></li>
+                     </ul>
+                  </li> 
+               </ul> 
+            </div> <!-- End of Sites Dynamic Menu -->
+      </td> <!-- Column 4 -->
+      <td><img src="../images/navbar_help.gif" width="30" align="right"></td>
+
+      </tr>
+      </table> <!-- End of Table (4 columns) -->
+
+    <!-- end #navbar_container --> </div>
+
+    <!-- Main Content Area -->
+    <div id="mainContent">
+    <tmp>Help</tmp>
+    <!-- end #mainContent --> </div>
+
+    <!-- Footer -->
+    <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="../site/index-6.html">Privacy Policy</a></p></div>
+
+<!-- end #page_container --> </div>
+
+<!-- Javascript Used by Dynamic Menu -->
+<script type="text/javascript"> 
+Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
+Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
+</script> 
+
+</body>
+</html>

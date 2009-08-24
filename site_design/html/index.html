@@ -3,15 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>NetView Prototype</title>
-<link href="css/netview.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/javascript.js"></script>
-<script type="text/javascript" src="SpryAssets/SpryMenuBar.js"></script>
-<script type="text/javascript" src="SpryAssets/xpath.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryData.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
+<script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
 
 <!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="../js/jquery.js"></script> 
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -27,10 +28,10 @@ $(document).ready(function() {
 <!-- Vars Used by Dynamic Menu -->
 <script type="text/javascript"> 
 <!-- 
-var dsMenu = new Spry.Data.XMLDataSet("data/profiles.xml", "menu"); 
+var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
 var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("data/sites.xml", "menu"); 
+var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
 var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
 //--> 
 </script> 
@@ -58,8 +59,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   <!--Preferences Sub-Navigation Bar Starts Here-->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
-                     <a href="app_tag_editor.html">App Tags</a>
-                     <a href="app_profiles.html">App Profiles</a>
+                     <a href="app_editor.html">Applications</a>
+                     <a href="profiles_editor.html">Profiles</a>
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
@@ -102,7 +103,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                </ul> 
             </div> <!-- End of Sites Dynamic Menu -->
       </td> <!-- Column 4 -->
-      <td><img src="images/navbar_help.gif" width="30" align="right"></td>
+      <td><img src="../images/navbar_help.gif" width="30" align="right"></td>
 
       </tr>
       </table> <!-- End of Table (4 columns) -->
