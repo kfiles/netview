@@ -1,4 +1,4 @@
-// Spry.Effect.js - version 0.38 - Spry Pre-Release 1.6
+// Spry.Effect.js - version 0.38 - Spry Pre-Release 1.6.1
 //
 // Copyright (c) 2006. Adobe Systems Incorporated.
 // All rights reserved.
@@ -1253,7 +1253,7 @@ Spry.Effect.Size.prototype.prepareStart = function()
 
 	if (this.dynamicFromRect == true)
 	{
-		var fromRect = Spry.Effect.getDimensions(element);
+		var fromRect = Spry.Effect.getDimensions(this.element);
 		this.startWidth = fromRect.width;
 		this.startHeight = fromRect.height;
 
@@ -1335,7 +1335,7 @@ Spry.Effect.Opacity.prototype.prepareStart = function()
 
 	if (this.dynamicStartOpacity == true)
 	{
-		this.startOpacity = Spry.Effect.getOpacity(element);
+		this.startOpacity = Spry.Effect.getOpacity(this.element);
 		this.opacityRange = this.startOpacity - this.stopOpacity;
 	}
 };
