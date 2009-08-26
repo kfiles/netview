@@ -5,11 +5,13 @@
 <title>NetView Prototype</title>
 <link href="css/netview.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" language="javascript" src="com.prodco.preferences.preferences/com.prodco.preferences.preferences.nocache.js"></script>
+<link href="css/netview.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/javascript.js"></script>
 <script type="text/javascript" src="SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="SpryAssets/xpath.js"></script> 
 <script type="text/javascript" src="SpryAssets/SpryData.js"></script> 
 <script type="text/javascript" src="SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<script type="text/javascript" src="SpryAssets/SpryEffects.js"></script> 
 
 <!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
 <script type="text/javascript" src="js/jquery.js"></script> 
@@ -52,15 +54,15 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <tr>
       <td> <!-- Column 1: Navigation -->
             <ul id="navbar" width="490">
-               <li class="navlist"><a href="index.html">NetMonitor</a></li>
-               <li class="navlist"><a href="analysis.html">Analysis</a></li>
-               <li class="navlist"><a href="alarms.html">Alarms</a></li>
+               <li class="navlist"><a href="Netview.html">NetMonitor</a></li>
+               <li class="navlist"><a href="html/analysis.html">Analysis</a></li>
+               <li class="navlist"><a href="html/alarms.html">Alarms</a></li>
                <li class="navlist"><a href="preferences.html">Preferences</a>
                   <!--Preferences Sub-Navigation Bar Starts Here-->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
-                     <a href="app_tag_editor.html">App Tags</a>
-                     <a href="app_profiles.html">App Profiles</a>
+                     <a href="app_editor.html">Applications</a>
+                     <a href="profiles_editor.html">Profiles</a>
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
@@ -102,8 +104,12 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   </li> 
                </ul> 
             </div> <!-- End of Sites Dynamic Menu -->
-      </td> <!-- Column 4 -->
-      <td><img src="images/navbar_help.gif" width="30" align="right"></td>
+      </td>
+      <td>  <!-- Column 4: Help -->
+            <ul id="navbar" width="20">
+               <li class="navlist"><a href="html/help.html">?</a></li>
+            </ul> 
+     </td>
 
       </tr>
       </table> <!-- End of Table (4 columns) -->
@@ -112,11 +118,16 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 
     <!-- Main Content Area -->
     <div id="mainContent">
-    <tmp>Preferences</tmp>
+    <table align="center">
+      <tr>
+        <td id="root"></td>
+      </tr>
+    </table>
+    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
     <!-- end #mainContent --> </div>
 
     <!-- Footer -->
-    <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="../site/index-6.html">Privacy Policy</a></p></div>
+    <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="site/index-6.html">Privacy Policy</a></p></div>
 
 <!-- end #page_container --> </div>
 
@@ -125,7 +136,6 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
 Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
 </script> 
-    <iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
 
 </body>
 </html>

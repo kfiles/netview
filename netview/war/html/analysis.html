@@ -3,15 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>NetView Prototype</title>
-<link href="css/netview.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/javascript.js"></script>
-<script type="text/javascript" src="SpryAssets/SpryMenuBar.js"></script>
-<script type="text/javascript" src="SpryAssets/xpath.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryData.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
+<script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
 
 <!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="../js/jquery.js"></script> 
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -27,10 +28,10 @@ $(document).ready(function() {
 <!-- Vars Used by Dynamic Menu -->
 <script type="text/javascript"> 
 <!-- 
-var dsMenu = new Spry.Data.XMLDataSet("data/profiles.xml", "menu"); 
+var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
 var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("data/sites.xml", "menu"); 
+var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
 var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
 //--> 
 </script> 
@@ -58,8 +59,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   <!--Preferences Sub-Navigation Bar Starts Here-->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
-                     <a href="app_tag_editor.html">App Tags</a>
-                     <a href="app_profiles.html">App Profiles</a>
+                     <a href="app_editor.html">Applications</a>
+                     <a href="profiles_editor.html">Profiles</a>
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
@@ -101,8 +102,12 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   </li> 
                </ul> 
             </div> <!-- End of Sites Dynamic Menu -->
-      </td> <!-- Column 4 -->
-      <td><img src="images/navbar_help.gif" width="30" align="right"></td>
+      </td>
+      <td>  <!-- Column 4: Help -->
+            <ul id="navbar" width="20">
+               <li class="navlist"><a href="help.html">?</a></li>
+            </ul> 
+     </td>
 
       </tr>
       </table> <!-- End of Table (4 columns) -->
@@ -111,12 +116,21 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 
     <!-- Main Content Area -->
     <div id="mainContent">
-    <!-- Site Detail Container -->
-    <div id="sitedetailbar_container"></div>
 
-    <div id="mainContent">
-	<!-- Tree Map Container -->
-	<div id="tree_map_container"></div>
+    <!-- Use an accordion panel to hide / unhide Tree Map. -->
+    <div id="TreeMapAccordion" class="Accordion">
+       <div class="AccordionPanel"> 
+          <div class="AccordionPanelLabel" onclick="treemap.start();">
+             <!-- Site Detail Container. This becomes the accordion panel tab and therefore the toggle "button" for the Tree Map. -->
+             <div id="sitedetailbar_container"></div>
+         </div> 
+          <div id="tree_map_container" class="AccordionPanelContent"></div> 
+       </div> 
+       <script type="text/javascript"> 
+          <!-- Starting with All Panels Closed. This feature is only supported when using variable height panels. -->
+          var treemap = new Spry.Effect.Blind('tree_map_container', {duration: 800, from: '400px', to: '0px', toggle: true, useFixedPanelHeights: false, defaultPanel: -1});
+       </script> 
+    </div>
 
     <!-- Navigation Bar Container Table (1 columns) -->
     <div id="navbar_container">
@@ -124,7 +138,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <tr>
       <td>
             <ul id="navbar">
-               <li class="navlist"><a href="applications.html">Applications</a></li>
+               <li class="navlist"><a href="applications.html">Apps</a></li>
                <li class="navlist"><a href="addresses.html">Addresses</a></li>
                <li class="navlist"><a href="ports.html">Ports</a></li>
                <li class="navlist"><a href="protocols.html">Protocols</a>
@@ -142,8 +156,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <!-- Event Detail Container -->
       <div id="event_detail_container">
         <div id="graph_container"></div>
-        <div id="graph_legend_table_container">
-        <table width="423" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
+        <div id="graph_legend_container">
+        <table width="424" float="left" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
             <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg Kbps</th>
@@ -152,7 +166,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
           </tr>
           <tr>
-            <th height="15" scope="row">Total</th>
+            <th height="15" scope="row">https</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
@@ -166,20 +180,34 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15" scope="row">&nbsp;</th>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <th height="15" scope="row">Exchange</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">Citrix</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">Total</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
           </tr>
         </table>
-        </div> <!-- end #graph_legend_table_container -->
+        </div> <!-- end #graph_legend_container -->
       </div> <!-- end #event_detail_container -->
       <!-- Event Detail Container -->
       <div id="event_detail_container">
         <div id="graph_container"></div>
-        <div id="graph_legend_table_container">
-        <table width="423" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
+        <div id="graph_legend_container">
+        <table width="424" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
             <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg Kbps</th>
@@ -188,7 +216,21 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
           </tr>
           <tr>
-            <th height="15" scope="row">Total</th>
+            <th height="15" scope="row">http</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">Oracle</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">SAP</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
@@ -202,15 +244,16 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15" scope="row">&nbsp;</th>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <th height="15" scope="row">Total</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
           </tr>
         </table>
-        </div> <!-- end #graph_legend_table_container -->
+        </div> <!-- end #graph_legend_container -->
       </div> <!-- end #event_detail_container -->
+      
     <!-- end #mainContent --> </div>
 
     <!-- Footer -->

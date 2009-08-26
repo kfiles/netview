@@ -3,15 +3,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>NetView Prototype</title>
-<link href="css/netview.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/javascript.js"></script>
-<script type="text/javascript" src="SpryAssets/SpryMenuBar.js"></script>
-<script type="text/javascript" src="SpryAssets/xpath.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryData.js"></script> 
-<script type="text/javascript" src="SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
+<script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
 
 <!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="js/jquery.js"></script> 
+<script type="text/javascript" src="../js/jquery.js"></script> 
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -27,10 +28,10 @@ $(document).ready(function() {
 <!-- Vars Used by Dynamic Menu -->
 <script type="text/javascript"> 
 <!-- 
-var dsMenu = new Spry.Data.XMLDataSet("data/profiles.xml", "menu"); 
+var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
 var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("data/sites.xml", "menu"); 
+var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
 var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
 //--> 
 </script> 
@@ -58,8 +59,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   <!--Preferences Sub-Navigation Bar Starts Here-->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
-                     <a href="app_tag_editor.html">App Tags</a>
-                     <a href="app_profiles.html">App Profiles</a>
+                     <a href="app_editor.html">Applications</a>
+                     <a href="profiles_editor.html">Profiles</a>
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
@@ -101,8 +102,12 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   </li> 
                </ul> 
             </div> <!-- End of Sites Dynamic Menu -->
-      </td> <!-- Column 4 -->
-      <td><img src="images/navbar_help.gif" width="30" align="right"></td>
+      </td>
+      <td>  <!-- Column 4: Help -->
+            <ul id="navbar" width="20">
+               <li class="navlist"><a href="help.html">?</a></li>
+            </ul> 
+     </td>
 
       </tr>
       </table> <!-- End of Table (4 columns) -->
@@ -124,77 +129,85 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
        <!-- Event List Container -->
        <div id="event_list_container">
           <!-- Event List Table (2 Columns) -->
-          <table width="414" border="1" cellpadding="0" cellspacing="0" class="event_table">
+          <table width="100%" border="1" cellpadding="0" cellspacing="0" class="event_table">
              <tr>
-             <th width="100" height="15" align="center" nowrap="nowrap" scope="col">Site</th>
-             <th height="30" align="center" nowrap="nowrap" scope="col">Events / Alerts / Alarms</th>
+             <th width="100" height="30px" scope="col">Site</th>
+             <th scope="col">Events / Alerts / Alarms</th>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">NYC</td>
+             <td height="15px" align="center" nowrap="nowrap">NYC</td>
              <td align="center" nowrap="nowrap">Application SLA</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">ATL</td>
+             <td height="15px" align="center" nowrap="nowrap">ATL</td>
              <td align="center" nowrap="nowrap">Packet Drop</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">TOKY</td>
+             <td height="15px" align="center" nowrap="nowrap">TOKY</td>
              <td align="center" nowrap="nowrap">Sustained Usage</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">LA</td>
+             <td height="15px" align="center" nowrap="nowrap">LA</td>
              <td align="center" nowrap="nowrap">Jitter</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">DAL</td>
+             <td height="15px" align="center" nowrap="nowrap">DAL</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">LON</td>
+             <td height="15px" align="center" nowrap="nowrap">LON</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">TOR</td>
+             <td height="15px" align="center" nowrap="nowrap">TOR</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">PAR</td>
+             <td height="15px" align="center" nowrap="nowrap">PAR</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">MIA</td>
+             <td height="15px" align="center" nowrap="nowrap">MIA</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">DEN</td>
+             <td height="15px" align="center" nowrap="nowrap">DEN</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">NYC</td>
+             <td height="15px" align="center" nowrap="nowrap">NYC</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">DET</td>
+             <td height="15px" align="center" nowrap="nowrap">DET</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">SIN</td>
+             <td height="15px" align="center" nowrap="nowrap">SIN</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">BOS</td>
+             <td height="15px" align="center" nowrap="nowrap">BOS</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">SFCO</td>
+             <td height="15px" align="center" nowrap="nowrap">SFCO</td>
              <td align="center" nowrap="nowrap">Event XYZ</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">&nbsp;</td>
+             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
              <td align="center" nowrap="nowrap">&nbsp;</td>
              </tr>
              <tr class="event_table" onclick="toggle(this)">
-             <td height="15" align="center" nowrap="nowrap">&nbsp;</td>
+             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
+             <td align="center" nowrap="nowrap">&nbsp;</td>
+             </tr>
+             <tr class="event_table" onclick="toggle(this)">
+             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
+             <td align="center" nowrap="nowrap">&nbsp;</td>
+             </tr>
+             <tr class="event_table" onclick="toggle(this)">
+             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
              <td align="center" nowrap="nowrap">&nbsp;</td>
              </tr>
           <!-- end Event List Table (2 Columns) --> </table>
@@ -203,38 +216,52 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <!-- Event Detail Container -->
       <div id="event_detail_container">
         <div id="graph_container"></div>
-        <div id="graph_legend_table_container">
-        <table width="423" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
+        <div id="graph_legend_container">
+        <table width="425" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
-            <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
+            <th height="30px" align="center" nowrap="nowrap" scope="col">Total</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg Kbps</th>
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg pps</th>
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
           </tr>
           <tr>
-            <th height="15" scope="row">Total</th>
+            <th height="15px" scope="row">Citrix</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15" scope="row">ITP VPLS</th>
+            <th height="15px" scope="row">ITP VPLS</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15" scope="row">&nbsp;</th>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
+            <th height="15px" scope="row">http</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15px" scope="row">Oracle</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15px" scope="row">Total</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
           </tr>
         </table>
-        <!-- end #graph_legend_table_container --> </div>
+        <!-- end #graph_legend_container --> </div>
       <!-- end #event_detail_container --> </div>
       
     <!-- end #mainContent --> </div>
