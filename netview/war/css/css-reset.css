@@ -1,0 +1,49 @@
+/*CSS Reset*/
+ 
+body, div, dl, dt, dd, li, pre,form, fieldset, input, textarea, p, blockquote, th, td, button {
+	margin: 0px;
+	padding: 0px;
+}
+ 
+h1, h2, h3, h4, h5, h6 {
+	margin: 0px;
+	padding: 0px;
+	font-size: 100%;
+	font-weight: normal;
+}
+ 
+address, caption, cite, code, dfn, em, strong, var {
+	font-style: normal;
+	font-weight: normal;
+}
+ 
+ol, ul {
+	margin: 0px;
+	padding: 0px;
+}
+ 
+ul {
+	list-style: none;
+ 
+}
+ 
+table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+ 
+caption, th {
+	text-align: left;
+	font-weight: normal;
+	font-style: normal;
+}
+ 
+acronym, abbr, fieldset, img {
+	border: 0px;
+}
+ 
+:focus {
+	outline: 0px;
+}
+ 
+/* end reset */
