@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<menu name="Set Site">
+
+<sites> 
+	<site name="Madrid"> 
+	</site> 
+	<site name="London"> 
+	</site> 
+	<site name="Rome"> 
+	</site> 
+	<site name="Paris"> 
+	</site> 
+	<site name="Athens"> 
+	</site> 
+	<site name="Munich"> 
+	</site> 
+</sites> 
+</menu> 
