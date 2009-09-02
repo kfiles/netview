@@ -10,6 +10,10 @@ ul#navbar {
 	font-size: 17px;  /* 1.4em; */
 }
 
+#navbar a.selected { /* appearance of the navigation bar link after it has been clicked */
+	color: yellow;
+}
+
 /* Horizontal Sub-Navigation List */
 .navlist {
 	float: left;
@@ -29,10 +33,9 @@ ul#navbar {
 	z-index: 999;
 }
 
-.navlist a:hover {
+.navlist a:hover { /* appearance of the link as the mouse is moved over it */
 	color: yellow;
 }
-
 
 /* Horizontal Sub-Navigation Bar */
 .navlist span {
@@ -43,7 +46,7 @@ ul#navbar {
 	display: none; /* hide by default */
 	width: 850px;
 	background-image: url(../images/navbar_bg_trans.png);
-	font-size: 15px; /* 0.9em; */ /* Smaller font than on navbar */
+	font-size: 15px; /* Smaller font than on navbar 0.9em; */
 	/*--Bottom right rounded corner--*/
 	-moz-border-radius-bottomright: 5px;
 	-khtml-border-radius-bottomright: 5px;
@@ -56,6 +59,32 @@ ul#navbar {
 .navlist:hover span { display: block; } /* Show navlist on hover */
 .navlist span a { display: inline; } /* Since we declared a link style on the parent list link, we will correct it back to its original state */
 .navlist span a:hover {color: yellow; text-decoration: none;}
+
+
+/* Horizontal Label Bar */
+.labelbar {
+	float: left;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	text-shadow: 2px 2px 2px #333;
+	font-size: 15px;
+	font-weight: bolder;
+	text-align: center;
+	z-index: 999;
+}
+ 
+.labelbar a {
+	padding: 5px 15px; /* above, below, left and right labelbar text  */
+	display: block;
+	color: #FFF; /* default text color: white */
+	text-decoration: none;
+	z-index: 999;
+}
+
+.labelbar a:hover { /* appearance of the link as the mouse is moved over it */
+	color: yellow;
+}
 
 
 /* drop down menus */

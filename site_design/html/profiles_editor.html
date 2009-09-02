@@ -52,15 +52,15 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <tr>
       <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
-               <li class="navlist"><a href="index.html" class="selected">Monitor</a></li>
+               <li class="navlist"><a href="index.html">Monitor</a></li>
                <li class="navlist"><a href="analysis.html">Analysis</a></li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
-               <li class="navlist"><a href="preferences.html">Preferences</a>
+               <li class="navlist"><a href="preferences.html" class="selected">Preferences</a>
                   <!--Preferences Sub-Navigation Bar -->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
                      <a href="app_editor.html">Applications</a>
-                     <a href="profiles_editor.html">Profiles</a>
+                     <a href="profiles_editor.html" class="selected">Profiles</a>
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
@@ -116,7 +116,39 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 
     <!-- Main Content Area -->
     <div id="mainContent">
-      
+
+    <!-- Profiles Editors. -->
+    <div id="ProfilesEditorAccordion" class="Accordion">
+
+       <div class="AccordionPanel">
+          <div class="AccordionPanelLabel" onclick="sprofile_editor.start();">
+             <!-- Site Profile Editor Label Bar -->
+             <div id="label_bar_container">
+                <div class="labelbar"><a href="#">Site Profile Editor</a></div>
+             </div>
+         <div id="site_profile_editor" class="AccordionPanelContent"></div> 
+       </div> <!-- AccordionPanel -->
+       <script type="text/javascript"> 
+          <!-- Starting with All Panels Open. -->
+          var sprofile_editor = new Spry.Effect.Blind('site_profile_editor', {duration: 800, from: '439px', to: '0px', toggle: true, useFixedPanelHeights: false, defaultPanel: -1});
+       </script>
+
+       <div class="AccordionPanel"> 
+          <div class="AccordionPanelLabel" onclick="aprofile_editor.start();">
+             <!-- Application Profile Editor Label Bar -->
+             <div id="label_bar_container">
+                <div class="labelbar"><a href="#">Applications Profile Editor</a></div>
+             </div>
+          <div id="app_profile_editor" class="AccordionPanelContent"></div> 
+       </div> <!-- AccordionPanel -->
+       <script type="text/javascript"> 
+          <!-- Starting with All Panels Open. -->
+          var aprofile_editor = new Spry.Effect.Blind('app_profile_editor', {duration: 800, from: '305px', to: '0px', toggle: true, useFixedPanelHeights: false, defaultPanel: -1});
+       </script>
+
+    </div> <!-- Profiles Editors -->
+
+
     </div> <!-- end #mainContent -->
 
     <!-- Footer -->

@@ -4,7 +4,7 @@
 
 /* Page Container creates a decorative margin around entire page */
 #page_container {
-	width: 850px;  /* NOTE: using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
+	width: 850px;
 	background-color: #CCC;
 	position: relative;
 	padding: 10px;
@@ -143,4 +143,32 @@
 	float: right;
 	height: 120px;
 	width: 425px;
+}
+
+/* Label Bar Container */
+#label_bar_container {
+	width: 100%;
+	height: 30px;
+	background-color: #000;
+	z-index: 999;
+	border-bottom-style: solid; 
+	border-bottom-color: #333; 
+	border-bottom-width: 1px;
+}
+
+/* Profile Editors Container */
+#site_profile_editor {
+	background-image: url(../images/site_profile_editor.jpg);
+	background-repeat: no-repeat;
+	height: 439px; /* FIX */
+	width: 850px;
+	margin: 0px 10px; /* FIX: remove */
+}
+
+#app_profile_editor {
+	background-image: url(../images/app_profile_editor.jpg);
+	background-repeat: no-repeat;
+	height: 305px; /* FIX */
+	width: 850px;
+	margin: 0px 10px; /* FIX: remove */
 }
