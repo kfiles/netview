@@ -42,21 +42,21 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 <!-- Page Container -->
 <div id="page_container">
 
-    <!-- Banner -->
-    <div id="banner"></div>
+    <!-- Banner. To make the banner a click-able link, put a link to the around the div. -->
+    <a href="http://netflowsoft.com"><div id="banner"></div></a>
 
     <!-- Navigation Bar Container -->
     <div id="navbar_container">
     <!-- Table (4 columns) -->
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-      <td> <!-- Column 1: Navigation -->
+      <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
-               <li class="navlist"><a href="index.html">NetMonitor</a></li>
-               <li class="navlist"><a href="analysis.html">Analysis</a></li>
+               <li class="navlist"><a href="index.html">Monitor</a></li>
+               <li class="navlist"><a href="analysis.html" class="selected">Analysis</a></li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
                <li class="navlist"><a href="preferences.html">Preferences</a>
-                  <!--Preferences Sub-Navigation Bar Starts Here-->
+                  <!--Preferences Sub-Navigation Bar -->
                   <span> 
                      <a href="policy_editor.html">Policy</a>
                      <a href="app_editor.html">Applications</a>
@@ -66,10 +66,10 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                      <a href="sites_editor.html">Sites</a>
                      <a href="agents_editor.html">Agents</a> 
                   </span>
-                  <!--Preferences Sub-Navigation Bar Ends Here-->
+                  <!--Preferences Sub-Navigation Bar -->
                </li>
             </ul> 
-      </td>
+      </td> <!-- Column 1: Navigation Bar -->
       <td> <!-- Column 2: Set Profile Pull-Down Button -->
             <!-- Profiles Dynamic Menu -->
             <div id="ProfilesMenubar" spry:region="dsMenu dsProfile dsSubProfile"> 
@@ -253,11 +253,11 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
         </table>
         </div> <!-- end #graph_legend_container -->
       </div> <!-- end #event_detail_container -->
-      
-    <!-- end #mainContent --> </div>
+
+    </div> <!-- end #mainContent -->
 
     <!-- Footer -->
-    <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="../site/index-6.html">Privacy Policy</a></p></div>
+    <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
 <!-- end #page_container --> </div>
 
