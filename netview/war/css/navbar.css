@@ -45,7 +45,7 @@ ul#navbar {
 	left: 0px; top:41px; /* position w/in navbar_container, 1px below top navbar */
 	display: none; /* hide by default */
 	width: 850px;
-	background-image: url(../images/navbar_bg_trans.png);
+	background-image: url(../images/navbar_bg.gif); /* navbar_bg_trans.png */
 	font-size: 15px; /* Smaller font than on navbar 0.9em; */
 	/*--Bottom right rounded corner--*/
 	-moz-border-radius-bottomright: 5px;

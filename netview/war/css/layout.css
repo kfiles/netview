@@ -17,45 +17,49 @@
 	background-image: url(../images/banner.jpg);
 	height: 72px;
 	width: 850px;
+	border-top: 1px solid #383838;
+	border-bottom: 1px solid #1b1b1b;
 }
 
 /* Navigation Bar Container */
 #navbar_container {
 	width: 100%;
-	height: 40px;  /* 31px */
-	background-color: #222;
+	height: 40px;
+	background-color: #242424;
 	background-image:url(../images/navbar_bg.gif);
 	background-repeat:repeat-x;
 	/* overflow: hidden; FIX */
 	z-index: 999;
+	border-top: 1px solid #484848;
+	border-bottom: 1px solid #121212;
 }
 
 /* Site Detail Container */
 #sitedetailbar_container {
-	/* background-image:url(../images/navbar_bg.gif);
-	background-repeat:repeat-x; FIX */
-	background-image: url(../images/sitedetailbar.jpg);
 	width: 100%;
 	height: 36px;
-	background-color: #333;
+	background-color: #242424;
 }
 
 /* Main Content Area */
 #mainContent {
 	width: 850px;
-	height: 790px;
-	background: #222;
 	font-size: 10px;
+	background-color: #242424;
+	border-top: 1px solid #383838;
+	border-bottom: 1px solid #1b1b1b;
 }
 
-/*Footer*/
+/* Footer */
 #footer {
 	height: 15px;
 	width: 100%;
 	float: left;
 	font-size: 10px;
-	background-color: #222;
 	color: #666;
+	background-color: #242424;
+	border-top: 1px solid #383838;
+	border-bottom: 1px solid #1b1b1b;
 }
 
 #footer p {
@@ -157,18 +161,40 @@
 }
 
 /* Profile Editors Container */
+#vbar1 {
+	float: left;
+	background-image: url(../images/vbar1.jpg);
+	height: 614px;
+	width: 23px;
+}
+
+#vbar2 {
+	float: right;
+	background-image: url(../images/vbar2.jpg);
+	height: 614px;
+	width: 45px;
+}
+
 #site_profile_editor {
 	background-image: url(../images/site_profile_editor.jpg);
 	background-repeat: no-repeat;
-	height: 439px; /* FIX */
+	height: 575px; /* FIX */
 	width: 850px;
 	margin: 0px 10px; /* FIX: remove */
 }
 
-#app_profile_editor {
-	background-image: url(../images/app_profile_editor.jpg);
+#app_profile_editor1 {
+	float: left;
+	background-image: url(../images/app_profile_editor1.jpg);
 	background-repeat: no-repeat;
-	height: 305px; /* FIX */
-	width: 850px;
-	margin: 0px 10px; /* FIX: remove */
+	height: 614px; /* FIX */
+	width: 782px;
+}
+
+#app_profile_editor2 {
+	float: left;
+	background-image: url(../images/app_profile_editor2.jpg);
+	background-repeat: no-repeat;
+	height: 614px; /* FIX */
+	width: 782px;
 }
