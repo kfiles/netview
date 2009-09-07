@@ -60,33 +60,6 @@ ul#navbar {
 .navlist span a { display: inline; } /* Since we declared a link style on the parent list link, we will correct it back to its original state */
 .navlist span a:hover {color: yellow; text-decoration: none;}
 
-
-/* Horizontal Label Bar */
-.labelbar {
-	float: left;
-	width: 100%;
-	margin: 0px;
-	padding: 0px;
-	text-shadow: 2px 2px 2px #333;
-	font-size: 15px;
-	font-weight: bolder;
-	text-align: center;
-	z-index: 999;
-}
- 
-.labelbar a {
-	padding: 5px 15px; /* above, below, left and right labelbar text  */
-	display: block;
-	color: #FFF; /* default text color: white */
-	text-decoration: none;
-	z-index: 999;
-}
-
-.labelbar a:hover { /* appearance of the link as the mouse is moved over it */
-	color: yellow;
-}
-
-
 /* drop down menus */
  
 #menu1, #menu2, #menu3, #menu4, #menu5 {

@@ -6,7 +6,7 @@ body {
 	background-image: url(../images/background_tile.gif);
 	background-repeat: repeat-x;
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
-	background-color: #222;
+	background-color: #242424;
 	margin: 0px; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
 	padding: 0px;
 	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
@@ -89,7 +89,7 @@ tmp {
 
 /* Navigation Bar Table */
 .navbar_table {
-	background: #222;
+	background-color: #242424;
 	font-size: 18px;
 }
 .navbar_table td a {
@@ -115,4 +115,27 @@ tmp {
 #SitesMenubar ul,
 #SitesMenubar ul li {
 	width: 140px;
+}
+
+/* Site Detail Horizontal Labels */
+#sitedetailbar_container p {
+	float: left;
+	margin: 0px;
+	padding: 10px 10px 0px 20px; /* above, below, left and right text  */
+	display: block;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+ 
+#sitedetailbar_container a {
+	color: #666; /* default text color: grey */
+}
+
+#sitedetailbar_container b {
+	color: #FFF; /* default text color: white */
+}
+
+#sitedetailbar_container c {
+	color: red; /* default text color: red */
 }
