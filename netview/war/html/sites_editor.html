@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>NetView Prototype</title>
-<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<link href="../css/netview.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/javascript.js"></script>
 <script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
@@ -53,7 +53,21 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
                <li class="navlist"><a href="index.html">Monitor</a></li>
-               <li class="navlist"><a href="analysis.html">Analysis</a></li>
+               <li class="navlist"><a href="analysis.html">Analysis</a>
+                  <!--Analysis Sub-Navigation Bar -->
+                  <span> 
+                     <a href="applications.html">Apps</a>
+                     <a href="addresses.html">Addresses</a>
+                     <a href="ports.html">Ports</a>
+                     <a href="protocols.html">Protocols</a>
+                     <a href="qos.html">QoS</a>
+                     <a href="subnets.html">Subnets</a>
+                     <a href="hosts.html">Hosts</a>
+                     <a href="total.html">Total</a>
+                     <a href="talkers.html">Talkers</a>
+                  </span>
+                  <!--Analysis Sub-Navigation Bar -->
+                  </li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
                <li class="navlist"><a href="preferences.html" class="selected">Preferences</a>
                   <!--Preferences Sub-Navigation Bar -->
@@ -112,19 +126,19 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </tr>
       </table> <!-- End of Table (4 columns) -->
 
-    <!-- end #navbar_container --> </div>
+    </div> <!-- end #navbar_container -->
 
     <!-- Main Content Area -->
     <div id="mainContent">
 
     <tmp>Sites Editor</tmp>
-
+      
     </div> <!-- end #mainContent -->
 
     <!-- Footer -->
     <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
-<!-- end #page_container --> </div>
+</div> <!-- end #page_container -->
 
 <!-- Javascript Used by Dynamic Menu -->
 <script type="text/javascript"> 

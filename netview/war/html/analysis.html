@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>NetView Prototype</title>
-<link href="../css/netview.css" rel="stylesheet" type="text/css" />
+<link href="../css/netview.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/javascript.js"></script>
 <script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
@@ -53,7 +53,21 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
                <li class="navlist"><a href="index.html">Monitor</a></li>
-               <li class="navlist"><a href="analysis.html" class="selected">Analysis</a></li>
+               <li class="navlist"><a href="analysis.html" class="selected">Analysis</a>
+                  <!--Analysis Sub-Navigation Bar -->
+                  <span> 
+                     <a href="applications.html">Apps</a>
+                     <a href="addresses.html">Addresses</a>
+                     <a href="ports.html">Ports</a>
+                     <a href="protocols.html">Protocols</a>
+                     <a href="qos.html">QoS</a>
+                     <a href="subnets.html">Subnets</a>
+                     <a href="hosts.html">Hosts</a>
+                     <a href="total.html">Total</a>
+                     <a href="talkers.html">Talkers</a>
+                  </span>
+                  <!--Analysis Sub-Navigation Bar -->
+                  </li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
                <li class="navlist"><a href="preferences.html">Preferences</a>
                   <!--Preferences Sub-Navigation Bar -->
@@ -155,26 +169,9 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
     </div> <!-- TreeMapAccordion -->
 
     <!-- Navigation Bar Container Table (1 columns) -->
-    <div id="navbar_container">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-      <td>
-            <ul id="navbar">
-               <li class="navlist"><a href="applications.html">Apps</a></li>
-               <li class="navlist"><a href="addresses.html">Addresses</a></li>
-               <li class="navlist"><a href="ports.html">Ports</a></li>
-               <li class="navlist"><a href="protocols.html">Protocols</a>
-               <li class="navlist"><a href="qos.html">QoS</a>
-               <li class="navlist"><a href="subnets.html">Subnets</a>
-               <li class="navlist"><a href="hosts.html">Hosts</a>
-               <li class="navlist"><a href="total.html">Total</a>
-               <li class="navlist"><a href="talkers.html">Talkers</a>
-               </li>
-            </ul> 
-      </td>
-      </tr>
-    </table>
-    </div> <!-- end #navbar_container -->
+    <div id="timelegendbar_container">
+       <p><a>October 19, 2008 1:00AM to 2:00AM, GMT (60min)</a></p>
+    </div> <!-- end #timelegendbar_container -->
 
       <!-- Event Detail Container -->
       <div id="event_detail_container">
@@ -276,7 +273,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
         </table>
         </div> <!-- end #graph_legend_container -->
       </div> <!-- end #event_detail_container -->
-
+      
     </div> <!-- end #mainContent -->
 
     <!-- Footer -->

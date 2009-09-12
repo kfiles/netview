@@ -119,10 +119,9 @@ tmp {
 
 /* Site Detail Horizontal Labels */
 #sitedetailbar_container p {
-	float: left;
 	margin: 0px;
 	padding: 10px 10px 0px 20px; /* above, below, left and right text  */
-	display: block;
+	/* display: block; */
 	text-align: center;
 	font-size: 12px;
 	font-weight: bold;
@@ -138,4 +137,13 @@ tmp {
 
 #sitedetailbar_container c {
 	color: red; /* default text color: red */
+}
+
+#timelegendbar_container p {
+	margin: 0px;
+	padding: 5px 5px 0px 0px; /* above, below, left and right text  */
+	/* display: block; */
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
 }

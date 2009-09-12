@@ -42,6 +42,14 @@
 	border-bottom: 1px solid #121212;
 }
 
+#timelegendbar_container {
+	width: 100%;
+	height: 26px;
+	background-color: #242424;
+	border-top: 1px solid #383838;
+	border-bottom: 1px solid #121212;
+}
+
 /* Main Content Area */
 #mainContent {
 	width: 850px;
@@ -189,14 +197,14 @@
 	float: left;
 	background-image: url(../images/app_profile_editor1.jpg);
 	background-repeat: no-repeat;
-	height: 614px; /* FIX */
-	width: 782px;
+	height: 663px; /* FIX */
+	width: 850px;
 }
 
 #app_profile_editor2 {
 	float: left;
 	background-image: url(../images/app_profile_editor2.jpg);
 	background-repeat: no-repeat;
-	height: 614px; /* FIX */
-	width: 782px;
+	height: 663px; /* FIX */
+	width: 850px;
 }
