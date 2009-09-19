@@ -46,6 +46,7 @@ ul#navbar {
 	left: 0px; top:41px; /* position w/in navbar_container, 1px below top navbar */
 	display: none; /* hide by default */
 	width: 850px; /* the width of the page */
+	height: 16px;
 	background-image: url(../images/subnavbar_bg.gif); /* navbar_bg_trans.png */
 	font-size: 15px; /* Smaller font than on navbar */
 	/*--Bottom right rounded corner--*/
