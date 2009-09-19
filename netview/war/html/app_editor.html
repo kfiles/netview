@@ -53,7 +53,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
                <li class="navlist"><a href="index.html">Monitor</a></li>
-               <li class="navlist"><a href="analysis.html">Analysis</a>
+               <li class="navlist"><a href="#">Analysis</a>
                   <!--Analysis Sub-Navigation Bar -->
                   <span> 
                      <a href="applications.html">Apps</a>
@@ -69,19 +69,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                   <!--Analysis Sub-Navigation Bar -->
                   </li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
-               <li class="navlist"><a href="preferences.html" class="selected">Preferences</a>
-                  <!--Preferences Sub-Navigation Bar -->
-                  <span> 
-                     <a href="policy_editor.html">Policy</a>
-                     <a href="app_editor.html" class="selected">Applications</a>
-                     <a href="profiles_editor.html">Profiles</a>
-                     <a href="users_editor.html">Users</a>
-                     <a href="alarms_editor.html">Alarms</a>
-                     <a href="sites_editor.html">Sites</a>
-                     <a href="agents_editor.html">Agents</a> 
-                  </span>
-                  <!--Preferences Sub-Navigation Bar -->
-               </li>
+               <li class="navlist"><a href="#" class="selected">Preferences</a></li>
             </ul> 
       </td> <!-- Column 1: Navigation Bar -->
       <td> <!-- Column 2: Set Profile Pull-Down Button -->
@@ -127,6 +115,19 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </table> <!-- End of Table (4 columns) -->
 
     </div> <!-- end #navbar_container -->
+
+    <!-- Preferences Sub-Navigation Bar Container -->
+    <div id="subnavbar_container">
+       <ul id="subnavlist">
+          <li><a href="policy_editor.html">Policy</a></li>
+          <li><a href="app_editor.html" class="selected">Applications</a></li>
+          <li><a href="profiles_editor.html">Profiles</a></li>
+          <li><a href="users_editor.html">Users</a></li>
+          <li><a href="alarms_editor.html">Alarms</a></li>
+          <li><a href="sites_editor.html">Sites</a></li>
+          <li><a href="agents_editor.html">Agents</a></li>
+       </ul> 
+    </div> <!-- end #subnavbar_container -->
 
     <!-- Main Content Area -->
     <div id="mainContent">

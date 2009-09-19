@@ -52,22 +52,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       <tr>
       <td> <!-- Column 1: Navigation Bar -->
             <ul id="navbar" width="490">
-               <li class="navlist"><a href="index.html" class="selected">Monitor</a></li>
-               <li class="navlist"><a href="#">Analysis</a>
-                  <!--Analysis Sub-Navigation Bar -->
-                  <span> 
-                     <a href="applications.html">Apps</a>
-                     <a href="addresses.html">Addresses</a>
-                     <a href="ports.html">Ports</a>
-                     <a href="protocols.html">Protocols</a>
-                     <a href="qos.html">QoS</a>
-                     <a href="subnets.html">Subnets</a>
-                     <a href="hosts.html">Hosts</a>
-                     <a href="total.html">Total</a>
-                     <a href="talkers.html">Talkers</a>
-                  </span>
-                  <!--Analysis Sub-Navigation Bar -->
-                  </li>
+               <li class="navlist"><a href="index.html">Monitor</a></li>
+               <li class="navlist"><a href="#" class="selected">Analysis</a></li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
                <li class="navlist"><a href="#">Preferences</a>
                   <!--Preferences Sub-Navigation Bar -->
@@ -78,7 +64,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
-                     <a href="agents_editor.html">Agents</a> 
+                     <a href="agents_editor.html">Agents</a>
                   </span>
                   <!--Preferences Sub-Navigation Bar -->
                </li>
@@ -128,160 +114,167 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 
     </div> <!-- end #navbar_container -->
 
+    <!-- Analysis Sub-Navigation Bar Container -->
+    <div id="subnavbar_container">
+       <ul id="subnavlist">
+          <li><a href="applications.html">Apps</a></li>
+          <li><a href="addresses.html">Addresses</a></li>
+          <li><a href="ports.html" class="selected">Ports</a></li>
+          <li><a href="protocols.html">Protocols</a></li>
+          <li><a href="qos.html">QoS</a></li>
+          <li><a href="subnets.html">Subnets</a></li>
+          <li><a href="hosts.html">Hosts</a></li>
+          <li><a href="total.html">Total</a></li>
+          <li><a href="talkers.html">Talkers</a></li>
+       </ul> 
+    </div> <!-- end #subnavbar_container -->
+
     <!-- Main Content Area -->
     <div id="mainContent">
 
-       <!-- Radial Map Container -->
-       <div id="radial_map_container"></div>
-       <!-- Small Graph Container -->
-       <div id="small_graph_container">
-          <div id="small_graph_1"></div>
-          <div id="small_graph_2"></div>
-          <div id="small_graph_3"></div>
-          <div id="small_graph_4"></div>
-       <!-- end #small_graph_container --> </div>
-      
-       <!-- Event List Container -->
-       <div id="event_list_container">
-          <!-- Event List Table (2 Columns) -->
-          <table width="100%" border="1" cellpadding="0" cellspacing="0" class="event_table">
-             <tr>
-             <th width="100" height="30px" scope="col">Site</th>
-             <th scope="col">Events / Alerts / Alarms</th>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">NYC</td>
-             <td align="center" nowrap="nowrap">Application SLA</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">ATL</td>
-             <td align="center" nowrap="nowrap">Packet Drop</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">TOKY</td>
-             <td align="center" nowrap="nowrap">Sustained Usage</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">LA</td>
-             <td align="center" nowrap="nowrap">Jitter</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">DAL</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">LON</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">TOR</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">PAR</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">MIA</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">DEN</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">NYC</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">DET</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">SIN</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">BOS</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">SFCO</td>
-             <td align="center" nowrap="nowrap">Event XYZ</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
-             <td align="center" nowrap="nowrap">&nbsp;</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
-             <td align="center" nowrap="nowrap">&nbsp;</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
-             <td align="center" nowrap="nowrap">&nbsp;</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
-             <td align="center" nowrap="nowrap">&nbsp;</td>
-             </tr>
-             <tr class="event_table" onclick="toggle(this)">
-             <td height="15px" align="center" nowrap="nowrap">&nbsp;</td>
-             <td align="center" nowrap="nowrap">&nbsp;</td>
-             </tr>
-          <!-- end Event List Table (2 Columns) --> </table>
+    <!-- TreeMapAccordion -->
+    <!-- Use an accordion panel to hide / unhide Tree Map. -->
+    <div id="TreeMapAccordion" class="Accordion">
+       <div class="AccordionPanel"> 
+          <div class="AccordionPanelLabel" onclick="treemap.start();">
+             <!-- Site Detail -->
+             <!-- Note: This becomes the accordion panel tab and therefore the toggle "button" for the Tree Map. -->
+             <div id="sitedetailbar_container">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                   <tr>
+                      <td>
+                            <p><a>Site:</a><b> New York, NY</b></p>
+                      </td>
+                      <td>
+                            <p><a>Site Id:</a><b> XYZ1234</b></p>
+                      </td>
+                      <td>
+                            <p><a>Bandwidth:</a><b> 6Mbps</b></p>
+                      </td>
+                      <td>
+                            <p><a>IP Address:</a><b> 164.21.375.28</b></p>
+                      </td>
+                      <td>
+                            <p><a>Profile:</a><c> Oracle</c></p>
+                      </td>
+                   </tr>
+                </table>
+             </div> <!-- end #sitedetailbar_container -->
+         </div>  <!-- end AccordionPanelLabel -->
+         <!-- Tree Map -->
+         <div id="tree_map_container" class="AccordionPanelContent"></div> 
+       </div> <!-- end AccordionPanel -->
+       <script type="text/javascript"> 
+          <!-- Starting with All Panels Closed. This feature is only supported when using variable height panels. -->
+          var treemap = new Spry.Effect.Blind('tree_map_container', {duration: 800, from: '400px', to: '0px', toggle: true, useFixedPanelHeights: false, defaultPanel: -1});
+       </script> 
+    </div> <!-- TreeMapAccordion -->
 
-       <!-- end #event_list_container --> </div>
+    <!-- Time Range Bar Container -->
+    <div id="timerangebar_container">
+       <p><a>October 19, 2008 1:00AM to 2:00AM, GMT (60min)</a></p>
+    </div> <!-- end #timerangebar_container -->
+
       <!-- Event Detail Container -->
       <div id="event_detail_container">
         <div id="graph_container"></div>
         <div id="graph_legend_container">
-        <table width="425" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
+        <table width="424" float="left" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
-            <th height="30px" align="center" nowrap="nowrap" scope="col">Total</th>
+            <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg Kbps</th>
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
             <th width="100" align="center" nowrap="nowrap" scope="col">Avg pps</th>
             <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
           </tr>
           <tr>
-            <th height="15px" scope="row">Citrix</th>
+            <th height="15" scope="row">https</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15px" scope="row">ITP VPLS</th>
+            <th height="15" scope="row">ITP VPLS</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15px" scope="row">http</th>
+            <th height="15" scope="row">Exchange</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15px" scope="row">Oracle</th>
+            <th height="15" scope="row">Citrix</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
           <tr>
-            <th height="15px" scope="row">Total</th>
+            <th height="15" scope="row">Total</th>
             <td align="center" nowrap="nowrap">19.992</td>
             <td align="center" nowrap="nowrap">100</td>
             <td align="center" nowrap="nowrap">91.324</td>
             <td align="center" nowrap="nowrap">100</td>
           </tr>
         </table>
-        <!-- end #graph_legend_container --> </div>
-      <!-- end #event_detail_container --> </div>
+        </div> <!-- end #graph_legend_container -->
+      </div> <!-- end #event_detail_container -->
+      <!-- Event Detail Container -->
+      <div id="event_detail_container">
+        <div id="graph_container"></div>
+        <div id="graph_legend_container">
+        <table width="424" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
+          <tr>
+            <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
+            <th width="100" align="center" nowrap="nowrap" scope="col">Avg Kbps</th>
+            <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
+            <th width="100" align="center" nowrap="nowrap" scope="col">Avg pps</th>
+            <th width="50" align="center" nowrap="nowrap" scope="col">%</th>
+          </tr>
+          <tr>
+            <th height="15" scope="row">http</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">Oracle</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">SAP</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">ITP VPLS</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+          <tr>
+            <th height="15" scope="row">Total</th>
+            <td align="center" nowrap="nowrap">19.992</td>
+            <td align="center" nowrap="nowrap">100</td>
+            <td align="center" nowrap="nowrap">91.324</td>
+            <td align="center" nowrap="nowrap">100</td>
+          </tr>
+        </table>
+        </div> <!-- end #graph_legend_container -->
+      </div> <!-- end #event_detail_container -->
       
     </div> <!-- end #mainContent -->
 

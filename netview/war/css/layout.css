@@ -28,9 +28,21 @@
 	background-color: #242424;
 	background-image:url(../images/navbar_bg.gif);
 	background-repeat:repeat-x;
-	/* overflow: hidden; FIX */
+	/* overflow: hidden; */
 	z-index: 999;
 	border-top: 1px solid #484848;
+	border-bottom: 1px solid #121212;
+}
+
+/* Sub-Navigation Bar Container */
+#subnavbar_container {
+	width: 100%;
+	height: 36px;
+	background-color: #242424;
+	background-image:url(../images/subnavbar_bg.gif);
+	background-repeat:repeat-x;
+	overflow: hidden;
+	z-index: 998;
 	border-bottom: 1px solid #121212;
 }
 
@@ -39,10 +51,12 @@
 	width: 100%;
 	height: 36px;
 	background-color: #242424;
+	z-index: 998;
 	border-bottom: 1px solid #121212;
+	cursor: pointer; /* FIX: behaves as a toggle button for the accordion Tree Map. */
 }
 
-#timelegendbar_container {
+#timerangebar_container {
 	width: 100%;
 	height: 26px;
 	background-color: #242424;
@@ -163,11 +177,10 @@
 	width: 100%;
 	height: 30px;
 	background-color: #000;
-	z-index: 999;
 	border-bottom-style: solid; 
 	border-bottom-color: #333; 
 	border-bottom-width: 1px;
-	cursor: pointer; /* FIX: behaves as a button the accordion panel tab and therefore the toggle button for the Tree Map. */
+	cursor: pointer; /* FIX: behaves as a button for the accordion panel tab and therefore the toggle button for the Tree Map. */
 }
 
 /* Profile Editors Container */

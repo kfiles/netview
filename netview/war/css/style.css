@@ -87,18 +87,6 @@ tmp {
 	color: #0D8ECF; /* yellow */
 }
 
-/* Navigation Bar Table */
-.navbar_table {
-	background-color: #242424;
-	font-size: 18px;
-}
-.navbar_table td a {
-	text-decoration: none;
-}
-.navbar_table td a:hover,
-.navbar_table td a:active {
-	color: #FF0;
-}
 
 /* Menubars */
 #ProfilesMenubar li {
@@ -139,7 +127,7 @@ tmp {
 	color: red; /* default text color: red */
 }
 
-#timelegendbar_container p {
+#timerangebar_container p {
 	margin: 0px;
 	padding: 5px 5px 0px 0px; /* above, below, left and right text  */
 	/* display: block; */
