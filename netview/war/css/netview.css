@@ -8,3 +8,5 @@ Title: NetView CSS
 @import url(style.css);
 @import url(navbar.css);
 @import url(../SpryAssets/SpryMenuBarHorizontal.css);
+@import url(../SpryAssets/SpryTooltip.css);
+@import url(../SpryAssets/SpryHTMLPanel.css);

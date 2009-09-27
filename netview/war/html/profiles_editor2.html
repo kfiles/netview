@@ -25,16 +25,10 @@ $(document).ready(function() {
 });
 </script> 
 
-<!-- Vars Used by Dynamic Menu -->
-<script type="text/javascript"> 
-<!-- 
-var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
-var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
-var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
-var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
-//--> 
-</script> 
+<!-- Define the data set that will load the sites data file -->
+<script type="text/javascript">
+var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
+</script>
 
 </head>
 <body>
@@ -74,36 +68,11 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </td> <!-- Column 1: Navigation Bar -->
       <td> <!-- Column 2: Set Profile Pull-Down Button -->
             <!-- Profiles Dynamic Menu -->
-            <div id="ProfilesMenubar" spry:region="dsMenu dsProfile dsSubProfile"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu::@name}</a> 
-                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile"> 
-                        <!-- Profile -->
-                        <li><a href="{dsProfile::@url}">{dsProfile::@name}</a>
-                           <ul spry:if="{dsSubProfile::ds_RowCount}" spry:repeatchildren="dsSubProfile"> 
-                              <!-- SubProfile -->
-                              <li><a href="{dsSubProfile::@url}">{dsSubProfile::@name}</a></li> 
-                           </ul> 
-                        </li> 
-                     </ul> 
-                  </li> 
-               </ul> 
-            </div> <!-- End of Profiles Dynamic Menu -->
+            <!-- Note: Removed Profiles Dynamic Menu from Navigation Bar as it does not apply within Preferences -->
       </td>
       <td> <!-- Column 3: Set Site Pull-Down Button -->
             <!-- Sites Dynamic Menu -->
-            <div id="SitesMenubar" spry:region="dsMenu2 dsSite"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu2"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu2::@name}</a> 
-                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite"> 
-                        <!-- Site -->
-                        <li><a>{dsSite::@name}</a></li>
-                     </ul>
-                  </li> 
-               </ul> 
-            </div> <!-- End of Sites Dynamic Menu -->
+            <!-- Note: Removed Sites Dynamic Menu from Navigation Bar as it does not apply within Preferences -->
       </td>
       <td>  <!-- Column 4: Help -->
             <ul id="navbar" width="20">
@@ -134,19 +103,13 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 
     <!-- Application Profile Editor -->
     <a href="profiles_editor.html"><div id="app_profile_editor2"></div></a>
-      
+
     </div> <!-- end #mainContent -->
 
     <!-- Footer -->
     <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
 </div> <!-- end #page_container -->
-
-<!-- Javascript Used by Dynamic Menu -->
-<script type="text/javascript"> 
-Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
-Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
-</script> 
 
 </body>
 </html>

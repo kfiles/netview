@@ -10,6 +10,8 @@
 <script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryTooltip.js"></script>
+<script type="text/javascript" src="../SpryAssets/SpryHTMLPanel.js"></script>
 
 <!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
 <script type="text/javascript" src="../js/jquery.js"></script> 
@@ -27,13 +29,11 @@ $(document).ready(function() {
 
 <!-- Vars Used by Dynamic Menu -->
 <script type="text/javascript"> 
-<!-- 
 var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
 var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
 var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
 var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
-//--> 
 </script> 
 
 </head>
@@ -138,21 +138,22 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
        <div class="AccordionPanel"> 
           <div class="AccordionPanelLabel" onclick="treemap.start();">
              <!-- Site Detail -->
-             <!-- Note: This becomes the accordion panel tab and therefore the toggle "button" for the Tree Map. -->
-             <div id="sitedetailbar_container">
+             <!-- Note: This becomes the accordion panel tab and therefore the toggle "button" for the Tree Map;
+                   also display a tooltip HTML Panel onmouseover -->
+             <div id="sitedetailbar_container" onmouseover="html_panel.loadContent('site_tooltip.html');">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                    <tr>
                       <td>
                             <p><a>Site:</a><b> New York, NY</b></p>
                       </td>
                       <td>
-                            <p><a>Site Id:</a><b> XYZ1234</b></p>
+                            <p><a>Site Id:</a><d> XYZ1234</d></p>
                       </td>
                       <td>
-                            <p><a>Bandwidth:</a><b> 6Mbps</b></p>
+                            <p><a>Bandwidth:</a><d> 6Mbps</d></p>
                       </td>
                       <td>
-                            <p><a>IP Address:</a><b> 164.21.375.28</b></p>
+                            <p><a>IP Address:</a><d> 164.21.375.28</d></p>
                       </td>
                       <td>
                             <p><a>Profile:</a><c> Oracle</c></p>
@@ -160,6 +161,8 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                    </tr>
                 </table>
              </div> <!-- end #sitedetailbar_container -->
+         <!-- Create the tooltip HTML Panel -->
+         <div id="site_tooltip" class="tooltipContent">Loading...</div> 
          </div>  <!-- end AccordionPanelLabel -->
          <!-- Tree Map -->
          <div id="tree_map_container" class="AccordionPanelContent"></div> 
@@ -288,6 +291,12 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
 Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
 </script> 
+
+<!-- Javascript Used by HTML Panel Tooltip widget -->
+<script type="text/javascript">
+var html_panel = new Spry.Widget.HTMLPanel("site_tooltip");	
+var tt_site = new Spry.Widget.Tooltip("site_tooltip","#sitedetailbar_container", {followMouse:true});
+</script>
 
 </body>
 </html>

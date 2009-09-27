@@ -5,7 +5,7 @@
 body {
 	background-image: url(../images/background_tile.gif);
 	background-repeat: repeat-x;
-	font: 100% Verdana, Arial, Helvetica, sans-serif;
+	font: 100% Verdana, Arial, Helvetica;
 	background-color: #242424;
 	margin: 0px; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
 	padding: 0px;
@@ -19,6 +19,7 @@ tmp {
 	font-weight: bold;
 	text-decoration: none;
 }
+
 
 /* Event Table */
 .event_table {
@@ -49,11 +50,11 @@ tmp {
 .event_table tr:hover,
 .event_table tr:active {
 	background-color: #000;
-	color: #0D8ECF; /* yellow */
+	color: #0D8ECF; /* #FCD202 */
 }
 
 .selevent_table {
-	background-color: yellow;
+	background-color: #FCD202;
 	color: #000;
 }
 
@@ -119,7 +120,7 @@ tmp {
 	color: #666; /* default text color: grey */
 }
 
-#sitedetailbar_container b {
+#sitedetailbar_container d {
 	color: #FFF; /* default text color: white */
 }
 
@@ -134,4 +135,23 @@ tmp {
 	text-align: center;
 	font-size: 12px;
 	font-weight: bold;
+}
+
+/* HTML Panel Tooltip */
+#site_tooltip{
+	font-size: 11px;
+	color: #FFF;
+	background-image:url(../images/navbar_bg_trans.png);
+	background-repeat:repeat-x;
+	border-top: 1px solid #484848;
+	border-bottom: 1px solid #121212;
+}
+
+#site_tooltip td {
+	text-align: left;
+	/* border-bottom: 1px solid #FFF; */
+	padding-top: 5px;
+	padding-right: 10px;
+	padding-bottom: 5px;
+	padding-left: 10px;
 }
