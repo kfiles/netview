@@ -47,7 +47,7 @@
 
 	<servlet-mapping>
 		<servlet-name>CsvUploadServlet</servlet-name>
-		<url-pattern>/upload</url-pattern>
+		<url-pattern>/upload/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>
