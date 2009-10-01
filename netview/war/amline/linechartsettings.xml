@@ -1,1 +1,137 @@
-<settings>  <font>Helvetica</font>  <text_color>CCCCCC</text_color>  <hide_bullets_count>20</hide_bullets_count>  <add_time_stamp>1</add_time_stamp>  <thousands_separator>,</thousands_separator>  <decimals_separator>.</decimals_separator>  <digits_after_decimal>1</digits_after_decimal>  <background>    <color>000000</color>    <alpha>90</alpha>    <border_alpha>10</border_alpha>    <file>ProdCo.jpg</file>  </background>  <plot_area>    <color>444444</color>    <alpha>100</alpha>    <border_color>999999</border_color>    <border_alpha>99</border_alpha>    <margins>      <left>50</left>      <right>40</right>      <bottom>65</bottom>    </margins>  </plot_area>  <grid>    <x>      <enabled>0</enabled>      <alpha>10</alpha>      <approx_count>9</approx_count>    </x>    <y_left>      <alpha>10</alpha>      <approx_count>20</approx_count>    </y_left>    <y_right>      <approx_count>20</approx_count>    </y_right>  </grid>  <axes>    <x>      <width>1</width>      <color>CCCCCC</color>    </x>    <y_left>      <width>1</width>      <color>CCCCCC</color>    </y_left>    <y_right>      <width>1</width>      <color>CCCCCC</color>    </y_right>  </axes>  <values>    <x>      <skip_first>1</skip_first>    </x>    <y_left>      <frequency>2</frequency>    </y_left>    <y_right>      <frequency>2</frequency>    </y_right>  </values>  <indicator>    <color>0D8ECF</color>    <x_balloon_text_color>FFFFFF</x_balloon_text_color>    <line_alpha>50</line_alpha>    <selection_color>0D8ECF</selection_color>    <selection_alpha>20</selection_alpha>  </indicator>  <balloon>    <on_off>0</on_off>    <corner_radius>3</corner_radius>  </balloon>  <scroller>    <color>666666</color>    <bg_color>333333</bg_color>  </scroller>  <legend>    <key>      <size>11</size>    </key>  </legend>  <zoom_out_button>    <text_color_hover>FCD202</text_color_hover>  </zoom_out_button>  <help>    <button>      <text_color>666666</text_color>      <text_color_hover>FCD202</text_color_hover>    </button>    <balloon>      <text><![CDATA[Click on the graph to turn on/off value balloon <br/><br/>Click on legend key to show/hide graph<br/><br/>Mark the area you wish to enlarge]]></text>      <color>FCD202</color>      <text_color>666666</text_color>    </balloon>  </help>  <strings>    <wrong_zoom_value>Incorrect zoom values</wrong_zoom_value>  </strings>  <graphs>    <graph gid="1">      <title>Graph1</title>      <color>0D8ECF</color>      <color_hover>FF0F00</color_hover>    </graph>    <graph gid="2">      <title> Graph2</title>      <color>B0DE09</color>      <color_hover>FF0F00</color_hover>      <line_width>1</line_width>      <bullet>round</bullet>    </graph>    <graph gid="3">      <title> Graph3</title>      <color>FFFF00</color>      <color_hover>FF0000</color_hover>      <line_width>1</line_width>      <balloon_text_color>000000</balloon_text_color>    </graph>    <graph gid="4">      <title> Graph4</title>      <color>FF00FF</color>      <color_hover>FF0000</color_hover>      <line_width>1</line_width>    </graph>  </graphs>  <labels>    <label lid="0">      <text><![CDATA[<b>Top source totals, Outbound from site</b>]]></text>      <y>25</y>      <text_size>13</text_size>      <align>center</align>    </label>    <label lid="1">      <text><![CDATA[<b>NYC 6Mbps October 19, 2008 1:00AM to 2:00AM, GMT (60min)</b>]]></text>      <y>8</y>      <text_color>FFFFFF</text_color>      <text_size>14</text_size>      <align>center</align>    </label>  </labels></settings>
+<settings>
+  <font>Helvetica</font>
+  <text_color>CCCCCC</text_color>
+  <hide_bullets_count>20</hide_bullets_count>
+  <add_time_stamp>1</add_time_stamp>
+  <thousands_separator>,</thousands_separator>
+  <decimals_separator>.</decimals_separator>
+  <digits_after_decimal>1</digits_after_decimal>
+  <background>
+    <color>000000</color>
+    <alpha>90</alpha>
+    <border_alpha>10</border_alpha>
+  </background>
+  <plot_area>
+    <color>444444</color>
+    <alpha>100</alpha>
+    <border_color>999999</border_color>
+    <border_alpha>99</border_alpha>
+    <margins>
+      <top>30</top>
+      <left>50</left>
+      <right>40</right>
+      <bottom>65</bottom>
+    </margins>
+  </plot_area>
+  <grid>
+    <x>
+      <enabled>0</enabled>
+      <alpha>10</alpha>
+      <approx_count>9</approx_count>
+    </x>
+    <y_left>
+      <alpha>10</alpha>
+      <approx_count>20</approx_count>
+    </y_left>
+    <y_right>
+      <approx_count>20</approx_count>
+    </y_right>
+  </grid>
+  <axes>
+    <x>
+      <width>1</width>
+      <color>CCCCCC</color>
+    </x>
+    <y_left>
+      <width>1</width>
+      <color>CCCCCC</color>
+    </y_left>
+    <y_right>
+      <width>1</width>
+      <color>CCCCCC</color>
+    </y_right>
+  </axes>
+  <values>
+    <x>
+      <skip_first>1</skip_first>
+    </x>
+    <y_left>
+      <frequency>2</frequency>
+    </y_left>
+    <y_right>
+      <frequency>2</frequency>
+    </y_right>
+  </values>
+  <indicator>
+    <color>0D8ECF</color>
+    <x_balloon_text_color>FFFFFF</x_balloon_text_color>
+    <line_alpha>50</line_alpha>
+    <selection_color>0D8ECF</selection_color>
+    <selection_alpha>20</selection_alpha>
+  </indicator>
+  <balloon>
+    <on_off>0</on_off>
+    <corner_radius>3</corner_radius>
+  </balloon>
+  <scroller>
+    <color>666666</color>
+    <bg_color>333333</bg_color>
+  </scroller>
+  <legend>
+    <key>
+      <size>11</size>
+    </key>
+  </legend>
+  <zoom_out_button>
+    <text_color_hover>FCD202</text_color_hover>
+  </zoom_out_button>
+  <help>
+    <button>
+      <text_color>666666</text_color>
+      <text_color_hover>FCD202</text_color_hover>
+    </button>
+    <balloon>
+      <text><![CDATA[Click on the graph to turn on/off value balloon <br/><br/>Click on legend key to show/hide graph<br/><br/>Mark the area you wish to enlarge]]></text>
+      <color>FCD202</color>
+      <text_color>666666</text_color>
+    </balloon>
+  </help>
+  <strings>
+    <wrong_zoom_value>Incorrect zoom values</wrong_zoom_value>
+  </strings>
+  <graphs>
+    <graph gid="1">
+      <title>Graph1</title>
+      <color>0D8ECF</color>
+      <color_hover>FF0F00</color_hover>
+    </graph>
+    <graph gid="2">
+      <title> Graph2</title>
+      <color>B0DE09</color>
+      <color_hover>FF0F00</color_hover>
+      <line_width>1</line_width>
+      <bullet>round</bullet>
+    </graph>
+    <graph gid="3">
+      <title> Graph3</title>
+      <color>FFFF00</color>
+      <color_hover>FF0000</color_hover>
+      <line_width>1</line_width>
+      <balloon_text_color>000000</balloon_text_color>
+    </graph>
+    <graph gid="4">
+      <title> Graph4</title>
+      <color>FF00FF</color>
+      <color_hover>FF0000</color_hover>
+      <line_width>1</line_width>
+    </graph>
+  </graphs>
+  <labels>
+    <label lid="0">
+      <text><![CDATA[<b>Top source totals, Outbound from site</b>]]></text>
+      <y>7</y>
+      <text_size>13</text_size>
+      <align>center</align>
+    </label>
+  </labels>
+</settings>

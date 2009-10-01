@@ -116,7 +116,20 @@ tmp {
 	font-weight: bold;
 }
  
+.sitedetailbar_container p {
+	margin: 0px;
+	padding: 10px 10px 0px 20px; /* above, below, left and right text  */
+	/* display: block; */
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+}
+ 
 #sitedetailbar_container a {
+	color: #666; /* default text color: grey */
+}
+
+.sitedetailbar_container a {
 	color: #666; /* default text color: grey */
 }
 

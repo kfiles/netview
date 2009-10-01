@@ -1,8 +1,10 @@
 <%@page import="com.prodco.netview.server.*,com.prodco.netview.server.query.*,java.util.*,java.text.*" %><%response.setContentType("text/xml"); %><chart>
 <%
 	int siteId = 1;
-int startTime = 1236211200;
-int endTime = 1236296700;
+//int startTime = 1236211200;
+int startTime =41201280;
+int endTime = 41201350;
+//int endTime = 1236211320;
 DecimalFormat bwFormat = new DecimalFormat("0.#");
 
 XYDataSet data = new FlowDataDAO().getTopResult(siteId, startTime, endTime, TopQueryType.SRC_PORT, 4);
