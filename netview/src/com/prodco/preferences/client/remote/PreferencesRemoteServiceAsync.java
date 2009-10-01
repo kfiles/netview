@@ -9,6 +9,8 @@ public interface PreferencesRemoteServiceAsync {
 
   public void findAppTagsByCustomer(int custId, AsyncCallback<List<AppTag>> callback);
 
+  public void findAppTags(AsyncCallback<List<Void>> callback);
+
   public void saveAppTagForCustomer(int custId, AppTag tag, AsyncCallback<Void> callback);
 
 }

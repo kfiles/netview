@@ -266,40 +266,35 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     {
     // Create a sample AppTag
 
-//    GetTagData();
-    List<AppTag> tags = new ArrayList<AppTag>();
-    AppTag tag = new AppTag( 1, "HTTP", "port=80" );
-    tags.add( tag );
-    tag = new AppTag( 2, "FTP", "port=23" );
-    tags.add( tag );
-    tag = new AppTag( 3, "SFTP", "port=23" );
-    tags.add( tag );
-    tag = new AppTag( 4, "ORACLE", "port=23" );
-    tags.add( tag );
-    tag = new AppTag( 5, "SCP", "port=23" );
-    tags.add( tag );
-
-    BeanModelFactory factory = BeanModelLookup.get().getFactory( AppTag.class );
-    List<BeanModel> models = factory.createModel( tags );
-
-    grid.getSelectionModel().deselectAll();
-    store.removeAll();
-    store.add( models );
-
+    GetTagData();
+    layout();
     }
 
   private void GetTagData ()
     {
+
     Services.PREFERENCES.findAppTagsByCustomer( 1,
       new AsyncCallback<List<AppTag>>() {
         public void onSuccess ( List<AppTag> tags )
           {
-          Window.alert( "Found AppTags" );
+          if ( tags != null )
+            {
+            BeanModelFactory factory = BeanModelLookup.get().getFactory(
+              AppTag.class );
+            List<BeanModel> models = null;
+            models = factory.createModel( tags );
+
+            // grid.getSelectionModel().deselectAll();
+            store.removeAll();
+            store.add( models );
+
+            }
+
           }
 
         public void onFailure ( Throwable caught )
           {
-          Window.alert( "Found Error" );
+          System.out.println( caught.getMessage() );
           }
       } );
 

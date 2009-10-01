@@ -1,9 +1,12 @@
 
 package com.prodco.preferences.client.model;
 
+import java.io.Serializable;
+
+import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.data.BeanModelTag;
 
-public class AppTag implements BeanModelTag 
+public class AppTag implements BeanModelTag,Serializable
   {
   private int tagPref;
   private String tagName;
@@ -21,6 +24,7 @@ public class AppTag implements BeanModelTag
   public Integer getTagPref ()
     {
     return this.tagPref;
+
     }
 
   public void setTagPref ( int tagPref )

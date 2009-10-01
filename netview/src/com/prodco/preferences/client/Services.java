@@ -12,6 +12,6 @@ public class Services {
 
   static {
     ((ServiceDefTarget) PREFERENCES).setServiceEntryPoint(GWT.getModuleBaseURL()
-        + "/PreferencesRemoteService");
+        + "PreferencesRemoteService");
   }
 }

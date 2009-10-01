@@ -43,12 +43,12 @@ WindowResizeListener, EntryPoint
     } );
 
     getVerticalTabInstance().add( new TagEditor("Tag"), "Tag" );
-    getVerticalTabInstance().add( new TagEditor("Profile"), "Profile" );
-    getVerticalTabInstance().add( new TagEditor("Policy"), "Policy" );
-    getVerticalTabInstance().add( new TagEditor("Users"), "Users" );
-    getVerticalTabInstance().add( new TagEditor("Alarms"), "Alarms" );
-    getVerticalTabInstance().add( new TagEditor("Site"), "Site" );
-    getVerticalTabInstance().add( new TagEditor("Agent"), "Agent" );
+//    getVerticalTabInstance().add( new TagEditor("Profile"), "Profile" );
+//    getVerticalTabInstance().add( new TagEditor("Policy"), "Policy" );
+//    getVerticalTabInstance().add( new TagEditor("Users"), "Users" );
+//    getVerticalTabInstance().add( new TagEditor("Alarms"), "Alarms" );
+//    getVerticalTabInstance().add( new TagEditor("Site"), "Site" );
+//    getVerticalTabInstance().add( new TagEditor("Agent"), "Agent" );
 
     getVerticalTabInstance().selectTab( 0 );
 

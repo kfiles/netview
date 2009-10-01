@@ -25,7 +25,7 @@
 			com.prodco.netview.server.CsvUploadServlet
 		</servlet-class>
 	</servlet>
-<!--
+
 	<servlet>
 		<servlet-name>preferencesServiceServlet</servlet-name>
 		<servlet-class>
@@ -36,9 +36,9 @@
   
 	<servlet-mapping>
 		<servlet-name>preferencesServiceServlet</servlet-name>
-		<url-pattern>/preferences/PreferencesRemoteService</url-pattern>
+		<url-pattern>preferences/PreferencesRemoteService</url-pattern>
 	</servlet-mapping>
--->
+
 	<servlet-mapping>
 		<servlet-name>GraphDataServlet</servlet-name>
 		<url-pattern>/data/graph</url-pattern>
