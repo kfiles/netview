@@ -26,17 +26,18 @@ import au.com.bytecode.opencsv.bean.CsvToBean;
 
 import com.google.apphosting.api.DeadlineExceededException;
 import com.prodco.netview.domain.FlowRecord;
-import com.prodco.netview.server.PersistenceManagerHelper;
 
 public class CsvUploadServlet extends HttpServlet
   {
 
   private static final long serialVersionUID = 1L;
 
+  private static final String API_BASE_URI = ".*/upload/";;
+
   private final Logger log = Logger.getLogger( this.getClass().getName() );
-  
-  SimpleDateFormat tcFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ssZ");
-  
+
+  SimpleDateFormat tcFormat = new SimpleDateFormat( "yyyy-MM-dd_HH:mm:ssZ" );
+
   /**
    * Constructor of the object.
    */
@@ -107,7 +108,15 @@ public class CsvUploadServlet extends HttpServlet
   public void doPost ( HttpServletRequest request, HttpServletResponse response )
     throws ServletException, IOException
     {
+    String uri = request.getRequestURL().toString();
+    String cmdPath = uri.replaceFirst( API_BASE_URI, "" );
+    String[] cmdAry = cmdPath.split( "/" );
+    String site = cmdAry[0];
+    String intf = cmdAry[1];
+    long siteId = Long.parseLong( site );
     BufferedReader in = request.getReader();
+    // Skip header
+    in.readLine();
     ColumnPositionMappingStrategy strat = new ColumnPositionMappingStrategy();
     strat.setType( FlowRecord.class );
     String[] columns = new String[]{"timecode", "timestampStart", "vlanName",
@@ -116,6 +125,7 @@ public class CsvUploadServlet extends HttpServlet
     strat.setColumnMapping( columns );
 
     CsvToBean csv = new CsvToBean();
+
     PersistenceManager pm = PersistenceManagerHelper.getInstance()
       .getPersistenceManager();
     pm.currentTransaction().begin();
@@ -124,38 +134,48 @@ public class CsvUploadServlet extends HttpServlet
       {
       List<FlowRecord> list = csv.parse( strat, in );
       int listSize = list.size();
-      log.info( "CSV Parsed with " + listSize + " records" );
+      log.info( "CSV Parsed with "
+        + listSize + " records" );
 
       response.setContentType( "text/plain" );
       for ( FlowRecord rec : list )
         {
-        rec.setSiteId( 1l );
+        // rec.setSiteId( 1l );
+        rec.setSiteId( siteId );
+        rec.setSrcIntf( intf );
         rec.setVlanName( "LAN" );
-        try {
-          rec.setTimecode( (int)(tcFormat.parse( rec.getTimestampStart() + "-0000" ).getTime()/30000l) );
-        } catch (ParseException e) {
-         //leave old timecode
-        }
+        try
+          {
+          rec.setTimecode( (int) ( tcFormat.parse( rec.getTimestampStart()
+            + "-0000" ).getTime() / 30000l ) );
+          }
+        catch ( ParseException e )
+          {
+          // leave old timecode
+          }
 
         pm.makePersistent( rec );
         count++;
         }
-      log.info( "Done storing " + listSize + " rows");
+      log.info( "Done storing "
+        + listSize + " rows" );
       pm.currentTransaction().commit();
       }
-    catch ( DeadlineExceededException e ) {
-      //Let the sender know how many records were processed
+    catch ( DeadlineExceededException e )
+      {
+      // Let the sender know how many records were processed
       response.getWriter().println( count );
       response.getWriter().flush();
-    }
+      }
     catch ( RuntimeException e )
       {
-      log.severe( "Error parsing CSV file: " + e.getClass().getName() + ": " + e.getMessage() );
+      log.severe( "Error parsing CSV file: "
+        + e.getClass().getName() + ": " + e.getMessage() );
       }
     finally
       {
       pm.close();
-      log.info( "Transaction ended");
+      log.info( "Transaction ended" );
       }
     // PrintWriter out = response.getWriter();
     // out
