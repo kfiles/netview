@@ -25,9 +25,12 @@
     <inherits name='com.extjs.gxt.ui.GXT'/>
 	
   <!--  Stylesheet -->
-    <stylesheet src="css/ext-all.css"/>
-    <stylesheet src="css/core.css"/>
-    <stylesheet src="css/netview.css"/>
+    <stylesheet src="/css/ext-all.css"/>
+    <stylesheet src="/css/core.css"/>
+    <stylesheet src="/css/netview.css"/>
   
 	<entry-point class="com.prodco.preferences.client.PreferencesEntry" />
+	
+	<servlet path="/PreferencesRemoteService" class="com.prodco.preferences.remote.PreferencesServiceServlet" />
+	
 </module>

@@ -4,6 +4,7 @@ package com.prodco.preferences.client;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.extjs.gxt.ui.client.binding.FieldBinding;
 import com.extjs.gxt.ui.client.binding.FormBinding;
 import com.extjs.gxt.ui.client.data.BeanModel;
 import com.extjs.gxt.ui.client.data.BeanModelFactory;
@@ -29,16 +30,11 @@ import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.WindowResizeListener;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.prodco.preferences.client.model.AppTag;
 
-/**
- * SOF Bundles Entry
- * 
- * @author: Robert Parlato
- * @since 1.5
- */
 public class TagEditor extends LayoutContainer implements WindowResizeListener
   {
 
@@ -46,9 +42,13 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
 
   private ListStore<BeanModel> store;
 
+  private List<FormBinding> formBindings = new ArrayList<FormBinding>();
+
   private ContentPanel gridPanel = new ContentPanel();
 
   private Grid<BeanModel> grid = null;
+
+  private TagDetailPanel detailPanel = null;
 
   private class GVC extends GridViewConfig
     {
@@ -71,21 +71,31 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     store = new ListStore<BeanModel>();
     store.setMonitorChanges( true );
 
+    detailPanel = new TagDetailPanel( formBindings );
+    detailPanel.setWidth( 600 );
+    detailPanel.setHeight( 300 );
+    detailPanel.setBodyBorder( true );
+    detailPanel.setBorders( true );
+
+    for ( FormBinding fb : formBindings )
+      {
+      fb.setStore( store );
+      }
+
+    grid = createGrid();
+
     store.addStoreListener( new StoreListener<BeanModel>() {
       @Override
       public void storeUpdate ( StoreEvent<BeanModel> se )
         {
+        Window.alert( "StoreUpdate called" );
         super.storeUpdate( se );
         }
     } );
 
-    grid = createGrid();
-
-    createDetailPanel();
-    
     Window.addWindowResizeListener( this );
     Window.enableScrolling( false );
-    Window.setMargin( "0px" );
+    Window.setMargin( "10px" );
     DeferredCommand.addCommand( new Command() {
       public void execute ()
         {
@@ -94,12 +104,6 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     } );
 
     resizeWindow();
-    }
-
-  private void createDetailPanel ()
-    {
-    // TODO Auto-generated method stub
-    
     }
 
   @Override
@@ -112,27 +116,36 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     gridPanel.setHeaderVisible( true );
     gridPanel.setFrame( true );
     gridPanel.setCollapsible( true );
-    gridPanel.setWidth( 800 );
+    gridPanel.setWidth( 600 );
+    gridPanel.setHeight( 125 );
     gridPanel.add( grid );
 
     LayoutContainer panel = new LayoutContainer();
     panel.setLayout( new TableLayout() );
-//    panel.add( new Image( "images/spacer.gif", 0, 0, 1, 10 ) );
     panel.add( gridPanel );
     panel.add( new Image( "images/spacer.gif", 0, 0, 1, 5 ) );
-    panel.add( new TagDetailPanel(new ArrayList<FormBinding>()) );
+    panel.add( detailPanel );
+    panel.setBorders( true );
+    panel.setWidth( 650 );
+    panel.setHeight( 500 );
 
     ContentPanel cp = new ContentPanel();
-//    cp.setHeading( "Tag Editor" );
     cp.setHeaderVisible( false );
     cp.setFrame( true );
     cp.setLayout( new FlowLayout() );
+    cp.setHeight( 675 );
 
     scrollPanel.add( panel );
+    scrollPanel.setHeight( "300px" );
+    scrollPanel.setWidth( "300px" );
+    scrollPanel.setAlwaysShowScrollBars( true );
+
     cp.add( scrollPanel );
-    
+    cp.setBorders( true );
+
     add( cp );
-//    add( new TagDetailPanel(new ArrayList<FormBinding>()) );
+    setWidth( 700 );
+    setHeight( 700 );
     layout();
 
     }
@@ -141,12 +154,40 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
   protected void onLoad ()
     {
     updateStore();
+    layout();
+
     }
 
   @Override
   protected void onShow ()
     {
-    updateStore();
+    super.onShow();
+    detailPanel = new TagDetailPanel( formBindings );
+    Window.alert( "I am in TagEditor.onShow()" );
+    }
+
+  private void loadDetailPanel ( AppTag tag )
+    {
+    detailPanel.redraw_panel( true );
+    BeanModelFactory factory = BeanModelLookup.get().getFactory( AppTag.class );
+    BeanModel model = factory.createModel( tag );
+    if ( model != null )
+      {
+      for ( FieldBinding b : detailPanel.getFieldBindings() )
+        {
+        b.bind( model );
+        }
+
+      }
+    else
+      {
+      for ( FormBinding fb : formBindings )
+        {
+        fb.unbind();
+        for ( FieldBinding b : fb.getBindings() )
+          b.getField().clearInvalid();
+        }
+      }
     }
 
   private Grid<BeanModel> createGrid ()
@@ -169,7 +210,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     gv.setEmptyText( "No rows returned" );
     gv.setViewConfig( new GVC() );
     grid.setAutoHeight( true );
-    grid.setAutoExpandColumn( "tagName" );
+    grid.setAutoExpandColumn( "tagRule" );
     grid.setStripeRows( true );
     grid.setBorders( true );
     grid.setWidth( 700 );
@@ -184,11 +225,12 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
           int rowNum = ge.getRowIndex() + 1;
           BeanModel model = (BeanModel) ge.getGrid().getStore().getAt(
             ge.getRowIndex() );
-          AppTag tag = (AppTag) model.getBean();
-          if ( tag != null )
-            Window.alert( "Row-"
-              + rowNum + " Selected." +"tagName="
-              + tag.getTagName() + ": " + tag.getTagRule() );
+          if ( null != model )
+            {
+            AppTag tag = (AppTag) model.getBean();
+            if ( tag != null )
+              loadDetailPanel( tag );
+            }
           }
         }
     } );
@@ -223,10 +265,18 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
   private void updateStore ()
     {
     // Create a sample AppTag
+
+//    GetTagData();
     List<AppTag> tags = new ArrayList<AppTag>();
     AppTag tag = new AppTag( 1, "HTTP", "port=80" );
     tags.add( tag );
     tag = new AppTag( 2, "FTP", "port=23" );
+    tags.add( tag );
+    tag = new AppTag( 3, "SFTP", "port=23" );
+    tags.add( tag );
+    tag = new AppTag( 4, "ORACLE", "port=23" );
+    tags.add( tag );
+    tag = new AppTag( 5, "SCP", "port=23" );
     tags.add( tag );
 
     BeanModelFactory factory = BeanModelLookup.get().getFactory( AppTag.class );
@@ -235,6 +285,23 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     grid.getSelectionModel().deselectAll();
     store.removeAll();
     store.add( models );
+
+    }
+
+  private void GetTagData ()
+    {
+    Services.PREFERENCES.findAppTagsByCustomer( 1,
+      new AsyncCallback<List<AppTag>>() {
+        public void onSuccess ( List<AppTag> tags )
+          {
+          Window.alert( "Found AppTags" );
+          }
+
+        public void onFailure ( Throwable caught )
+          {
+          Window.alert( "Found Error" );
+          }
+      } );
 
     }
 

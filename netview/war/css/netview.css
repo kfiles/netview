@@ -1,7 +1,9 @@
 /*
 Title: NetView CSS
 */
- 
+
+@import url(core.css);
+@import url(ext-all.css); 
 @import url(css-reset.css);
 /* @import url(global.css); */
 @import url(layout.css);

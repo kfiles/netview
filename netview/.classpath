@@ -2,98 +2,21 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-1.8.jar" sourcepath="opencsv-1.8/src"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/json_simple-1.1.jar"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/appengine-local-runtime-shared.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/geronimo-el_1.0_spec-1.0.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/geronimo-jsp_2.1_spec-1.0.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/geronimo-servlet_2.5_spec-1.2.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-ant-1.6.5.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-ant-launcher-1.6.5.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-commons-el-1.0.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-commons-logging-1.1.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-jasper-compiler-5.0.28.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/shared/jsp/repackaged-appengine-jasper-runtime-5.0.28.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/appengine-api-1.0-sdk-1.2.2.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/datanucleus-appengine-1.0.2.final.jar" sourcepath="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/src/orm/datanucleus-appengine-1.0.2.final-src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/datanucleus-core-1.1.4-gae.jar" sourcepath="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/src/orm/datanucleus-core-1.1.4-gae-src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/datanucleus-jpa-1.1.4.jar" sourcepath="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/src/orm/datanucleus-jpa-1.1.4-src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/geronimo-jpa_3.0_spec-1.1.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/geronimo-jta_1.1_spec-1.1.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/user/orm/jdo2-api-2.3-ea.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Program Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/lib/appengine-tools-api.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="file:/C:/Program%20Files/Genuitec/Common/plugins/com.google.appengine.eclipse.sdkbundle_1.2.2.v200907131030/appengine-java-sdk-1.2.2/docs/javadoc/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/appengine-api-1.0-sdk-1.2.2.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-appengine-1.0.2.final.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-core-1.1.4-gae.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-enhancer-1.1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-jpa-1.1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/datanucleus-rdbms-1.1.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/geronimo-jpa_3.0_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/geronimo-jta_1.1_spec-1.1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-servlet.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jdo2-api-2.3-ea.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/jdo2-api-2.3-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/json_simple-1.1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.8-bin.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-1.8.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

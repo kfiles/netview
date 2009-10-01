@@ -113,9 +113,9 @@ WindowResizeListener, EntryPoint
    */
   public void onWindowResized ( int width, int height )
     {
-    height = height - 115;
+    height = height -20;
     prefPanel.setWidth( width
-      - 50 + "px" );
+      - 25 + "px" );
     }
 
   }

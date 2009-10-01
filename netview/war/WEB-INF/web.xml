@@ -5,31 +5,49 @@
 
 <web-app>
 
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>Netview.html</welcome-file>
-  </welcome-file-list>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>Netview.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- Servlets -->
+
+	<servlet>
+		<servlet-name>GraphDataServlet</servlet-name>
+		<servlet-class>
+			com.prodco.netview.server.GraphDataServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>CsvUploadServlet</servlet-name>
+		<servlet-class>
+			com.prodco.netview.server.CsvUploadServlet
+		</servlet-class>
+	</servlet>
+<!--
+	<servlet>
+		<servlet-name>preferencesServiceServlet</servlet-name>
+		<servlet-class>
+			com.prodco.preferences.remote.PreferencesServiceServlet
+		</servlet-class>
+	</servlet>
+
   
-  <!-- Servlets -->
+	<servlet-mapping>
+		<servlet-name>preferencesServiceServlet</servlet-name>
+		<url-pattern>/preferences/PreferencesRemoteService</url-pattern>
+	</servlet-mapping>
+-->
+	<servlet-mapping>
+		<servlet-name>GraphDataServlet</servlet-name>
+		<url-pattern>/data/graph</url-pattern>
+	</servlet-mapping>
 
-  <servlet>
-    <servlet-name>GraphDataServlet</servlet-name>
-    <servlet-class>com.prodco.netview.server.GraphDataServlet</servlet-class>
-  </servlet>
 
-  <servlet>
-    <servlet-name>CsvUploadServlet</servlet-name>
-    <servlet-class>com.prodco.netview.server.CsvUploadServlet</servlet-class>
-  </servlet>
-
-    <servlet-mapping>
-    <servlet-name>GraphDataServlet</servlet-name>
-    <url-pattern>/data/graph</url-pattern>
-  </servlet-mapping>
-
-    <servlet-mapping>
-    <servlet-name>CsvUploadServlet</servlet-name>
-    <url-pattern>/upload</url-pattern>
-  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>CsvUploadServlet</servlet-name>
+		<url-pattern>/upload</url-pattern>
+	</servlet-mapping>
 
 </web-app>
