@@ -1,29 +1,30 @@
+
 package com.prodco.preferences.remote;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.prodco.preferences.client.model.AppTag;
 import com.prodco.preferences.client.remote.PreferencesRemoteException;
 import com.prodco.preferences.client.remote.PreferencesRemoteService;
 
-public class PreferencesServiceServlet extends RemoteServiceServlet implements PreferencesRemoteService  {
+public class PreferencesServiceServlet extends RemoteServiceServlet
+  implements
+    PreferencesRemoteService
+  {
 
+  public PreferencesServiceServlet ()
+    {
+    System.out.println( "Creating YaltaServiceServlet" );
+    }
 
-  public PreferencesServiceServlet() {
-	  System.out.println("Creating YaltaServiceServlet");
-  }
+  public List<AppTag> findAppTagsByCustomer ( int custId )
+    throws PreferencesRemoteException
+    {
 
-  public List<AppTag> findAppTagsByCustomer(int custId)
-      throws PreferencesRemoteException {
-      
-      System.out.println("Entering findAppTagsByCustomer");
-      List<AppTag> tags = new ArrayList<AppTag>();
+    System.out.println( "Entering findAppTagsByCustomer" );
+    List<AppTag> tags = new ArrayList<AppTag>();
     AppTag tag = new AppTag( 1, "HTTP", "port=80" );
     tags.add( tag );
     tag = new AppTag( 2, "FTP", "port=23" );
@@ -34,20 +35,21 @@ public class PreferencesServiceServlet extends RemoteServiceServlet implements P
     tags.add( tag );
     tag = new AppTag( 5, "SCP", "port=23" );
     tags.add( tag );
-    
-    System.out.println("Returning tags with "+tags.size()+" tags");
 
+    System.out.println( "Returning tags with "
+      + tags.size() + " tags" );
 
-      return tags;
-  }
-
-  public void findAppTags()
-    {
-       return;
+    return tags;
     }
 
-  public void saveAppTagForCustomer(int custId, AppTag tag)
-      throws PreferencesRemoteException {
-  }
+  public List<AppTag> findAppTags ()
+    {
+    return null;
+    }
 
-}
+  public void saveAppTagForCustomer ( int custId, AppTag tag )
+    throws PreferencesRemoteException
+    {
+    }
+
+  }

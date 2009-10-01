@@ -4,7 +4,6 @@ package com.prodco.analysis.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.prodco.analysis.client.model.FlowCollector;
@@ -21,7 +20,6 @@ public class Analysis implements EntryPoint
    */
   public void onModuleLoad ()
     {
-    Window.alert( "alert" );
     FlowCollector c = new FlowCollector();
     c.setSiteId( 4l );
     c.setWanBandwitch( 6.0f );

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.google.gdt.eclipse.suite.webapp">
 <stringAttribute key="bad_container_name" value="\netview\netview.launch"/>
-<stringAttribute key="com.google.gwt.eclipse.core.URL" value="Netview.html"/>
+<stringAttribute key="com.google.gwt.eclipse.core.URL" value="netview.html"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/netview"/>
 </listAttribute>
