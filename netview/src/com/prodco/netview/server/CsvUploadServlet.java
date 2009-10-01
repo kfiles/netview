@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 
-import com.google.apphosting.api.DeadlineExceededException;
 import com.prodco.netview.domain.FlowRecord;
 
 public class CsvUploadServlet extends HttpServlet
@@ -160,12 +159,6 @@ public class CsvUploadServlet extends HttpServlet
       log.info( "Done storing "
         + listSize + " rows" );
       pm.currentTransaction().commit();
-      }
-    catch ( DeadlineExceededException e )
-      {
-      // Let the sender know how many records were processed
-      response.getWriter().println( count );
-      response.getWriter().flush();
       }
     catch ( RuntimeException e )
       {
