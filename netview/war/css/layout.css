@@ -48,7 +48,7 @@
 }
 
 /* Site Detail Container */
-#sitedetailbar_container {
+.sitedetailbar_container {
 	width: 100%;
 	height: 36px;
 	background-color: #242424;
@@ -57,17 +57,8 @@
 	cursor: pointer; /* FIX: behaves as a toggle button for the accordion Tree Map. */
 }
 
-/* Site Detail Container */
-.sitedetailbar_container {
-	width: 100%;
-	height: 36px;
-	background-color: #242424;
-	z-index: 998;
-	border-bottom: 2px solid #dddddd;
-	cursor: pointer; /* FIX: behaves as a toggle button for the accordion Tree Map. */
-}
-
-#timerangebar_container {
+/* Time Range Container */
+.timerangebar_container {
 	width: 100%;
 	height: 26px;
 	background-color: #242424;
@@ -115,22 +106,8 @@
 	border-bottom: 1px solid #1b1b1b;
 }
 
-#footer p {
-	margin: 0; /* zeroing the margins of the first element in the footer will avoid the possibility of margin collapse - a space between divs */
-	text-align:center;
-}
-
-#footer p a {
-	color:#666;
-	text-decoration:none;
-}
-
-#footer p a:hover {
-	text-decoration:underline;
-}
-
 /* Radial Map Container */
-#radial_map_container {
+.radial_map_container {
 	background-image: url(../images/radialmap.jpg);
 	height: 480px;
 	width: 650px;
@@ -145,7 +122,7 @@
 }
 
 /* Small Graphs Container */
-#small_graph_column_container {
+.small_graph_container {
 	float: left;
 	width: 200px;
 	height: 480px;
@@ -176,7 +153,7 @@
 }
 
 /* Event List Container */
-#event_list_container {
+.event_list_container {
 	float: left;
 	height: 360px;
 	width: 425px;
@@ -184,19 +161,19 @@
 }
 
 /* Event List Container: contains graph and graph legend containers */
-#event_detail_container {
+.event_detail_container {
 	background-color: #242424;
 	float: right;
 	height: 360px;
 	width: 425px;
 }
-#graph_container {
+.graph_container {
 	background-image: url(../images/graph.jpg);
 	float: right;
 	height: 240px;
 	width: 425px;
 }
-#graph_legend_container {
+.graph_legend_container {
 	float: right;
 	height: 120px;
 	width: 425px;
@@ -214,20 +191,6 @@
 }
 
 /* Profile Editors Container */
-#vbar1 {
-	float: left;
-	background-image: url(../images/vbar1.jpg);
-	height: 614px;
-	width: 23px;
-}
-
-#vbar2 {
-	float: right;
-	background-image: url(../images/vbar2.jpg);
-	height: 614px;
-	width: 45px;
-}
-
 #site_profile_editor {
 	background-image: url(../images/site_profile_editor.jpg);
 	background-repeat: no-repeat;

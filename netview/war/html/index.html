@@ -5,14 +5,12 @@
 <title>NetView Prototype</title>
 <link href="../css/netview.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script>
-
-<!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="../js/jquery.js"></script> 
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -26,15 +24,13 @@ $(document).ready(function() {
 </script> 
 
 <!-- Vars Used by Dynamic Menu -->
-<script type="text/javascript"> 
-<!-- 
-var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
-var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
+<script type="text/javascript">
+var dsProfiles = new Spry.Data.XMLDataSet("../data/profiles.xml", "profiles"); 
+var dsProfile = new Spry.Data.NestedXMLDataSet(dsProfiles, "profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
-var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
-//--> 
-</script> 
+var dsSites = new Spry.Data.XMLDataSet("../data/sites.xml", "sites"); 
+var dsSite = new Spry.Data.NestedXMLDataSet(dsSites, "site"); 
+</script>
 
 </head>
 <body>
@@ -42,7 +38,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 <!-- Page Container -->
 <div id="page_container">
 
-    <!-- Banner. To make the banner a click-able link, put a link to the around the div. -->
+    <!-- Banner. To make the banner a click-able link, put a link around the banner div. -->
     <a href="http://netflowsoft.com"><div id="banner"></div></a>
 
     <!-- Navigation Bar Container -->
@@ -84,38 +80,39 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                </li>
             </ul> 
       </td> <!-- Column 1: Navigation Bar -->
-      <td> <!-- Column 2: Set Profile Pull-Down Button -->
-            <!-- Profiles Dynamic Menu -->
-            <div id="ProfilesMenubar" spry:region="dsMenu dsProfile dsSubProfile"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu::@name}</a> 
-                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile"> 
-                        <!-- Profile -->
-                        <li><a href="{dsProfile::@url}">{dsProfile::@name}</a>
+      <td> <!-- Column 2: Set Profile Dynamic Pull-Down Menu -->
+            <div id="ProfilesMenubar" spry:region="dsProfiles dsProfile dsSubProfile"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsProfiles"> 
+                  <!-- Set Pull-Down Menu Name -->
+                  <li><a>Set Profile</a>
+                     <!-- For every item in dsProfile data set.. -->
+                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile">
+                        <!-- Profile Menu Item Name / Action -->
+                        <li><a href="javascript:setProfile({dsProfile::@id})">{dsProfile::@name}</a>
+                           <!-- For every item in dsSubProfile data set.. -->
                            <ul spry:if="{dsSubProfile::ds_RowCount}" spry:repeatchildren="dsSubProfile"> 
-                              <!-- SubProfile -->
-                              <li><a href="{dsSubProfile::@url}">{dsSubProfile::@name}</a></li> 
+                              <!-- SubProfile Menu Item Name / Action -->
+                              <li><a href="javascript:setProfile({dsSubProfile::@id})">{dsSubProfile::@name}</a></li>
                            </ul> 
                         </li> 
                      </ul> 
                   </li> 
                </ul> 
-            </div> <!-- End of Profiles Dynamic Menu -->
+            </div> <!-- End of Set Profile Dynamic Menu -->
       </td>
-      <td> <!-- Column 3: Set Site Pull-Down Button -->
-            <!-- Sites Dynamic Menu -->
-            <div id="SitesMenubar" spry:region="dsMenu2 dsSite"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu2"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu2::@name}</a> 
-                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite"> 
-                        <!-- Site -->
-                        <li><a>{dsSite::@name}</a></li>
+      <td> <!-- Column 3: Set Site Dynamic Pull-Down Menu -->
+            <div id="SitesMenubar" spry:region="dsSites dsSite"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsSites"> 
+                  <!-- Set Pull-Down Menu Name -->
+                  <li><a>Set Site</a>
+                     <!-- For every item in dsSite data set.. -->
+                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite">
+                        <!-- Site Menu Item Name / Action -->
+                        <li><a href="javascript:setSite({dsSite::@id})">{dsSite::name}</a></li>
                      </ul>
                   </li> 
                </ul> 
-            </div> <!-- End of Sites Dynamic Menu -->
+            </div> <!-- End of Set Site Dynamic Menu -->
       </td>
       <td>  <!-- Column 4: Help -->
             <ul id="navbar" width="20">
@@ -126,23 +123,23 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </tr>
       </table> <!-- End of Table (4 columns) -->
 
-    </div> <!-- end #navbar_container -->
+    </div> <!-- end navbar_container -->
 
     <!-- Main Content Area -->
     <div id="mainContent">
 
        <!-- Radial Map Container -->
-       <div id="radial_map_container"></div>
+       <div class="radial_map_container"></div>
        <!-- Small Graph Container -->
-       <div id="small_graph_container">
+       <div class="small_graph_container">
           <div id="small_graph_1"></div>
           <div id="small_graph_2"></div>
           <div id="small_graph_3"></div>
           <div id="small_graph_4"></div>
-       <!-- end #small_graph_container --> </div>
+       </div> <!-- end small_graph_container -->
       
        <!-- Event List Container -->
-       <div id="event_list_container">
+       <div class="event_list_container">
           <!-- Event List Table (2 Columns) -->
           <table width="100%" border="1" cellpadding="0" cellspacing="0" class="event_table">
              <tr>
@@ -231,11 +228,11 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
              </tr>
           <!-- end Event List Table (2 Columns) --> </table>
 
-       <!-- end #event_list_container --> </div>
+       </div> <!-- end event_list_container -->
       <!-- Event Detail Container -->
-      <div id="event_detail_container">
-        <div id="graph_container"></div>
-        <div id="graph_legend_container">
+      <div class="event_detail_container">
+        <div class="graph_container"></div>
+        <div class="graph_legend_container">
         <table width="425" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
             <th height="30px" align="center" nowrap="nowrap" scope="col">Total</th>
@@ -280,15 +277,15 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
             <td align="center" nowrap="nowrap">100</td>
           </tr>
         </table>
-        <!-- end #graph_legend_container --> </div>
-      <!-- end #event_detail_container --> </div>
+        </div> <!-- end graph_legend_container -->
+      </div> <!-- end event_detail_container -->
       
-    </div> <!-- end #mainContent -->
+    </div> <!-- end mainContent -->
 
     <!-- Footer -->
     <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
-</div> <!-- end #page_container -->
+</div> <!-- end page_container -->
 
 <!-- Javascript Used by Dynamic Menu -->
 <script type="text/javascript"> 

@@ -1,41 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<menu name="Set Profile">
-
+<?xml version="1.0" encoding="UTF-8"?>
 <profiles>
-<profile name="Network" url="data/network.xml"> 
-</profile> 
-
-<profile name="Voice" url="data/voice.xml"> 
-</profile> 
-
-<profile name="Video" url="data/video.xml"> 
-</profile> 
-
-<profile name="Applications" url="#"> 
-<subprofile name="Oracle" url="data/oracle.xml"> 
-</subprofile> 
-<subprofile name="Citrix" url="data/citrix.xml"> 
-</subprofile> 
-<subprofile name="HTTP" url="data/http.xml"> 
-</subprofile> 
-<subprofile name="SAP" url="data/sap.xml"> 
-</subprofile> 
-<subprofile name="Exchange" url="data/exchange.xml"> 
-</subprofile> 
-<subprofile name="FTP" url="data/ftp.xml"> 
-</subprofile> 
-</profile> 
-
-<profile name="Geographical" url="#"> 
-<subprofile name="N America - East" url="data/namericaeast.xml"> 
-</subprofile> 
-<subprofile name="N America - West" url="data/namericawest.xml"> 
-</subprofile> 
-<subprofile name="Europe" url="data/europe.xml"> 
-</subprofile> 
-<subprofile name="Asia" url="data/asia.xml"> 
-</subprofile> 
-</profile> 
-
+	<profile id="1" name="Network"></profile>
+	<profile id="2" name="Voice"></profile>
+	<profile id="3" name="Video"></profile>
+	<profile id="0" name="Applications">
+		<subprofile id="18" name="Oracle"></subprofile>
+		<subprofile id="19" name="Citrix"></subprofile>
+		<subprofile id="20" name="HTTP"></subprofile>
+		<subprofile id="4" name="SAP"></subprofile>
+		<subprofile id="5" name="Exchange"></subprofile>
+		<subprofile id="6" name="FTP"></subprofile>
+		<subprofile id="7" name="SQL*NET"></subprofile>
+		<subprofile id="8" name="TFTP"></subprofile>
+		<subprofile id="9" name="POP3"></subprofile>
+		<subprofile id="10" name="VDOLive"></subprofile>
+		<subprofile id="11" name="LDAP"></subprofile>
+		<subprofile id="12" name="PCAnywhere"></subprofile>
+	</profile>
+	<profile id="0" name="Geographical">
+		<subprofile id="13" name="N America - East"></subprofile>
+		<subprofile id="14" name="N America - West"></subprofile>
+		<subprofile id="15" name="Europe"></subprofile>
+		<subprofile id="16" name="Asia"></subprofile>
+		<subprofile id="17" name="HQ Subnets"></subprofile>
+		<subprofile id="17" name="Sunnyvale Engineering"></subprofile>
+	</profile>
+	<profile id="21" name="My IP Header Profile"></profile>
 </profiles>
-</menu> 

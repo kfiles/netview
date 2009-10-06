@@ -5,16 +5,14 @@
 <title>NetView Prototype</title>
 <link href="../css/netview.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
-<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script>
 <script type="text/javascript" src="../SpryAssets/SpryTooltip.js"></script>
 <script type="text/javascript" src="../SpryAssets/SpryHTMLPanel.js"></script>
-
-<!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="../js/jquery.js"></script> 
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -28,13 +26,13 @@ $(document).ready(function() {
 </script> 
 
 <!-- Vars Used by Dynamic Menu -->
-<script type="text/javascript"> 
-var dsMenu = new Spry.Data.XMLDataSet("../data/profiles.xml", "menu"); 
-var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile"); 
+<script type="text/javascript">
+var dsProfiles = new Spry.Data.XMLDataSet("../data/profiles.xml", "profiles"); 
+var dsProfile = new Spry.Data.NestedXMLDataSet(dsProfiles, "profile"); 
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
-var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
-var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
-</script> 
+var dsSites = new Spry.Data.XMLDataSet("../data/sites.xml", "sites"); 
+var dsSite = new Spry.Data.NestedXMLDataSet(dsSites, "site"); 
+</script>
 
 </head>
 <body>
@@ -42,7 +40,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
 <!-- Page Container -->
 <div id="page_container">
 
-    <!-- Banner. To make the banner a click-able link, put a link to the around the div. -->
+    <!-- Banner. To make the banner a click-able link, put a link around the banner div. -->
     <a href="http://netflowsoft.com"><div id="banner"></div></a>
 
     <!-- Navigation Bar Container -->
@@ -64,44 +62,45 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                      <a href="users_editor.html">Users</a>
                      <a href="alarms_editor.html">Alarms</a>
                      <a href="sites_editor.html">Sites</a>
-                     <a href="agents_editor.html">Agents</a>
+                     <a href="agents_editor.html">Agents</a> 
                   </span>
                   <!--Preferences Sub-Navigation Bar -->
                </li>
             </ul> 
       </td> <!-- Column 1: Navigation Bar -->
-      <td> <!-- Column 2: Set Profile Pull-Down Button -->
-            <!-- Profiles Dynamic Menu -->
-            <div id="ProfilesMenubar" spry:region="dsMenu dsProfile dsSubProfile"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu::@name}</a> 
-                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile"> 
-                        <!-- Profile -->
-                        <li><a href="{dsProfile::@url}">{dsProfile::@name}</a>
+      <td> <!-- Column 2: Set Profile Dynamic Pull-Down Menu -->
+            <div id="ProfilesMenubar" spry:region="dsProfiles dsProfile dsSubProfile"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsProfiles"> 
+                  <!-- Set Pull-Down Menu Name -->
+                  <li><a>Set Profile</a>
+                     <!-- For every item in dsProfile data set.. -->
+                     <ul spry:if="{dsProfile::ds_RowCount}" spry:repeatchildren="dsProfile">
+                        <!-- Profile Menu Item Name / Action -->
+                        <li><a href="javascript:setProfile({dsProfile::@id})">{dsProfile::@name}</a>
+                           <!-- For every item in dsSubProfile data set.. -->
                            <ul spry:if="{dsSubProfile::ds_RowCount}" spry:repeatchildren="dsSubProfile"> 
-                              <!-- SubProfile -->
-                              <li><a href="{dsSubProfile::@url}">{dsSubProfile::@name}</a></li> 
+                              <!-- SubProfile Menu Item Name / Action -->
+                              <li><a href="javascript:setProfile({dsSubProfile::@id})">{dsSubProfile::@name}</a></li>
                            </ul> 
                         </li> 
                      </ul> 
                   </li> 
                </ul> 
-            </div> <!-- End of Profiles Dynamic Menu -->
+            </div> <!-- End of Set Profile Dynamic Menu -->
       </td>
-      <td> <!-- Column 3: Set Site Pull-Down Button -->
-            <!-- Sites Dynamic Menu -->
-            <div id="SitesMenubar" spry:region="dsMenu2 dsSite"> 
-               <ul class="MenuBarHorizontal" spry:repeatchildren="dsMenu2"> 
-                  <!-- Menu -->
-                  <li><a>{dsMenu2::@name}</a> 
-                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite"> 
-                        <!-- Site -->
-                        <li><a>{dsSite::@name}</a></li>
+      <td> <!-- Column 3: Set Site Dynamic Pull-Down Menu -->
+            <div id="SitesMenubar" spry:region="dsSites dsSite"> 
+               <ul class="MenuBarHorizontal" spry:repeatchildren="dsSites"> 
+                  <!-- Set Pull-Down Menu Name -->
+                  <li><a>Set Site</a>
+                     <!-- For every item in dsSite data set.. -->
+                     <ul spry:if="{dsSite::ds_RowCount}" spry:repeatchildren="dsSite">
+                        <!-- Site Menu Item Name / Action -->
+                        <li><a href="javascript:setSite({dsSite::@id})">{dsSite::name}</a></li>
                      </ul>
                   </li> 
                </ul> 
-            </div> <!-- End of Sites Dynamic Menu -->
+            </div> <!-- End of Set Site Dynamic Menu -->
       </td>
       <td>  <!-- Column 4: Help -->
             <ul id="navbar" width="20">
@@ -112,7 +111,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </tr>
       </table> <!-- End of Table (4 columns) -->
 
-    </div> <!-- end #navbar_container -->
+    </div> <!-- end navbar_container -->
 
     <!-- Analysis Sub-Navigation Bar Container -->
     <div id="subnavbar_container">
@@ -127,20 +126,20 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
           <li><a href="total.html">Total</a></li>
           <li><a href="talkers.html" class="selected">Talkers</a></li>
        </ul> 
-    </div> <!-- end #subnavbar_container -->
+    </div> <!-- end subnavbar_container -->
 
     <!-- Main Content Area -->
     <div id="mainContent">
 
-    <!-- TreeMapAccordion -->
+    <!-- Tree Map Accordion -->
     <!-- Use an accordion panel to hide / unhide Tree Map. -->
     <div id="TreeMapAccordion" class="Accordion">
        <div class="AccordionPanel"> 
-          <div class="AccordionPanelLabel" onclick="treemap.start();">
+          <div onclick="treemap.start();">
              <!-- Site Detail -->
              <!-- Note: This becomes the accordion panel tab and therefore the toggle "button" for the Tree Map;
                    also display a tooltip HTML Panel onmouseover -->
-             <div id="sitedetailbar_container" onmouseover="html_panel.loadContent('site_tooltip.html');">
+             <div class="sitedetailbar_container" onmouseover="html_panel.loadContent('site_tooltip.html');">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                    <tr>
                       <td>
@@ -160,7 +159,7 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                       </td>
                    </tr>
                 </table>
-             </div> <!-- end #sitedetailbar_container -->
+             </div> <!-- end sitedetailbar_container -->
          <!-- Create the tooltip HTML Panel -->
          <div id="site_tooltip" class="tooltipContent">Loading...</div> 
          </div>  <!-- end AccordionPanelLabel -->
@@ -171,17 +170,17 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
           <!-- Starting with All Panels Closed. This feature is only supported when using variable height panels. -->
           var treemap = new Spry.Effect.Blind('tree_map_container', {duration: 800, from: '400px', to: '0px', toggle: true, useFixedPanelHeights: false, defaultPanel: -1});
        </script> 
-    </div> <!-- TreeMapAccordion -->
+    </div> <!-- Tree Map Accordion -->
 
     <!-- Time Range Bar Container -->
-    <div id="timerangebar_container">
+    <div class="timerangebar_container">
        <p><a>October 19, 2008 1:00AM to 2:00AM, GMT (60min)</a></p>
-    </div> <!-- end #timerangebar_container -->
+    </div> <!-- end timerangebar_container -->
 
       <!-- Event Detail Container -->
-      <div id="event_detail_container">
-        <div id="graph_container"></div>
-        <div id="graph_legend_container">
+      <div class="event_detail_container">
+        <div class="graph_container"></div>
+        <div class="graph_legend_container">
         <table width="424" float="left" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
             <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
@@ -227,11 +226,11 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
           </tr>
         </table>
         </div> <!-- end #graph_legend_container -->
-      </div> <!-- end #event_detail_container -->
+      </div> <!-- end event_detail_container -->
       <!-- Event Detail Container -->
-      <div id="event_detail_container">
-        <div id="graph_container"></div>
-        <div id="graph_legend_container">
+      <div class="event_detail_container">
+        <div class="graph_container"></div>
+        <div class="graph_legend_container">
         <table width="424" border="1" cellpadding="0" cellspacing="0" class="graph_legend_table">
           <tr>
             <th height="30" align="center" nowrap="nowrap" scope="col">Total</th>
@@ -277,25 +276,25 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
           </tr>
         </table>
         </div> <!-- end #graph_legend_container -->
-      </div> <!-- end #event_detail_container -->
+      </div> <!-- end event_detail_container -->
       
-    </div> <!-- end #mainContent -->
+    </div> <!-- end mainContent -->
 
     <!-- Footer -->
     <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
-</div> <!-- end #page_container -->
+</div> <!-- end page_container -->
 
 <!-- Javascript Used by Dynamic Menu -->
 <script type="text/javascript"> 
 Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
 Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
-</script> 
+</script>
 
 <!-- Javascript Used by HTML Panel Tooltip widget -->
 <script type="text/javascript">
 var html_panel = new Spry.Widget.HTMLPanel("site_tooltip");	
-var tt_site = new Spry.Widget.Tooltip("site_tooltip","#sitedetailbar_container", {followMouse:true});
+var tt_site = new Spry.Widget.Tooltip("site_tooltip",".sitedetailbar_container", {followMouse:true});
 </script>
 
 </body>

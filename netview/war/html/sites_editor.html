@@ -5,14 +5,12 @@
 <title>NetView Prototype</title>
 <link href="../css/netview.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../js/javascript.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryMenuBar.js"></script>
 <script type="text/javascript" src="../SpryAssets/xpath.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryData.js"></script> 
 <script type="text/javascript" src="../SpryAssets/SpryNestedXMLDataSet.js"></script> 
-<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script> 
-
-<!-- Horizontal Sub-Navigation Bar - show/hide sub-navigation bar -->
-<script type="text/javascript" src="../js/jquery.js"></script> 
+<script type="text/javascript" src="../SpryAssets/SpryEffects.js"></script>
 
 <script type="text/javascript"> 
 $(document).ready(function() {
@@ -25,9 +23,18 @@ $(document).ready(function() {
 });
 </script> 
 
+<!-- Vars Used by Dynamic Menu -->
+<script type="text/javascript">
+var dsProfiles = new Spry.Data.XMLDataSet("../data/profiles.xml", "profiles"); 
+var dsProfile = new Spry.Data.NestedXMLDataSet(dsProfiles, "profile"); 
+var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
+var dsSites = new Spry.Data.XMLDataSet("../data/sites.xml", "sites"); 
+var dsSite = new Spry.Data.NestedXMLDataSet(dsSites, "site"); 
+</script>
+
 <!-- Define the data set that will load the sites data file -->
 <script type="text/javascript">
-var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
+var dsSites = new Spry.Data.XMLDataSet("../data/sites.xml", "sites/site");
 </script>
 
 </head>
@@ -36,7 +43,7 @@ var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
 <!-- Page Container -->
 <div id="page_container">
 
-    <!-- Banner. To make the banner a click-able link, put a link to the around the div. -->
+    <!-- Banner. To make the banner a click-able link, put a link around the banner div. -->
     <a href="http://netflowsoft.com"><div id="banner"></div></a>
 
     <!-- Navigation Bar Container -->
@@ -66,12 +73,10 @@ var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
                <li class="navlist"><a href="#" class="selected">Preferences</a></li>
             </ul> 
       </td> <!-- Column 1: Navigation Bar -->
-      <td> <!-- Column 2: Set Profile Pull-Down Button -->
-            <!-- Profiles Dynamic Menu -->
-            <!-- Note: Removed Profiles Dynamic Menu from Navigation Bar as it does not apply within Preferences -->
+      <td> <!-- Column 2: Set Profile Dynamic Pull-Down Menu -->
+            <!-- Note: Removed Set Profile Dynamic Menu from Navigation Bar as it does not apply within Preferences -->
       </td>
-      <td> <!-- Column 3: Set Site Pull-Down Button -->
-            <!-- Sites Dynamic Menu -->
+      <td> <!-- Column 3: Set Site Dynamic Pull-Down Menu -->
             <!-- Note: Removed Sites Dynamic Menu from Navigation Bar as it does not apply within Preferences -->
       </td>
       <td>  <!-- Column 4: Help -->
@@ -83,7 +88,7 @@ var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
       </tr>
       </table> <!-- End of Table (4 columns) -->
 
-    </div> <!-- end #navbar_container -->
+    </div> <!-- end navbar_container -->
 
     <!-- Preferences Sub-Navigation Bar Container -->
     <div id="subnavbar_container">
@@ -134,12 +139,19 @@ var dsSites = new Spry.Data.XMLDataSet("../data/sites_new.xml", "sites/site");
        </div> <!-- end #event_list_container -->
      
     </div> <!-- end #prefContent -->
-    </div> <!-- end #mainContent -->
+      
+    </div> <!-- end mainContent -->
 
     <!-- Footer -->
     <div id="footer"><p>NetFlow Software, Inc. &copy; 2009 <a href="http://netflowsoft.com/html/index-6.html">Privacy Policy</a></p></div>
 
-</div> <!-- end #page_container -->
+</div> <!-- end page_container -->
+
+<!-- Javascript Used by Dynamic Menu -->
+<script type="text/javascript"> 
+Spry.Data.Region.addObserver('ProfilesMenubar',{onPostUpdate:function(){var ProfilesMenubar = new Spry.Widget.MenuBar("ProfilesMenubar");}}); 
+Spry.Data.Region.addObserver('SitesMenubar',{onPostUpdate:function(){var SitesMenubar = new Spry.Widget.MenuBar("SitesMenubar");}}); 
+</script>
 
 </body>
 </html>

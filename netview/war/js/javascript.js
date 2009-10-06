@@ -51,3 +51,13 @@ $("ul#navbar li").hover(function() { //Hover over event on list item
 });
 });
 */
+
+/* Called from Set Site Dynamic Pull-Down Menu Bar when a site is selected. */
+function setSite(siteId) {
+	/* Call server-side component to set site id */
+}
+
+/* Called from Set Profile Dynamic Pull-Down Menu Bar when a profile is selected. */
+function setProfile(profileId) {
+	/* Call server-side component to set profile id */
+}

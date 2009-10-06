@@ -11,7 +11,7 @@ body {
 	padding: 0px;
 	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
 	color: #CCC;
-  }
+}
 
 /* FIX: remove this div */
 tmp {
@@ -89,33 +89,19 @@ tmp {
 }
 
 
-/* Menubars */
-#ProfilesMenubar li {
-	width: 140px; /* 11em; */
-}
-#ProfilesMenubar ul,
+/* Dynamic Pull-Down Menubars */
 #ProfilesMenubar ul li {
 	width: 140px;
+	/* width: auto;
+	white-space: nowrap; FIX */
 }
-
-#SitesMenubar li {
-	width: 140px;
-}
-#SitesMenubar ul,
 #SitesMenubar ul li {
 	width: 140px;
+	/* width: auto;
+	white-space: nowrap; FIX */
 }
 
-/* Site Detail Horizontal Labels */
-#sitedetailbar_container p {
-	margin: 0px;
-	padding: 10px 10px 0px 20px; /* above, below, left and right text  */
-	/* display: block; */
-	text-align: center;
-	font-size: 12px;
-	font-weight: bold;
-}
- 
+/* Site Detail Container */
 .sitedetailbar_container p {
 	margin: 0px;
 	padding: 10px 10px 0px 20px; /* above, below, left and right text  */
@@ -125,23 +111,20 @@ tmp {
 	font-weight: bold;
 }
  
-#sitedetailbar_container a {
-	color: #666; /* default text color: grey */
-}
-
 .sitedetailbar_container a {
 	color: #666; /* default text color: grey */
 }
 
-#sitedetailbar_container d {
+.sitedetailbar_container d {
 	color: #FFF; /* default text color: white */
 }
 
-#sitedetailbar_container c {
+.sitedetailbar_container c {
 	color: red; /* default text color: red */
 }
 
-#timerangebar_container p {
+/* Time Range Container */
+.timerangebar_container p {
 	margin: 0px;
 	padding: 5px 5px 0px 0px; /* above, below, left and right text  */
 	/* display: block; */
@@ -150,8 +133,23 @@ tmp {
 	font-weight: bold;
 }
 
+/* Footer */
+#footer p {
+	margin: 0; /* zeroing the margins of the first element in the footer will avoid the possibility of margin collapse - a space between divs */
+	text-align:center;
+}
+
+#footer p a {
+	color:#666;
+	text-decoration:none;
+}
+
+#footer p a:hover {
+	text-decoration:underline;
+}
+
 /* HTML Panel Tooltip */
-#site_tooltip{
+#site_tooltip {
 	font-size: 11px;
 	color: #FFF;
 	background-image:url(../images/navbar_bg_trans.png);
