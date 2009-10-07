@@ -71,7 +71,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     store = new ListStore<BeanModel>();
     store.setMonitorChanges( true );
 
-    detailPanel = new TagDetailPanel( formBindings );
+    detailPanel = new TagDetailPanel( this,formBindings );
     detailPanel.setWidth( 600 );
     detailPanel.setHeight( 300 );
     detailPanel.setBodyBorder( true );
@@ -117,7 +117,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     gridPanel.setFrame( true );
     gridPanel.setCollapsible( true );
     gridPanel.setWidth( 600 );
-    gridPanel.setHeight( 125 );
+    gridPanel.setHeight( 225 );
     gridPanel.add( grid );
 
     LayoutContainer panel = new LayoutContainer();
@@ -162,7 +162,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
   protected void onShow ()
     {
     super.onShow();
-    detailPanel = new TagDetailPanel( formBindings );
+//    detailPanel = new TagDetailPanel( this, formBindings );
     Window.alert( "I am in TagEditor.onShow()" );
     }
 
@@ -209,11 +209,12 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     GridView gv = grid.getView();
     gv.setEmptyText( "No rows returned" );
     gv.setViewConfig( new GVC() );
-    grid.setAutoHeight( true );
+//    grid.setAutoHeight( true );
     grid.setAutoExpandColumn( "tagRule" );
     grid.setStripeRows( true );
     grid.setBorders( true );
     grid.setWidth( 700 );
+    grid.setHeight( 300 );
 
     // Listen for selection events,
     grid.addListener( Events.CellClick, new Listener<GridEvent>() {
@@ -256,13 +257,13 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
    */
   public void onWindowResized ( int width, int height )
     {
-    scrollPanel.setHeight( ( height - 171 )
+    scrollPanel.setHeight( ( height - 50 )
       + "px" );
     scrollPanel.setWidth( ( width - 76 )
       + "px" );
     }
 
-  private void updateStore ()
+  public void updateStore ()
     {
     // Create a sample AppTag
 

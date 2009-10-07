@@ -7,6 +7,9 @@ import java.util.List;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.binding.FieldBinding;
 import com.extjs.gxt.ui.client.binding.FormBinding;
+import com.extjs.gxt.ui.client.data.BeanModel;
+import com.extjs.gxt.ui.client.data.BeanModelFactory;
+import com.extjs.gxt.ui.client.data.BeanModelLookup;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
 import com.extjs.gxt.ui.client.event.ComponentEvent;
 import com.extjs.gxt.ui.client.event.Events;
@@ -21,11 +24,15 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.prodco.preferences.client.model.AppTag;
 
 public class TagDetailPanel extends CommonPanel
   {
 
   private String title = "Tag Detail";
+
+  private NumberField tfId = new NumberField();
 
   private NumberField tfRank = new NumberField();
 
@@ -37,102 +44,136 @@ public class TagDetailPanel extends CommonPanel
 
   private FormPanel detailPanel = makeFormColumn();
   Button btnSave = new Button();
-  Button btnCancel = new Button("&nbsp;Cancel");
+  Button btnCancel = new Button( "&nbsp;Cancel" );
 
-  public String getTitle() {
+  private TagEditor parent;
+  
+  public String getTitle ()
+    {
     return title;
-  }
+    }
 
   /**
    * 
    */
-  public TagDetailPanel(List<FormBinding> formBindings) {
-  
-    this.formBindings = formBindings;
-    this.setWidth(600);
-    this.setHeight(300);
-    this.setLayout(new FlowLayout());
-    this.setFrame(true);
-    this.setHeading(getTitle());
-    setIconStyle("icon-home");
-    add(createTabPanel());
-  }
+  public TagDetailPanel ( TagEditor parent, List<FormBinding> formBindings )
+    {
 
+    this.parent=parent;
+    this.formBindings = formBindings;
+    this.setWidth( 600 );
+    this.setHeight( 300 );
+    this.setLayout( new FlowLayout() );
+    this.setFrame( true );
+    this.setHeading( getTitle() );
+    setIconStyle( "icon-home" );
+    add( createTabPanel() );
+    }
 
   @Override
-  protected void onRender(Element parent, int index) {
-    super.onRender(parent, index);
+  protected void onRender ( Element parent, int index )
+    {
+    super.onRender( parent, index );
     this.layout();
-  }
+    }
 
-  public void redraw_panel(boolean readOnly) {
+  public void redraw_panel ( boolean readOnly )
+    {
     this.layout();
-  }
-  
-  public void clearPanel() {
-  detailPanel.reset();
-  this.layout();
-}
+    }
 
-  @SuppressWarnings("unchecked")
-  private LayoutContainer createTabPanel() {
-    FormData fieldWidth = new FormData("95%");
+  public void clearPanel ()
+    {
+    detailPanel.reset();
+    this.layout();
+    }
+
+  @SuppressWarnings ( "unchecked" )
+  private LayoutContainer createTabPanel ()
+    {
+    FormData fieldWidth = new FormData( "95%" );
+
+    tfId.setPropertyEditorType( Integer.class );
+    tfId.setName( "tagId" );
 
     tfRank.setPropertyEditorType( Integer.class );
     tfRank.setName( "tagPref" );
     tfRank.setFieldLabel( "Tag Priority" );
-    tfRank.setLabelSeparator(":");
+    tfRank.setLabelSeparator( ":" );
     detailPanel.add( tfRank, fieldWidth );
 
-    tfTagName.setName("tagName");
-    tfTagName.setFieldLabel("Tag Name#");
-    detailPanel.add(tfTagName, fieldWidth);
+    tfTagName.setName( "tagName" );
+    tfTagName.setFieldLabel( "Tag Name#" );
+    detailPanel.add( tfTagName, fieldWidth );
 
-    tfTagRule.setName("tagRule");
-    tfTagRule.setFieldLabel("Tag Rule");
-    detailPanel.add(tfTagRule, fieldWidth);
+    tfTagRule.setName( "tagRule" );
+    tfTagRule.setFieldLabel( "Tag Rule" );
+    detailPanel.add( tfTagRule, fieldWidth );
 
     // When the button is pressed, load new alarms with the date range
-    btnSave.setText("&nbsp;&nbsp;Save");
-    btnSave.setIconStyle("gwt-Button");
-    btnSave.addListener(Events.OnClick, new Listener<ComponentEvent>() {
-      public void handleEvent(ComponentEvent ce) {
-        if (ce.getType() == Events.OnClick) {
+    btnSave.setText( "&nbsp;&nbsp;Save" );
+    btnSave.setIconStyle( "gwt-Button" );
+    btnSave.addListener( Events.OnClick, new Listener<ComponentEvent>() {
+      public void handleEvent ( ComponentEvent ce )
+        {
+        if ( ce.getType() == Events.OnClick )
+          {
           updateTag();
+          }
         }
-      }
-    });
-    
-    btnCancel.setIconStyle("gwt-Button");
+    } );
+
+    btnCancel.setIconStyle( "gwt-Button" );
     btnCancel.setText( "&nbsp;&nbsp;Cancel" );
-    btnCancel.addListener(Events.OnClick, new Listener<ComponentEvent>() {
-      public void handleEvent(ComponentEvent ce) {
-        if (ce.getType() == Events.OnClick) {
+    btnCancel.addListener( Events.OnClick, new Listener<ComponentEvent>() {
+      public void handleEvent ( ComponentEvent ce )
+        {
+        if ( ce.getType() == Events.OnClick )
+          {
           clearPanel();
+          }
         }
-      }
-    });
+    } );
 
     detailPanel.add( btnSave );
     detailPanel.add( btnCancel );
 
     detailPanel.setButtonAlign( HorizontalAlignment.CENTER );
-    
-    bindings.addAll(new FormBinding(detailPanel, true).getBindings());
+
+    bindings.addAll( new FormBinding( detailPanel, true ).getBindings() );
+    bindings.add( new FieldBinding(tfId,"tagId") );
 
     return detailPanel;
-  }
+    }
 
   public void updateTag ()
     {
-        int rank = tfRank.getValue().intValue();
-        String tagName = tfTagName.getValue();
-        String tagRule = tfTagRule.getValue();
-        Window.alert("Saving tag for rank="+rank+":"+tagName+":"+tagRule);
+    int id = tfId.getValue().intValue();
+    int rank = tfRank.getValue().intValue();
+    String tagName = tfTagName.getValue();
+    String tagRule = tfTagRule.getValue();    
+    AppTag tag = new AppTag(id,rank,tagName,tagRule);
+    
+    Services.PREFERENCES.saveAppTagForCustomer( 1, tag, 
+      new AsyncCallback<Void>() {
+        public void onSuccess ( Void args0 )
+          {
+//          Window.alert("Successfully changed Tag for customer");
+          parent.updateStore();
+          }
+
+        public void onFailure ( Throwable caught )
+          {
+          Window.alert("Failed in updating tag:"+caught.getMessage() );
+          }
+      } );
+
+
     }
 
-  public List<FieldBinding> getFieldBindings() {
+  public List<FieldBinding> getFieldBindings ()
+    {
     return bindings;
-  }
+    }
 
   }
