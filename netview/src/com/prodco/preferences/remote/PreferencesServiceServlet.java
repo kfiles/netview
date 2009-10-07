@@ -130,13 +130,63 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     System.out.println( "Entering saveAppTagForCustomer" );
     try
       {
-      String sql = "update customer_application_tag set tag_pref="
-        + tag.getTagPref() + ", tag_name='" + tag.getTagName()
-        + "', tag_rule='" + tag.getTagRule() + "' where cust_id=" + custId
-        + " and app_tag_id=" + tag.getTagId();
+      String sql = "";
+      if ( tag.getTagId() != null )
+        {
+        sql = "update customer_application_tag set tag_pref="
+          + tag.getTagPref() + ", tag_name='" + tag.getTagName()
+          + "', tag_rule='" + tag.getTagRule() + "' where cust_id=" + custId
+          + " and app_tag_id=" + tag.getTagId();
+        }
+      else
+        {
+        sql = "insert into customer_application_tag (cust_id,tag_pref,tag_name,tag_rule) values ("
+          + custId
+          + ","
+          + tag.getTagPref()
+          + ",'"
+          + tag.getTagName()
+          + "','"
+          + tag.getTagRule() + "')";
+        }
+      System.out.println( "sql="
+        + sql );
       int num_rows = getConnection().createStatement().executeUpdate( sql );
-      System.out.println( "total rows updated = "
+      System.out.println( "total rows updated/inserted = "
         + num_rows );
+      }
+    catch ( SQLException e )
+      {
+      System.out.println( e.getClass().getSimpleName()
+        + " in retrieving flows: " + ExceptionUtil.getMessageOrType( e )
+        + " at\n" + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
+
+    }
+
+  public void deleteAppTagForCustomer ( int custId, AppTag tag )
+    throws PreferencesRemoteException
+    {
+    System.out.println( "Entering saveAppTagForCustomer" );
+    try
+      {
+      String sql = "";
+      if ( tag.getTagId() != null )
+        {
+        sql = "delete from customer_application_tag where cust_id="
+          + custId + " and app_tag_id=" + tag.getTagId();
+        System.out.println( "sql="
+          + sql );
+        int num_rows = getConnection().createStatement().executeUpdate( sql );
+        System.out.println( "total rows deleted = "
+          + num_rows );
+        }
       }
     catch ( SQLException e )
       {

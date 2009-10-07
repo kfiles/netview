@@ -17,4 +17,7 @@ public interface PreferencesRemoteServiceAsync
   public void saveAppTagForCustomer ( int custId, AppTag tag,
     AsyncCallback<Void> callback );
 
+  public void deleteAppTagForCustomer ( int custId, AppTag tag,
+    AsyncCallback<Void> callback );
+
   }

@@ -8,14 +8,14 @@ import com.extjs.gxt.ui.client.data.BeanModelTag;
 
 public class AppTag implements BeanModelTag,Serializable
   {
-  private int tagId;
-  private int tagPref;
+  private Integer tagId;
+  private Integer tagPref;
   private String tagName;
   private String tagRule;
 
   public AppTag() {}
   
-  public AppTag ( int tagId, int tagPref, String tagName, String tagRule )
+  public AppTag ( Integer tagId, Integer tagPref, String tagName, String tagRule )
     {
     this.tagId = tagId;
     this.tagPref = tagPref;

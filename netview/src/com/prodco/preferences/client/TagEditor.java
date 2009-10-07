@@ -115,9 +115,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     gridPanel.setHeading( "App Tags" );
     gridPanel.setHeaderVisible( true );
     gridPanel.setFrame( true );
-    gridPanel.setCollapsible( true );
-    gridPanel.setWidth( 600 );
-    gridPanel.setHeight( 225 );
+    gridPanel.setCollapsible( true );    
     gridPanel.add( grid );
 
     LayoutContainer panel = new LayoutContainer();
@@ -126,26 +124,24 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     panel.add( new Image( "images/spacer.gif", 0, 0, 1, 5 ) );
     panel.add( detailPanel );
     panel.setBorders( true );
-    panel.setWidth( 650 );
-    panel.setHeight( 500 );
+    panel.setWidth( 600 );
+    panel.setHeight( 400 );
+
+    scrollPanel.add( panel );
+    scrollPanel.setHeight( "450px" );
+    scrollPanel.setWidth( "600px" );
+    scrollPanel.setAlwaysShowScrollBars( true );
 
     ContentPanel cp = new ContentPanel();
     cp.setHeaderVisible( false );
     cp.setFrame( true );
     cp.setLayout( new FlowLayout() );
-    cp.setHeight( 675 );
-
-    scrollPanel.add( panel );
-    scrollPanel.setHeight( "300px" );
-    scrollPanel.setWidth( "300px" );
-    scrollPanel.setAlwaysShowScrollBars( true );
-
     cp.add( scrollPanel );
     cp.setBorders( true );
 
     add( cp );
     setWidth( 700 );
-    setHeight( 700 );
+    setHeight( 450 );
     layout();
 
     }
@@ -156,14 +152,6 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     updateStore();
     layout();
 
-    }
-
-  @Override
-  protected void onShow ()
-    {
-    super.onShow();
-//    detailPanel = new TagDetailPanel( this, formBindings );
-    Window.alert( "I am in TagEditor.onShow()" );
     }
 
   private void loadDetailPanel ( AppTag tag )
@@ -194,13 +182,13 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     {
     List<ColumnConfig> configs = new ArrayList<ColumnConfig>();
 
-    ColumnConfig column = new ColumnConfig( "tagPref", "Id", 50 );
+    ColumnConfig column = new ColumnConfig( "tagPref", "Preference", 75 );
     configs.add( column );
 
-    column = new ColumnConfig( "tagName", "Tag Name", 200 );
+    column = new ColumnConfig( "tagName", "Tag Name", 150 );
     configs.add( column );
 
-    column = new ColumnConfig( "tagRule", "Tag Rule", 400 );
+    column = new ColumnConfig( "tagRule", "Tag Rule", 350 );
     configs.add( column );
 
     ColumnModel cm = new ColumnModel( configs );
@@ -209,12 +197,11 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     GridView gv = grid.getView();
     gv.setEmptyText( "No rows returned" );
     gv.setViewConfig( new GVC() );
-//    grid.setAutoHeight( true );
     grid.setAutoExpandColumn( "tagRule" );
     grid.setStripeRows( true );
     grid.setBorders( true );
-    grid.setWidth( 700 );
-    grid.setHeight( 300 );
+    grid.setWidth( 580 );
+    grid.setHeight( 150 );
 
     // Listen for selection events,
     grid.addListener( Events.CellClick, new Listener<GridEvent>() {

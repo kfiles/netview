@@ -17,4 +17,7 @@ public interface PreferencesRemoteService extends RemoteService
   public void saveAppTagForCustomer ( int custId, AppTag tag )
     throws PreferencesRemoteException;
 
+  public void deleteAppTagForCustomer ( int custId, AppTag tag )
+  throws PreferencesRemoteException;
+
   }
