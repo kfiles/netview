@@ -18,6 +18,7 @@ public class TreeMap extends Widget
     div = DOM.createDiv();
     div.setId( divName );
     div.setAttribute( "align", "center" );
+    div.setAttribute( "class", "treemap_container" );
     setElement( div );
 
     }
@@ -39,6 +40,7 @@ public class TreeMap extends Widget
     //    "height", "100%",
     //    "align", "middle",
     //    "id", "Treemap",
+    so.addParam("wmode" ,"opaque" );
     so.addVariable("quality", "high");
     //    so.addVariable("bgcolor", "#869ca7",
     so.addVariable("preloader_color", "#000000"); 

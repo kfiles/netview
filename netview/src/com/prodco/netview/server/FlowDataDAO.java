@@ -23,6 +23,7 @@ import com.prodco.netview.client.util.ExceptionUtil;
 import com.prodco.netview.domain.FlowRecord;
 import com.prodco.netview.server.query.TopQueryResult;
 import com.prodco.netview.server.query.TopQueryType;
+import com.prodco.netview.server.query.TrafficDir;
 
 public class FlowDataDAO
   {
@@ -33,7 +34,7 @@ public class FlowDataDAO
 
   @SuppressWarnings ( "unchecked" )
   public XYDataSet getTopResult ( int siteId, int startTime, int endTime,
-    TopQueryType type, int num )
+    TopQueryType type, TrafficDir dir, int num )
     {
     XYDataSet rv = null;
     try
@@ -43,7 +44,8 @@ public class FlowDataDAO
         .getPersistenceManager();
       pm.currentTransaction().begin();
       String q = "siteId == "
-        + siteId + " && timecode > " + startTime + " && timecode < " + endTime;
+        + siteId + " && timecode > " + startTime + " && timecode < " + endTime
+        + " && srcIntf == '" + dir.getDescr() + "'";
       Query query = pm.newQuery( FlowRecord.class, q );
       query.setOrdering( "timecode asc" );
       List<FlowRecord> recs = (List<FlowRecord>) query.execute();
