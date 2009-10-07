@@ -126,12 +126,4 @@
       <line_width>1</line_width>
     </graph>
   </graphs>
-  <labels>
-    <label lid="0">
-      <text><![CDATA[<b>Top source totals, Outbound from site</b>]]></text>
-      <y>7</y>
-      <text_size>13</text_size>
-      <align>center</align>
-    </label>
-  </labels>
 </settings>

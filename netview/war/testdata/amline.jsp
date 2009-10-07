@@ -1,13 +1,19 @@
 <%@page import="com.prodco.netview.server.*,com.prodco.netview.server.query.*,java.util.*,java.text.*" %><%response.setContentType("text/xml"); %><chart>
 <%
-	int siteId = 1;
+//	int siteId = 1;
 //int startTime = 1236211200;
-int startTime =41201280;
-int endTime = 41201350;
+//int startTime =41201280;
+//int endTime = 41201350;
 //int endTime = 1236211320;
+int siteId = Integer.parseInt( request.getParameter("siteId") );
+int startTime = Integer.parseInt( request.getParameter("startTc") );
+int endTime = Integer.parseInt( request.getParameter("endTc") );
+TopQueryType type = TopQueryType.fromString( request.getParameter("type") );
+TrafficDir dir = TrafficDir.fromString( request.getParameter("dir") );
+
 DecimalFormat bwFormat = new DecimalFormat("0.#");
 
-XYDataSet data = new FlowDataDAO().getTopResult(siteId, startTime, endTime, TopQueryType.SRC_PORT, 4);
+XYDataSet data = new FlowDataDAO().getTopResult(siteId, startTime, endTime, type, dir, 4);
 if (null == data)
 	out.println("No XYDataSet");
 else { 
@@ -37,4 +43,13 @@ for (Number num : series.getYVals()) { %>
 %></graphs>
 <%
   } //else %>
+  <labels>
+    <label lid="0">
+      <text><![CDATA[<b>Top <%= type.getDescr() %>, <%= dir.getDescr() %> from site</b>]]></text>
+      <y>7</y>
+      <text_size>13</text_size>
+      <align>center</align>
+    </label>
+  </labels>
+  
 </chart>

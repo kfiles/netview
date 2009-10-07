@@ -23,6 +23,10 @@ $(document).ready(function() {
       $(this).find("span").hide(); //Hide the subnav
       });
 });
+function selectSubNavBarItem(token) {
+   $("ul#subnavlist li a").removeClass('selected');
+   $("ul#subnavlist li a[href*='" + token + "']").addClass('selected');
+ }
 </script> 
 
 <!-- Vars Used by Dynamic Menu -->
@@ -33,6 +37,7 @@ var dsProfile = new Spry.Data.NestedXMLDataSet(dsMenu, "profiles/profile");
 var dsSubProfile = new Spry.Data.NestedXMLDataSet(dsProfile, "subprofile"); 
 var dsMenu2 = new Spry.Data.XMLDataSet("../data/sites.xml", "menu"); 
 var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site"); 
+
 //--> 
 </script> 
 
@@ -55,17 +60,17 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
                <li class="navlist"><a href="index.html">Monitor</a></li>
                <li class="navlist"><a href="analysis.html" class="selected">Analysis</a>
                   <!--Analysis Sub-Navigation Bar -->
-                  <span> 
-                     <a href="applications.html">Apps</a>
-                     <a href="addresses.html">Addresses</a>
-                     <a href="ports.html">Ports</a>
-                     <a href="protocols.html">Protocols</a>
-                     <a href="qos.html">QoS</a>
-                     <a href="subnets.html">Subnets</a>
-                     <a href="hosts.html">Hosts</a>
-                     <a href="total.html">Total</a>
-                     <a href="talkers.html">Talkers</a>
-                  </span>
+                  <!-- span> 
+                     <a href="analysis.html#apps">Apps</a>
+                     <a href="analysis.html#addresses">Addresses</a>
+                     <a href="analysis.html#ports">Ports</a>
+                     <a href="analysis.html#proto">Protocols</a>
+                     <a href="analysis.html#tos">ToS</a>
+                     <a href="analysis.html#subnets">Subnets</a>
+                     <a href="analysis.html#hosts">Hosts</a>
+                     <a href="analysis.html#total">Total</a>
+                     <a href="analysis.html#talkers">Talkers</a>
+                  </span -->
                   <!--Analysis Sub-Navigation Bar -->
                   </li>
                <li class="navlist"><a href="alarms.html">Alarms</a></li>
@@ -127,6 +132,20 @@ var dsSite = new Spry.Data.NestedXMLDataSet(dsMenu2, "sites/site");
       </table> <!-- End of Table (4 columns) -->
 
     </div> <!-- end #navbar_container -->
+    <!-- Preferences Sub-Navigation Bar Container -->
+    <div id="subnavbar_container">
+       <ul id="subnavlist">
+          <li><a href="analysis.html#apps">Apps</a></li>
+          <li><a href="analysis.html#addresses">Addresses</a></li>
+          <li><a href="analysis.html#ports">Ports</a></li>
+          <li><a href="analysis.html#proto">Protocols</a></li>
+          <li><a href="analysis.html#tos">ToS</a></li>
+          <li><a href="analysis.html#subnets">Subnets</a></li>
+          <li><a href="analysis.html#hosts">Hosts</a></li>
+          <li><a href="analysis.html#total">Total</a></li>
+          <li><a href="analysis.html#talkers">Talkers</a></li>
+       </ul> 
+    </div> <!-- end #subnavbar_container -->
 
     <!-- Main Content Area -->
     <div id="mainContent">

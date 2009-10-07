@@ -66,6 +66,13 @@
 	border-bottom: 1px solid #121212;
 }
 
+/* TreeMap Container */
+.treemap_container {
+ overflow:hidden;
+	background-color: #242424;
+	border: 1px solid #383838;
+}
+ 
 /* Main Content Area */
 #mainContent {
 	width: 850px;
