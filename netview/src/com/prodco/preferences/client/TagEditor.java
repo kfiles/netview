@@ -72,8 +72,6 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     store.setMonitorChanges( true );
 
     detailPanel = new TagDetailPanel( this,formBindings );
-    detailPanel.setWidth( 600 );
-    detailPanel.setHeight( 300 );
     detailPanel.setBodyBorder( true );
     detailPanel.setBorders( true );
 
@@ -125,23 +123,23 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     panel.add( detailPanel );
     panel.setBorders( true );
     panel.setWidth( 600 );
-    panel.setHeight( 400 );
+    panel.setHeight( 370 );
 
-    scrollPanel.add( panel );
-    scrollPanel.setHeight( "450px" );
-    scrollPanel.setWidth( "600px" );
-    scrollPanel.setAlwaysShowScrollBars( true );
+//    scrollPanel.add( panel );
+//    scrollPanel.setHeight( "595px" );
+//    scrollPanel.setWidth( "375px" );
+//    scrollPanel.setAlwaysShowScrollBars( true );
 
     ContentPanel cp = new ContentPanel();
     cp.setHeaderVisible( false );
     cp.setFrame( true );
     cp.setLayout( new FlowLayout() );
-    cp.add( scrollPanel );
+    cp.add( panel );
     cp.setBorders( true );
 
     add( cp );
-    setWidth( 700 );
-    setHeight( 450 );
+    setWidth( 710 );
+    setHeight( 380 );
     layout();
 
     }
@@ -188,7 +186,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     column = new ColumnConfig( "tagName", "Tag Name", 150 );
     configs.add( column );
 
-    column = new ColumnConfig( "tagRule", "Tag Rule", 350 );
+    column = new ColumnConfig( "tagRule", "Tag Rule", 300 );
     configs.add( column );
 
     ColumnModel cm = new ColumnModel( configs );
@@ -200,7 +198,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     grid.setAutoExpandColumn( "tagRule" );
     grid.setStripeRows( true );
     grid.setBorders( true );
-    grid.setWidth( 580 );
+    grid.setWidth( 590 );
     grid.setHeight( 150 );
 
     // Listen for selection events,

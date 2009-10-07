@@ -65,25 +65,12 @@ public class TagDetailPanel extends CommonPanel
 
     this.parent = parent;
     this.formBindings = formBindings;
-    this.setWidth( 600 );
-    this.setHeight( 200 );
+    this.setWidth( 590 );
+    this.setHeight( 150 );
     this.setLayout( new FlowLayout() );
     this.setFrame( true );
-    this.setHeading( getTitle() );
-     setIconStyle( "icon-home" );
+    this.setHeading( getTitle() );    
     add( createTabPanel() );
-
-    SelectionListener<ButtonEvent> l = new SelectionListener<ButtonEvent>() {
-
-      @Override
-      public void componentSelected ( ButtonEvent ce )
-        {
-        Info.display( "Click", ce.getButton().getText()
-          + " clicked" );
-
-        }
-
-    };
     layout();
     }
 
@@ -128,6 +115,14 @@ public class TagDetailPanel extends CommonPanel
     tfId.setName( "tagId" );
     tfId.setVisible( false );
 
+    bindings.addAll( new FormBinding( detailPanel, true ).getBindings() );
+    bindings.add( new FieldBinding( tfId, "tagId" ) );
+
+//    detailPanel.setBorders( true );
+    detailPanel.setSize( 590, 110 );
+    detailPanel.setHeaderVisible( false );
+    panel.add( detailPanel );
+
     HorizontalAlignment align = HorizontalAlignment.CENTER;
     Button btnSave = new Button( "Update/Add" );
     btnSave.setIconStyle( "gwt-Button" );
@@ -167,18 +162,15 @@ public class TagDetailPanel extends CommonPanel
 
     } );
 
-    bindings.addAll( new FormBinding( detailPanel, true ).getBindings() );
-    bindings.add( new FieldBinding( tfId, "tagId" ) );
 
-    detailPanel.setBorders( true );
-    panel.add( detailPanel );
     panel.addButton( btnSave );
     panel.addButton( btnReset );
     panel.addButton( btnDelete );
-    panel.setBorders( true );
+//    panel.setBorders( true );
     panel.setButtonAlign( align );
-    panel.setSize( 600, 200 );
+    panel.setSize( 600, 130 );
     panel.setLayout( new FitLayout() );
+    panel.setHeaderVisible( false );
     panel.layout();
 
     return panel;
