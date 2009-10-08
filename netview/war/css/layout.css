@@ -180,7 +180,13 @@
 	height: 240px;
 	width: 425px;
 }
-.graph_legend_container {
+.left_graph_legend_container {
+	float: left;
+	height: 120px;
+	width: 425px;
+}
+
+.right_graph_legend_container {
 	float: right;
 	height: 120px;
 	width: 425px;

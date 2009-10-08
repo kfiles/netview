@@ -77,6 +77,14 @@ tmp {
 	border: 1px solid #222;
 }
 
+.graph_legend_table_header { /*header cell*/
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+	background-color: #000;
+	border: 1px solid #222;
+}
+
 .graph_legend_table tr a {
 	text-decoration: none;
 	display: block;
