@@ -61,3 +61,8 @@ function setSite(siteId) {
 function setProfile(profileId) {
 	/* Call server-side component to set profile id */
 }
+
+function selectSubNavBarItem(token) {
+	   $("ul#subnavlist li a").removeClass('selected');
+	   $("ul#subnavlist li a[href*='#" + token + "']").addClass('selected');
+	 }

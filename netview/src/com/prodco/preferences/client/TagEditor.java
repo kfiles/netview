@@ -25,17 +25,14 @@ import com.extjs.gxt.ui.client.widget.grid.GridView;
 import com.extjs.gxt.ui.client.widget.grid.GridViewConfig;
 import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.layout.TableLayout;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.WindowResizeListener;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ScrollPanel;
 import com.prodco.preferences.client.model.AppTag;
 
-public class TagEditor extends LayoutContainer implements WindowResizeListener
+public class TagEditor extends LayoutContainer
   {
 
   private ScrollPanel scrollPanel = new ScrollPanel();
@@ -66,12 +63,12 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
       }
     }
 
-  public TagEditor ( String header )
+  public TagEditor ()
     {
     store = new ListStore<BeanModel>();
     store.setMonitorChanges( true );
 
-    detailPanel = new TagDetailPanel( this,formBindings );
+    detailPanel = new TagDetailPanel( this, formBindings );
     detailPanel.setBodyBorder( true );
     detailPanel.setBorders( true );
 
@@ -91,15 +88,8 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
         }
     } );
 
-    Window.addWindowResizeListener( this );
     Window.enableScrolling( false );
     Window.setMargin( "10px" );
-    DeferredCommand.addCommand( new Command() {
-      public void execute ()
-        {
-        onWindowResized( Window.getClientWidth(), Window.getClientHeight() );
-        }
-    } );
 
     resizeWindow();
     }
@@ -113,22 +103,22 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
     gridPanel.setHeading( "App Tags" );
     gridPanel.setHeaderVisible( true );
     gridPanel.setFrame( true );
-    gridPanel.setCollapsible( true );    
+    gridPanel.setCollapsible( true );
     gridPanel.add( grid );
 
     LayoutContainer panel = new LayoutContainer();
     panel.setLayout( new TableLayout() );
     panel.add( gridPanel );
-    panel.add( new Image( "images/spacer.gif", 0, 0, 1, 5 ) );
+    panel.add( new Image( "/images/spacer.gif", 0, 0, 1, 5 ) );
     panel.add( detailPanel );
     panel.setBorders( true );
     panel.setWidth( 600 );
     panel.setHeight( 370 );
 
-//    scrollPanel.add( panel );
-//    scrollPanel.setHeight( "595px" );
-//    scrollPanel.setWidth( "375px" );
-//    scrollPanel.setAlwaysShowScrollBars( true );
+    // scrollPanel.add( panel );
+    // scrollPanel.setHeight( "595px" );
+    // scrollPanel.setWidth( "375px" );
+    // scrollPanel.setAlwaysShowScrollBars( true );
 
     ContentPanel cp = new ContentPanel();
     cp.setHeaderVisible( false );
@@ -234,7 +224,7 @@ public class TagEditor extends LayoutContainer implements WindowResizeListener
    */
   private void resizeWindow ()
     {
-    onWindowResized( Window.getClientWidth(), Window.getClientHeight() );
+    onWindowResized( 800, Window.getClientHeight() );
     }
 
   /**
