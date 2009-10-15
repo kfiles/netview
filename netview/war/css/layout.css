@@ -82,6 +82,11 @@
 	border-bottom: 1px solid #1b1b1b;
 }
 
+.content {
+	font-size: 10px;
+	background-color: #242424;
+}
+
 /* Preferences Content Area */
 #prefContent {
 	width: 90%;
@@ -94,6 +99,24 @@
 }
 
 #prefContent a {
+	font-size: 30px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #555;
+	/* border: 1px solid #FFF; */
+}
+
+.prefContent {
+	width: 90%;
+	margin: auto;
+	background-color: #242424;
+	/* border: 1px solid #FFF; */
+	text-align: left;
+	/* margin-top: 20px;
+	margin-bottom: 20px;*/
+}
+
+.prefContent p {
 	font-size: 30px;
 	font-weight: bold;
 	text-decoration: none;
