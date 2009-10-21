@@ -47,9 +47,9 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     {
     try
       {
-      String userName = "prodco";
+      String userName = "netview";
       String password = "prodco";
-      String url = "jdbc:mysql://localhost:3306/prodco";
+      String url = "jdbc:mysql://localhost:3306/netview";
       Class.forName( "com.mysql.jdbc.Driver" ).newInstance();
       conn = (Connection) DriverManager.getConnection( url, userName, password );
       System.out.println( "Database connection established" );
@@ -84,17 +84,20 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
 
     try
       {
-      String sql = "Select app_tag_id,tag_pref,tag_name,tag_rule "
-        + " from customer_application_tag where cust_id=" + custId;
+      String sql = "Select a.id,a.priority,a.name,a.descr,a.rule " +
+                    "from appl_tag a, appl_prof b " +
+                     "where a.app_prof_id=b.id and " +
+                    "b.state = 1 and b.cust_id="+custId;
+
       ResultSet rs = getConnection().createStatement().executeQuery( sql );
 
       while ( rs.next() )
         {
         AppTag tag = new AppTag();
-        tag.setTagId( rs.getInt( "app_tag_id" ) );
-        tag.setTagPref( rs.getInt( "tag_pref" ) );
-        tag.setTagName( rs.getString( "tag_name" ) );
-        tag.setTagRule( rs.getString( "tag_rule" ) );
+        tag.setTagId( rs.getInt( "id" ) );
+        tag.setTagPref( rs.getInt( "priority" ) );
+        tag.setTagName( rs.getString( "name" ) );
+        tag.setTagRule( rs.getString( "rule" ) );
         tags.add( tag );
         }
       }
@@ -133,18 +136,19 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
       String sql = "";
       if ( tag.getTagId() != null )
         {
-        sql = "update customer_application_tag set tag_pref="
-          + tag.getTagPref() + ", tag_name='" + tag.getTagName()
-          + "', tag_rule='" + tag.getTagRule() + "' where cust_id=" + custId
-          + " and app_tag_id=" + tag.getTagId();
+        sql = "update appl_tag set priority="
+          + tag.getTagPref() + ", name='" + tag.getTagName()
+          + "', rule='" + tag.getTagRule() + "' where id=" + tag.getTagId();
         }
       else
         {
-        sql = "insert into customer_application_tag (cust_id,tag_pref,tag_name,tag_rule) values ("
-          + custId
+        sql = "insert into appl_tag (app_prof_id,priority,name,descr,rule) values ("
+          + "1"
           + ","
           + tag.getTagPref()
           + ",'"
+          + tag.getTagName()
+          + "','"
           + tag.getTagName()
           + "','"
           + tag.getTagRule() + "')";
@@ -179,8 +183,7 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
       String sql = "";
       if ( tag.getTagId() != null )
         {
-        sql = "delete from customer_application_tag where cust_id="
-          + custId + " and app_tag_id=" + tag.getTagId();
+        sql = "delete from appl_tag where id=" + tag.getTagId();
         System.out.println( "sql="
           + sql );
         int num_rows = getConnection().createStatement().executeUpdate( sql );
