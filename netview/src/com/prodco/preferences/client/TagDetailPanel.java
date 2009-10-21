@@ -50,6 +50,8 @@ public class TagDetailPanel extends CommonPanel
 
   private FormPanel detailPanel = makeFormColumn();
 
+  Button btnSave = null;
+
   private TagEditor parent;
 
   public String getTitle ()
@@ -66,10 +68,10 @@ public class TagDetailPanel extends CommonPanel
     this.parent = parent;
     this.formBindings = formBindings;
     this.setWidth( 590 );
-    this.setHeight( 150 );
+    this.setHeight( 160 );
     this.setLayout( new FlowLayout() );
     this.setFrame( true );
-    this.setHeading( getTitle() );    
+    this.setHeading( getTitle() );
     add( createTabPanel() );
     layout();
     }
@@ -118,13 +120,13 @@ public class TagDetailPanel extends CommonPanel
     bindings.addAll( new FormBinding( detailPanel, true ).getBindings() );
     bindings.add( new FieldBinding( tfId, "tagId" ) );
 
-//    detailPanel.setBorders( true );
+    // detailPanel.setBorders( true );
     detailPanel.setSize( 590, 110 );
     detailPanel.setHeaderVisible( false );
     panel.add( detailPanel );
 
     HorizontalAlignment align = HorizontalAlignment.CENTER;
-    Button btnSave = new Button( "Update/Add" );
+    btnSave = new Button( "Save" );
     btnSave.setIconStyle( "gwt-Button" );
     btnSave.addListener( Events.OnClick, new Listener<ComponentEvent>() {
       public void handleEvent ( ComponentEvent ce )
@@ -136,7 +138,7 @@ public class TagDetailPanel extends CommonPanel
         }
     } );
 
-    Button btnReset = new Button( "Reset" );
+    Button btnReset = new Button( "Add" );
     btnReset.setIconStyle( "gwt-Button" );
     btnReset.addListener( Events.OnClick, new Listener<ComponentEvent>() {
       public void handleEvent ( ComponentEvent ce )
@@ -144,6 +146,7 @@ public class TagDetailPanel extends CommonPanel
         if ( ce.getType() == Events.OnClick )
           {
           clearPanel();
+          btnSave.setText( "Save" );
           }
         }
     } );
@@ -162,11 +165,10 @@ public class TagDetailPanel extends CommonPanel
 
     } );
 
-
     panel.addButton( btnSave );
     panel.addButton( btnReset );
     panel.addButton( btnDelete );
-//    panel.setBorders( true );
+    // panel.setBorders( true );
     panel.setButtonAlign( align );
     panel.setSize( 600, 130 );
     panel.setLayout( new FitLayout() );
@@ -257,6 +259,11 @@ public class TagDetailPanel extends CommonPanel
   public List<FieldBinding> getFieldBindings ()
     {
     return bindings;
+    }
+
+  public Button getSaveBtn ()
+    {
+    return btnSave;
     }
 
   }
