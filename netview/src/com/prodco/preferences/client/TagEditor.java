@@ -113,7 +113,7 @@ public class TagEditor extends LayoutContainer
     panel.add( detailPanel );
     panel.setBorders( true );
     panel.setWidth( 600 );
-    panel.setHeight( 370 );
+    panel.setHeight( 380 );
 
     // scrollPanel.add( panel );
     // scrollPanel.setHeight( "595px" );
@@ -153,7 +153,7 @@ public class TagEditor extends LayoutContainer
         {
         b.bind( model );
         }
-
+      detailPanel.getSaveBtn().setText( "Update" );
       }
     else
       {
@@ -173,10 +173,10 @@ public class TagEditor extends LayoutContainer
     ColumnConfig column = new ColumnConfig( "tagPref", "Preference", 75 );
     configs.add( column );
 
-    column = new ColumnConfig( "tagName", "Tag Name", 150 );
+    column = new ColumnConfig( "tagName", "Name", 150 );
     configs.add( column );
 
-    column = new ColumnConfig( "tagRule", "Tag Rule", 300 );
+    column = new ColumnConfig( "tagRule", "Rule", 300 );
     configs.add( column );
 
     ColumnModel cm = new ColumnModel( configs );
@@ -205,7 +205,9 @@ public class TagEditor extends LayoutContainer
             {
             AppTag tag = (AppTag) model.getBean();
             if ( tag != null )
+              {
               loadDetailPanel( tag );
+              }
             }
           }
         }
