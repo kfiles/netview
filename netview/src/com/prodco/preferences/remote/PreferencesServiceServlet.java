@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,10 +91,9 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
 
     try
       {
-      String sql = "Select a.id,a.priority,a.name,a.descr,a.rule " +
-                    "from appl_tag a, appl_prof b " +
-                     "where a.app_prof_id=b.id and " +
-                    "b.state = 1 and b.cust_id="+custId;
+      String sql = "Select a.id,a.priority,a.name,a.descr,a.rule "
+        + "from appl_tag a, appl_prof b " + "where a.app_prof_id=b.id and "
+        + "b.state = 1 and b.cust_id=" + custId;
 
       ResultSet rs = getConnection().createStatement().executeQuery( sql );
 
@@ -123,7 +123,6 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     return tags;
     }
 
-
   public void saveAppTagForCustomer ( int custId, AppTag tag )
     throws PreferencesRemoteException
     {
@@ -134,8 +133,8 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
       if ( tag.getTagId() != null )
         {
         sql = "update appl_tag set priority="
-          + tag.getTagPref() + ", name='" + tag.getTagName()
-          + "', rule='" + tag.getTagRule() + "' where id=" + tag.getTagId();
+          + tag.getTagPref() + ", name='" + tag.getTagName() + "', rule='"
+          + tag.getTagRule() + "' where id=" + tag.getTagId();
         }
       else
         {
@@ -146,9 +145,7 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
           + ",'"
           + tag.getTagName()
           + "','"
-          + tag.getTagName()
-          + "','"
-          + tag.getTagRule() + "')";
+          + tag.getTagName() + "','" + tag.getTagRule() + "')";
         }
       System.out.println( "sql="
         + sql );
@@ -159,8 +156,8 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     catch ( SQLException e )
       {
       System.out.println( e.getClass().getSimpleName()
-        + " in inserting tag: " + ExceptionUtil.getMessageOrType( e )
-        + " at\n" + ExceptionUtil.getTrace( e ) );
+        + " in inserting tag: " + ExceptionUtil.getMessageOrType( e ) + " at\n"
+        + ExceptionUtil.getTrace( e ) );
       throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
       }
     catch ( Exception ex )
@@ -180,7 +177,8 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
       String sql = "";
       if ( tag.getTagId() != null )
         {
-        sql = "delete from appl_tag where id=" + tag.getTagId();
+        sql = "delete from appl_tag where id="
+          + tag.getTagId();
         System.out.println( "sql="
           + sql );
         int num_rows = getConnection().createStatement().executeUpdate( sql );
@@ -191,8 +189,8 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     catch ( SQLException e )
       {
       System.out.println( e.getClass().getSimpleName()
-        + " in updating tag: " + ExceptionUtil.getMessageOrType( e )
-        + " at\n" + ExceptionUtil.getTrace( e ) );
+        + " in updating tag: " + ExceptionUtil.getMessageOrType( e ) + " at\n"
+        + ExceptionUtil.getTrace( e ) );
       throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
       }
     catch ( Exception ex )
@@ -204,127 +202,203 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     }
 
   public List<Site> findSitesByCustomer ( int custId )
-  throws PreferencesRemoteException
-  {
-  System.out.println( "Entering findSitesByCustomer" );
-  List<Site> sites = new ArrayList<Site>();
-
-  try
+    throws PreferencesRemoteException
     {
-    String sql = "Select a.id,a.name,b.street1,b.street2,b.city,b.state_id,c.name as state_name," +
-    		        "b.country_id,d.name as country_name,b.zip,b.suite " +
-                  "from site a, address b, State c, Country d" +
-                   " where a.cust_id="+custId +
-                   " and a.address_id=b.id " +
-                   " and b.state_id=c.id "+
-                   " and b.country_id=d.id";
+    System.out.println( "Entering findSitesByCustomer" );
+    List<Site> sites = new ArrayList<Site>();
 
-    System.out.println("sql="+sql);
-    ResultSet rs = getConnection().createStatement().executeQuery( sql );
-
-    while ( rs.next() )
+    try
       {
-      Site s = new Site();
-      s.setSiteId( rs.getInt( "id" ) );
-      s.setName( rs.getString( "name" ) );
-      s.setAddress( rs.getString( "street1" )+ (rs.getString("street2")==null?"":", "+rs.getString("street2")) );
-      s.setCity( rs.getString( "city" ) );
-      s.setState( rs.getString( "state_name" ) );
-      s.setCountry( rs.getString( "country_name" ) );
-      s.setZip( rs.getString( "zip" ) );
-
-      sites.add( s );
-      }
-    }
-  catch ( SQLException e )
-    {
-    System.out.println( e.getClass().getSimpleName()
-      + " in retrieving sites: " + ExceptionUtil.getMessageOrType( e )
-      + " at\n" + ExceptionUtil.getTrace( e ) );
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
-    }
-  catch ( Exception ex )
-    {
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
-
-    }
-
-  return sites;
-  }
-
-  public void saveSite ( int custId, Site site)
-  throws PreferencesRemoteException
-  {
-  System.out.println( "Entering saveSite" );
-  try
-    {
-    String sql = "";
-    if ( site.getSiteId() != null )
-      {
-      sql = "update site set name='"
-        + site.getName() + "' where id=" + site.getSiteId();
-      }
-    else
-      {
-      sql = "insert into site (cust_id,name,address_id) values ("
+      String sql = "Select a.id,a.name,b.street1,b.street2,b.city,b.state_id,c.name as state_name,"
+        + "b.country_id,d.name as country_name,b.zip,b.suite "
+        + "from site a, address b, State c, Country d"
+        + " where a.cust_id="
         + custId
-        + ",'"
-        + site.getName()
-        + "',"
-        + "1)";
+        + " and a.address_id=b.id "
+        + " and b.state_id=c.id "
+        + " and b.country_id=d.id";
+
+      System.out.println( "sql="
+        + sql );
+      ResultSet rs = getConnection().createStatement().executeQuery( sql );
+
+      while ( rs.next() )
+        {
+        Site s = new Site();
+        s.setSiteId( rs.getInt( "id" ) );
+        s.setName( rs.getString( "name" ) );
+        s.setAddress( rs.getString( "street1" )
+          + ( rs.getString( "street2" ) == null ? "" : ", "
+            + rs.getString( "street2" ) ) );
+        s.setCity( rs.getString( "city" ) );
+        s.setState( rs.getString( "state_name" ) );
+        s.setCountry( rs.getString( "country_name" ) );
+        s.setZip( rs.getString( "zip" ) );
+
+        sites.add( s );
+        }
       }
-    System.out.println( "sql="
-      + sql );
-    int num_rows = getConnection().createStatement().executeUpdate( sql );
-    System.out.println( "total rows updated/inserted = "
-      + num_rows );
-    }
-  catch ( SQLException e )
-    {
-    System.out.println( e.getClass().getSimpleName()
-      + " in inserting site: " + ExceptionUtil.getMessageOrType( e )
-      + " at\n" + ExceptionUtil.getTrace( e ) );
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
-    }
-  catch ( Exception ex )
-    {
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
-
-    }
-
-  }
-
-public void deleteSite ( int custId, Site site )
-  throws PreferencesRemoteException
-  {
-  System.out.println( "Entering saveAppTagForCustomer" );
-  try
-    {
-    String sql = "";
-    if ( site.getSiteId() != null )
+    catch ( SQLException e )
       {
-      sql = "delete from site where id=" + site.getSiteId();
+      System.out.println( e.getClass().getSimpleName()
+        + " in retrieving sites: " + ExceptionUtil.getMessageOrType( e )
+        + " at\n" + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
+
+    return sites;
+    }
+
+  public void saveSite ( int custId, Site site )
+    throws PreferencesRemoteException
+    {
+    System.out.println( "Entering saveSite" );
+    try
+      {
+      String sql = "";
+      if ( site.getSiteId() != null )
+        {
+        updateAddress( site );
+        sql = "update site set name='"
+          + site.getName() + "' where id=" + site.getSiteId();
+        }
+      else
+        {
+        int address_id = addAddress( site );
+        sql = "insert into site (cust_id,name,address_id) values ("
+          + custId + ",'" + site.getName() + "'," + address_id + ")";
+        }
       System.out.println( "sql="
         + sql );
       int num_rows = getConnection().createStatement().executeUpdate( sql );
-      System.out.println( "total rows deleted = "
+      System.out.println( "total rows updated/inserted = "
         + num_rows );
       }
+    catch ( SQLException e )
+      {
+      System.out.println( e.getClass().getSimpleName()
+        + " in inserting site: " + ExceptionUtil.getMessageOrType( e )
+        + " at\n" + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
+
     }
-  catch ( SQLException e )
+
+  private void updateAddress ( Site site ) throws PreferencesRemoteException
     {
-    System.out.println( e.getClass().getSimpleName()
-      + " in deleting site: " + ExceptionUtil.getMessageOrType( e )
-      + " at\n" + ExceptionUtil.getTrace( e ) );
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+    System.out.println( "Entering updateAddress" );
+    try
+      {
+      String sql = "";
+      if ( site.getSiteId() != null )
+        {
+
+        sql = "update address set street1='"
+          + site.getAddress() + "', city='" + site.getCity() + "', zip='"
+          + site.getZip() + "' where id=(select address_id from site where id="
+          + site.getSiteId() + ")";
+        }
+      System.out.println( "sql="
+        + sql );
+      int num_rows = getConnection().createStatement().executeUpdate( sql );
+      System.out.println( "total rows updated/inserted = "
+        + num_rows );
+      }
+    catch ( SQLException e )
+      {
+      System.out.println( e.getClass().getSimpleName()
+        + " in updating address: " + ExceptionUtil.getMessageOrType( e )
+        + " at\n" + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
     }
-  catch ( Exception ex )
+
+  private int addAddress ( Site site ) throws PreferencesRemoteException
     {
-    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+    System.out.println( "Entering addAddress" );
+    int retVal = 0;
+
+    try
+      {
+      String sql = "insert into address (street1,city,zip,state_id,country_id) values ('"
+        + site.getAddress()
+        + "','"
+        + site.getCity()
+        + "','"
+        + site.getZip()
+        + "',1,1)";
+      System.out.println( "sql="
+        + sql );
+      Statement st = getConnection().createStatement();
+      int num_rows = st.executeUpdate( sql, Statement.RETURN_GENERATED_KEYS );
+      System.out.println( "total rows updated/inserted = "
+        + num_rows );
+      ResultSet rs = st.getGeneratedKeys();
+      if ( rs.next() )
+        retVal = rs.getInt( 1 );
+      st.close();
+      }
+    catch ( SQLException e )
+      {
+      System.out.println( e.getClass().getSimpleName()
+        + " in updating address: " + ExceptionUtil.getMessageOrType( e )
+        + " at\n" + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
+    return retVal;
+    }
+
+  public void deleteSite ( int custId, Site site )
+    throws PreferencesRemoteException
+    {
+    System.out.println( "Entering saveAppTagForCustomer" );
+    try
+      {
+      String sql = "";
+      if ( site.getSiteId() != null )
+        {
+        sql = "delete from site where id="
+          + site.getSiteId();
+        System.out.println( "sql="
+          + sql );
+        int num_rows = getConnection().createStatement().executeUpdate( sql );
+        System.out.println( "total rows deleted = "
+          + num_rows );
+        }
+      }
+    catch ( SQLException e )
+      {
+      System.out.println( e.getClass().getSimpleName()
+        + " in deleting site: " + ExceptionUtil.getMessageOrType( e ) + " at\n"
+        + ExceptionUtil.getTrace( e ) );
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+      }
+    catch ( Exception ex )
+      {
+      throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+      }
 
     }
 
-  }
-
-  
   }
