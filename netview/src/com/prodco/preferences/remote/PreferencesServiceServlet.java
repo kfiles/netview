@@ -11,6 +11,7 @@ import java.util.List;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.prodco.netview.client.util.ExceptionUtil;
 import com.prodco.preferences.client.model.AppTag;
+import com.prodco.preferences.client.model.Site;
 import com.prodco.preferences.client.remote.PreferencesRemoteException;
 import com.prodco.preferences.client.remote.PreferencesRemoteService;
 
@@ -76,6 +77,11 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     // }
     }
 
+  private static Connection getConnection ()
+    {
+    return conn;
+    }
+
   public List<AppTag> findAppTagsByCustomer ( int custId )
     throws PreferencesRemoteException
     {
@@ -104,7 +110,7 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     catch ( SQLException e )
       {
       System.out.println( e.getClass().getSimpleName()
-        + " in retrieving flows: " + ExceptionUtil.getMessageOrType( e )
+        + " in retrieving tags: " + ExceptionUtil.getMessageOrType( e )
         + " at\n" + ExceptionUtil.getTrace( e ) );
       throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
       }
@@ -117,15 +123,6 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     return tags;
     }
 
-  private static Connection getConnection ()
-    {
-    return conn;
-    }
-
-  public List<AppTag> findAppTags ()
-    {
-    return null;
-    }
 
   public void saveAppTagForCustomer ( int custId, AppTag tag )
     throws PreferencesRemoteException
@@ -162,7 +159,7 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     catch ( SQLException e )
       {
       System.out.println( e.getClass().getSimpleName()
-        + " in retrieving flows: " + ExceptionUtil.getMessageOrType( e )
+        + " in inserting tag: " + ExceptionUtil.getMessageOrType( e )
         + " at\n" + ExceptionUtil.getTrace( e ) );
       throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
       }
@@ -194,7 +191,7 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
     catch ( SQLException e )
       {
       System.out.println( e.getClass().getSimpleName()
-        + " in retrieving flows: " + ExceptionUtil.getMessageOrType( e )
+        + " in updating tag: " + ExceptionUtil.getMessageOrType( e )
         + " at\n" + ExceptionUtil.getTrace( e ) );
       throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
       }
@@ -206,4 +203,128 @@ public class PreferencesServiceServlet extends RemoteServiceServlet
 
     }
 
+  public List<Site> findSitesByCustomer ( int custId )
+  throws PreferencesRemoteException
+  {
+  System.out.println( "Entering findSitesByCustomer" );
+  List<Site> sites = new ArrayList<Site>();
+
+  try
+    {
+    String sql = "Select a.id,a.name,b.street1,b.street2,b.city,b.state_id,c.name as state_name," +
+    		        "b.country_id,d.name as country_name,b.zip,b.suite " +
+                  "from site a, address b, State c, Country d" +
+                   " where a.cust_id="+custId +
+                   " and a.address_id=b.id " +
+                   " and b.state_id=c.id "+
+                   " and b.country_id=d.id";
+
+    System.out.println("sql="+sql);
+    ResultSet rs = getConnection().createStatement().executeQuery( sql );
+
+    while ( rs.next() )
+      {
+      Site s = new Site();
+      s.setSiteId( rs.getInt( "id" ) );
+      s.setName( rs.getString( "name" ) );
+      s.setAddress( rs.getString( "street1" )+ (rs.getString("street2")==null?"":", "+rs.getString("street2")) );
+      s.setCity( rs.getString( "city" ) );
+      s.setState( rs.getString( "state_name" ) );
+      s.setCountry( rs.getString( "country_name" ) );
+      s.setZip( rs.getString( "zip" ) );
+
+      sites.add( s );
+      }
+    }
+  catch ( SQLException e )
+    {
+    System.out.println( e.getClass().getSimpleName()
+      + " in retrieving sites: " + ExceptionUtil.getMessageOrType( e )
+      + " at\n" + ExceptionUtil.getTrace( e ) );
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+    }
+  catch ( Exception ex )
+    {
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+    }
+
+  return sites;
+  }
+
+  public void saveSite ( int custId, Site site)
+  throws PreferencesRemoteException
+  {
+  System.out.println( "Entering saveSite" );
+  try
+    {
+    String sql = "";
+    if ( site.getSiteId() != null )
+      {
+      sql = "update site set name='"
+        + site.getName() + "' where id=" + site.getSiteId();
+      }
+    else
+      {
+      sql = "insert into site (cust_id,name,address_id) values ("
+        + custId
+        + ",'"
+        + site.getName()
+        + "',"
+        + "1)";
+      }
+    System.out.println( "sql="
+      + sql );
+    int num_rows = getConnection().createStatement().executeUpdate( sql );
+    System.out.println( "total rows updated/inserted = "
+      + num_rows );
+    }
+  catch ( SQLException e )
+    {
+    System.out.println( e.getClass().getSimpleName()
+      + " in inserting site: " + ExceptionUtil.getMessageOrType( e )
+      + " at\n" + ExceptionUtil.getTrace( e ) );
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+    }
+  catch ( Exception ex )
+    {
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+    }
+
+  }
+
+public void deleteSite ( int custId, Site site )
+  throws PreferencesRemoteException
+  {
+  System.out.println( "Entering saveAppTagForCustomer" );
+  try
+    {
+    String sql = "";
+    if ( site.getSiteId() != null )
+      {
+      sql = "delete from site where id=" + site.getSiteId();
+      System.out.println( "sql="
+        + sql );
+      int num_rows = getConnection().createStatement().executeUpdate( sql );
+      System.out.println( "total rows deleted = "
+        + num_rows );
+      }
+    }
+  catch ( SQLException e )
+    {
+    System.out.println( e.getClass().getSimpleName()
+      + " in deleting site: " + ExceptionUtil.getMessageOrType( e )
+      + " at\n" + ExceptionUtil.getTrace( e ) );
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( e ) );
+    }
+  catch ( Exception ex )
+    {
+    throw new PreferencesRemoteException( ExceptionUtil.getMessageOrType( ex ) );
+
+    }
+
+  }
+
+  
   }
