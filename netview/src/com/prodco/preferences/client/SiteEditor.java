@@ -155,6 +155,7 @@ public class SiteEditor extends LayoutContainer
         b.bind( model );
         }
       detailPanel.getSaveBtn().setText( "Update" );
+      detailPanel.getAddIntfBtn().enable();
       }
     else
       {

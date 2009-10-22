@@ -51,6 +51,7 @@ public class SiteDetailPanel extends CommonPanel
   private FormPanel detailPanel = makeFormColumn();
 
   Button btnSave = null;
+  Button btnAddIntf = null;
 
   private SiteEditor parent;
 
@@ -158,6 +159,7 @@ public class SiteDetailPanel extends CommonPanel
           {
           clearPanel();
           btnSave.setText( "Save" );
+          btnAddIntf.disable();
           }
         }
     } );
@@ -171,14 +173,31 @@ public class SiteDetailPanel extends CommonPanel
         if ( ce.getType() == Events.OnClick )
           {
           deleteSite();
+          btnAddIntf.disable();
           }
         }
 
     } );
 
+    btnAddIntf = new Button( "Flow Collector" );
+    btnDelete.setIconStyle( "gwt-Button" );
+    btnDelete.addListener( Events.OnClick, new Listener<ComponentEvent>() {
+      public void handleEvent ( ComponentEvent ce )
+        {
+
+        if ( ce.getType() == Events.OnClick )
+          {
+//          addFlowCollector();
+          }
+        }
+
+    } );
+    btnAddIntf.disable();
+
     panel.addButton( btnSave );
     panel.addButton( btnReset );
     panel.addButton( btnDelete );
+    panel.addButton( btnAddIntf );
     // panel.setBorders( true );
     panel.setButtonAlign( align );
     panel.setSize( 600, 220 );
@@ -279,6 +298,11 @@ public class SiteDetailPanel extends CommonPanel
   public Button getSaveBtn ()
     {
     return btnSave;
+    }
+
+  public Button getAddIntfBtn ()
+    {
+    return btnAddIntf;
     }
 
   }
