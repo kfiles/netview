@@ -3,10 +3,14 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/json_simple-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/mysql-connector-java-5.1.8-bin.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/opencsv-1.8.jar"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-beans-binding-0.2.4.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-incubator-trunk-r1684.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-mosaic-0.3.0-rc1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gwt-dnd-2.6.5.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/gxt.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

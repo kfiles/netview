@@ -23,6 +23,7 @@
 	
   <!--  Inherit Ext-GWT stuff -->
     <inherits name='com.extjs.gxt.ui.GXT'/>
+    <inherits name='org.gwt.mosaic.Mosaic'/>
 	
   <!--  Stylesheet -->
     <stylesheet src="/css/ext-all.css"/>

@@ -33,6 +33,10 @@
 		</servlet-class>
 	</servlet>
 
+	<servlet>
+		<servlet-name>remoteLoggingService</servlet-name>
+		<servlet-class>com.google.gwt.gen2.logging.server.RemoteLoggingService</servlet-class>
+	</servlet>
   
 	<servlet-mapping>
 		<servlet-name>preferencesServiceServlet</servlet-name>
@@ -44,6 +48,10 @@
 		<url-pattern>/data/graph</url-pattern>
 	</servlet-mapping>
 
+	<servlet-mapping>
+  		<servlet-name>remoteLoggingService</servlet-name>
+  		<url-pattern>/preferences/logging</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>CsvUploadServlet</servlet-name>
