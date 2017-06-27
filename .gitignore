@@ -1,0 +1,9 @@
+
+# /netview/war/
+/netview/war/netview
+/netview/war/preferences
+/netview/war/analysis
+
+# /netview/war/WEB-INF/lib/
+/netview/war/WEB-INF/lib/appengine-api-1.0-sdk-1.2.1.jar
+/netview/war/WEB-INF/lib/datanucleus-appengine-1.0.1.final.jar
